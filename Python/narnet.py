@@ -1,12 +1,13 @@
 import math
 from operator import mul, add
+from statistics import mean
 import time
 
 class settings:
     def __init__(self, xoffset, gain, ymin):
         self.xoffset = xoffset
         self.gain = gain
-        self.ymin = ymin
+        self.ymin = ymin 
         
 def NAR_inference(weights, x):
     n = 5
@@ -29,7 +30,8 @@ def NAR_inference(weights, x):
         return (y - ysettings.ymin) / ysettings.gain + ysettings.xoffset
     
     def tansig(n):
-        return [2 / (1 + math.exp(-2*ni)) - 1 for ni in n]
+        # return [2 / (1 + math.exp(-2*ni)) - 1 for ni in n]
+        return [math.tanh(ni) for ni in n]
 
     for ts in range(16):
         xd1[ts] = mapminmax_apply(xd1[ts],x1_step)
@@ -40,11 +42,11 @@ def NAR_inference(weights, x):
     for ts in range(len(x)):
         
         # rotating delay state position
-        xdts = (ts + 15) % 17
+        xdts = (ts + 16) % 17
         xd1[xdts] = mapminmax_apply(x[ts], x1_step)
 
         # layer 1
-        tapdelay1 = [xd1[(xdts - i - 1) % 17] for i in range(0,16)]
+        tapdelay1 = [xd1[(xdts - i - 1) % 17] for i in range(16)]
         a1 = tansig(map(add, list(sum(map(mul, neuron, tapdelay1)) for neuron in w1), b1))
         
         # layer 2 
@@ -64,4 +66,9 @@ x_test = open("Python/S1_test.txt", "r").read().splitlines()
 x_test = list(list(map(float, x.split())) for x in x_test)
 
 delays = [16 for _ in range(16)]
-y = NAR_inference(weights, x_test[0])
+y_test = NAR_inference(weights, x_test[0])
+y_matlab = x_test[1]
+
+diff = mean([abs(yti - ymi) for yti,ymi in zip(y_test, y_matlab)])
+
+print('hi')
