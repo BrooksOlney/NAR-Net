@@ -1,7 +1,9 @@
 import math
-from operator import mul, add
 from statistics import mean
-import time
+import numpy as np
+from fxpmath import Fxp
+import matplotlib.pyplot as plt
+import itertools as it
 
 class settings:
     def __init__(self, xoffset, gain, ymin):
@@ -9,19 +11,34 @@ class settings:
         self.gain = gain
         self.ymin = ymin 
         
+def write_quantized_weights(weights):
+    b1, w1, b2, w2 = weights
+    
+    with open('weights_quantized.txt', 'w') as ofile:
+        
+        w1_bins = it.chain(*w1)
+        
+        ofile.write(' '.join(list(map(str, b1.val))) + '\n')
+        ofile.write(' '.join(list(map(str, [w.val for w in w1_bins]))) + '\n')
+        ofile.write(' '.join(list(map(str, b2.val))) + '\n')
+        ofile.write(' '.join(list(map(str, w2.val))) + '\n')
+        
 def NAR_inference(weights, x):
     n = 5
     feedbackDelay = 16
+    fxp_float = Fxp(None, dtype='fxp-s32/23')
     
-    b1, w1, b2, w2 = weights
+    fxp_rng = Fxp(None, dtype='fxp-s8/6')
     
-    w1 = [w1[i*16:(i+1)*16] for i in range(n)]
-    
+    b1, w1, b2, w2 = [Fxp(w, like=fxp_rng) for w in weights]
+
+    write_quantized_weights((b1,w1,b2,w2))
+
     x1_step = settings(2.2, 0.1, -1)
     y1_step = settings(2.2, 0.1, -1)
 
-    xd1 = [16] * 16    
-    y = [0] * len(x)
+    # xd1 = [16] * 16    
+    # y = [0] * len(x)
     
     def mapminmax_apply(x, xsettings):
         return (x - xsettings.xoffset) * xsettings.gain + xsettings.ymin
@@ -31,13 +48,15 @@ def NAR_inference(weights, x):
     
     def tansig(n):
         # return [2 / (1 + math.exp(-2*ni)) - 1 for ni in n]
-        return [math.tanh(ni) for ni in n]
+        return [np.tanh(ni) for ni in n]
 
+    y = np.zeros(len(x), dtype=float)
+    xd1 = Fxp(np.zeros(17), like=fxp_rng)
+    xd1[:16] = 16   
+    
     for ts in range(16):
         xd1[ts] = mapminmax_apply(xd1[ts],x1_step)
         
-    xd1 += [0]
-    
     # time loop
     for ts in range(len(x)):
         
@@ -46,29 +65,38 @@ def NAR_inference(weights, x):
         xd1[xdts] = mapminmax_apply(x[ts], x1_step)
 
         # layer 1
-        tapdelay1 = [xd1[(xdts - i - 1) % 17] for i in range(16)]
-        a1 = tansig(map(add, list(sum(map(mul, neuron, tapdelay1)) for neuron in w1), b1))
+        tapdelay1 = fxp_rng(np.array([xd1[(xdts - i - 1) % 17] for i in range(16)]))
+        # a1 = tansig(map(add, list(sum(map(mul, neuron, tapdelay1)) for neuron in w1), b1))
+        a1 = fxp_rng(tansig(np.matmul(w1, tapdelay1) + b1))
         
         # layer 2 
-        a2  = sum(map(mul, w2, a1)) + b2[0]
+        # a2  = sum(map(mul, w2, a1)) + b2[0]
+        a2 = fxp_rng(np.matmul(w2, a1) + b2)
         
         # output
-        y[ts] = mapminmax_reverse(a2, y1_step)
+        y[ts] = mapminmax_reverse(Fxp(a2, like=fxp_float), y1_step)
  
     return y
  
 # load weights
 weights = open("Python/modelWeights.txt", "r").read().splitlines()
-weights = list(list(map(float, w.split())) for w in weights)
+weights = list(np.array(list(map(float, w.split()))) for w in weights)
+weights[1] = weights[1].reshape(5, 16)
 
 # load testing data
 x_test = open("Python/S1_test.txt", "r").read().splitlines()
-x_test = list(list(map(float, x.split())) for x in x_test)
+x_test = list(np.array(list(map(float, x.split()))) for x in x_test)
 
 delays = [16 for _ in range(16)]
 y_test = NAR_inference(weights, x_test[0])
-y_matlab = x_test[1]
+y_matlab = x_test[0]
 
 diff = mean([abs(yti - ymi) for yti,ymi in zip(y_test, y_matlab)])
+rmse = math.sqrt(np.sum((y_test - y_matlab) ** 2) / y_test.size)
+
+plt.plot(range(293), y_test, label='test')
+plt.plot(range(293), y_matlab, label='matlab')
+plt.legend()
+plt.show()
 
 print('hi')

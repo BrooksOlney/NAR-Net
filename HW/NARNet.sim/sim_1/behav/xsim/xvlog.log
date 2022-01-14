@@ -1,0 +1,4 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "F:/Research/NAR-Net/HW/NARNet.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module NARNet
+INFO: [VRFC 10-2263] Analyzing Verilog file "F:/Research/NAR-Net/HW/NARNet.srcs/sim_1/new/NARNN_tb.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module NARNN_tb
