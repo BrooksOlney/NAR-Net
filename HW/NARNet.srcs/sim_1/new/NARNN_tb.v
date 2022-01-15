@@ -8,14 +8,15 @@ reg clk, rst, enable;
 wire [31:0] y_out;
 
 
-NARNet uut (.clk(clk), .enable(enable), .rst(rst), .x_in(32'd0), .y_out(y_out));
+NARNet uut (.clk(clk), .enable(1'b1), .rst(1'b0), .x_in(32'd0), .y_out(y_out));
 
-initial begin
+always begin
     
     clk = 1'b0;
-    #10;
+    #1;
     clk = 1'b1;
-    #10;
+    #1;
+    
 
 end
 

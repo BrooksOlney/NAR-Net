@@ -7,6 +7,8 @@ import itertools as it
 
 class settings:
     def __init__(self, xoffset, gain, ymin):
+        fxp_rng = Fxp(None, dtype='fxp-s8/6')
+        
         self.xoffset = xoffset
         self.gain = gain
         self.ymin = ymin 
@@ -15,13 +17,18 @@ def write_quantized_weights(weights):
     b1, w1, b2, w2 = weights
     
     with open('weights_quantized.txt', 'w') as ofile:
-        
         w1_bins = it.chain(*w1)
-        
         ofile.write(' '.join(list(map(str, b1.val))) + '\n')
         ofile.write(' '.join(list(map(str, [w.val for w in w1_bins]))) + '\n')
         ofile.write(' '.join(list(map(str, b2.val))) + '\n')
         ofile.write(' '.join(list(map(str, w2.val))) + '\n')
+
+    with open('weights_quantized.coe', 'w') as ofile:
+        w1_bins = it.chain(*w1)
+        allweights = it.chain([*b1, *w1_bins, *b2, *w2])
+        ofile.write('memory_initialization_radix = 2;\nmemory_initialization_vector =\n')
+        ofile.write(',\n'.join(map(str, [w.bin() for w in allweights])));
+        ofile.write(';\n')
         
 def NAR_inference(weights, x):
     n = 5
@@ -67,11 +74,11 @@ def NAR_inference(weights, x):
         # layer 1
         tapdelay1 = fxp_rng(np.array([xd1[(xdts - i - 1) % 17] for i in range(16)]))
         # a1 = tansig(map(add, list(sum(map(mul, neuron, tapdelay1)) for neuron in w1), b1))
-        a1 = fxp_rng(tansig(np.matmul(w1, tapdelay1) + b1))
+        a1 = fxp_rng(tansig(fxp_rng(np.matmul(w1, tapdelay1)) + b1))
         
         # layer 2 
         # a2  = sum(map(mul, w2, a1)) + b2[0]
-        a2 = fxp_rng(np.matmul(w2, a1) + b2)
+        a2 = fxp_rng(fxp_rng(np.matmul(w2, a1)) + b2)
         
         # output
         y[ts] = mapminmax_reverse(Fxp(a2, like=fxp_float), y1_step)
