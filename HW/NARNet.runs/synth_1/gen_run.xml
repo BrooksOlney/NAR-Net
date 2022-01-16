@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7s50csga324-2" LaunchTime="1642263772">
+<GenRun Id="synth_1" LaunchPart="xc7s50csga324-2" LaunchTime="1642297114">
   <File Type="PA-TCL" Name="NARNet.tcl"/>
   <File Type="RDS-PROPCONSTRS" Name="NARNet_drc_synth.rpt"/>
   <File Type="REPORTS-TCL" Name="NARNet_reports.tcl"/>
@@ -32,6 +32,13 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
+    <File Path="$PSRCDIR/sources_1/new/weights_rom.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
     <File Path="$PPRDIR/NARNet.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
@@ -40,6 +47,12 @@
       </FileInfo>
     </File>
     <File Path="$PPRDIR/../weights_quantized.txt"/>
+    <File Path="$PPRDIR/../weights_quantized.coe">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
     <Config>
       <Option Name="DesignMode" Val="RTL"/>
       <Option Name="TopModule" Val="NARNet"/>
@@ -62,5 +75,4 @@
     <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2020"/>
     <Step Id="synth_design"/>
   </Strategy>
-  <BlockFileSet Type="BlockSrcs" Name="blk_mem_gen_0"/>
 </GenRun>

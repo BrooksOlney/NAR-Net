@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Sat Jan 15 20:39:10 2022
+# Process ID: 2932
+# Current directory: F:/Research/NAR-Net/HW/NARNet.runs/impl_1
+# Command line: vivado.exe -log NARNet.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source NARNet.tcl -notrace
+# Log file: F:/Research/NAR-Net/HW/NARNet.runs/impl_1/NARNet.vdi
+# Journal file: F:/Research/NAR-Net/HW/NARNet.runs/impl_1\vivado.jou
+#-----------------------------------------------------------
+source NARNet.tcl -notrace

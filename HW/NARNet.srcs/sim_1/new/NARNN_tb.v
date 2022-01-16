@@ -4,11 +4,12 @@ module NARNN_tb(
 
     );
     
-reg clk, rst, enable;
+reg clk = 0, rst = 0, enable = 0, x_ready = 0;
 wire [31:0] y_out;
+reg [31:0] x_in;
 
 
-NARNet uut (.clk(clk), .enable(1'b1), .rst(1'b0), .x_in(32'd0), .y_out(y_out));
+NARNet uut (.clk(clk), .enable(enable), .rst(rst), .x_in(x_in), .x_ready(x_ready), .y_out(y_out));
 
 always begin
     
@@ -16,9 +17,18 @@ always begin
     #1;
     clk = 1'b1;
     #1;
-    
-
 end
 
+initial begin
+
+    #20;
+    enable = 1;
+    x_in <= 32'b00000101010011001100110011001100;
+    x_ready <= 1;
+    #5;
+    x_ready <= 0;
+    #100;
+
+end
     
 endmodule
