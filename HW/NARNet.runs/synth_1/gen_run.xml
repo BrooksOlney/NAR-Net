@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7s50csga324-2" LaunchTime="1642297114">
+<GenRun Id="synth_1" LaunchPart="xc7s50csga324-2" LaunchTime="1642305983">
   <File Type="PA-TCL" Name="NARNet.tcl"/>
   <File Type="RDS-PROPCONSTRS" Name="NARNet_drc_synth.rpt"/>
   <File Type="REPORTS-TCL" Name="NARNet_reports.tcl"/>

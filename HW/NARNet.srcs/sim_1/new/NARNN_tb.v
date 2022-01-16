@@ -20,9 +20,8 @@ always begin
 end
 
 initial begin
-
-    #20;
     enable = 1;
+    #200;
     x_in <= 32'b00000101010011001100110011001100;
     x_ready <= 1;
     #5;

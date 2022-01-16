@@ -5,9 +5,11 @@ module NARNet(clk,enable,rst,x_in,x_ready,y_out);
 // parameters for NARNN
 parameter N=5;
 parameter feedbackDelay=16;
-parameter xoffset = 8'b01_111111; // 2.2
-parameter gain    = 8'b00_000110; // 0.1
-parameter ymin    = 8'b11_000000; // -1
+parameter xoffset = 32'b01000000000011001100110011001101;//8'b01_111111; // 2.2
+parameter gain    = 32'b00111101110011001100110011001101;//8'b00_000110; // 0.1
+parameter ymin    = 32'b10111111100000000000000000000000;//8'b11_000000; // -1
+parameter ymin_opp    = 32'b00111111100000000000000000000000;//8'b11_000000; // 1
+
 
 // inputs/outputs 
 input wire clk, enable, rst, x_ready;
@@ -28,7 +30,7 @@ reg signed [7:0] b2;
 reg signed [7:0] w2 [0:4];
 
 integer i, j;
-integer weights_file, read;
+//integer weights_file, read;
 
 //// initialize all of the weights
 //initial begin
@@ -52,7 +54,7 @@ integer weights_file, read;
 reg [7:0] bram_counter = 0;
 reg [2:0] row  = 0;
 reg [6:0] count = 0;
-reg load_weights = 0;
+reg weights_loaded = 0;
 assign bram_addr = bram_counter;
 
 always @(posedge clk) begin
@@ -77,7 +79,7 @@ if (enable == 1) begin
         w2[row] <= bram_out;
         row <= row + 1;
         bram_counter <= bram_counter + 1;
-    end
+    end else weights_loaded <= 1;
 end
 end
 
@@ -150,6 +152,7 @@ assign y_out = y_out_reg;
 //reg [7:0] acc_a, acc_b;
 reg [7:0] acc_res;
 //qadd acc (.a(acc_a), .b(acc_b), .c(acc_res));
+reg [7:0] temp;
 
 always @(posedge clk) begin
 
@@ -166,7 +169,7 @@ end
 else if (enable == 1) begin
     case (current_state)
         s_wait: begin
-            if (x_ready == 1'b1) begin
+            if (x_ready == 1'b1 && weights_loaded == 1) begin
                 x_in_reg <= x_in;
                 current_state <= s_delay;
             end
@@ -175,7 +178,8 @@ else if (enable == 1) begin
         // intialize tap delays
         s_delay: begin
             if (delay_set != 1'b1) begin
-                xdl[(ts + 16) % 17] <= {x_in_reg[31], x_in_reg[22:16]};
+                temp = mapminmax_to_fixed(x_in_reg);
+                xdl[(ts + 16) % 17] = {x_in_reg[31], temp[27:20]};
                 delay_set <= 1'b1;
             end
             else if (tap < 16) begin
@@ -244,11 +248,14 @@ end
 
 end
 
-function fixed_to_float;
+function mapminmax_to_fixed;
 
-input [7:0] x;
+input [31:0] x;
+reg [31:0] temp;    
 
 begin
+temp = x - xoffset;
+mapminmax_to_fixed = temp * gain + 1;
 
 end
 

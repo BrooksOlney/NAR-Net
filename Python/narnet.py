@@ -7,8 +7,6 @@ import itertools as it
 
 class settings:
     def __init__(self, xoffset, gain, ymin):
-        fxp_rng = Fxp(None, dtype='fxp-s8/6')
-        
         self.xoffset = xoffset
         self.gain = gain
         self.ymin = ymin 
@@ -26,9 +24,13 @@ def write_quantized_weights(weights):
     with open('weights_quantized.coe', 'w') as ofile:
         w1_bins = it.chain(*w1)
         allweights = it.chain([*b1, *w1_bins, *b2, *w2])
-        ofile.write('memory_initialization_radix = 2;\nmemory_initialization_vector =\n')
-        ofile.write(',\n'.join(map(str, [w.bin() for w in allweights])));
-        ofile.write(';\n')
+        # ofile.write('memory_initialization_radix = 2;\nmemory_initialization_vector =\n')
+        # ofile.write(',\n'.join(map(str, [w.bin() for w in allweights])));
+        # ofile.write(';\n')
+        
+        test = list(map(str, [w.bin() for w in allweights]))
+        for i,w in enumerate(test):
+            ofile.write(f'8\'b{bin(i)[2:].zfill(8)} : rom_reg <= 8\'b{w};\n')
         
 def NAR_inference(weights, x):
     n = 5
@@ -106,4 +108,4 @@ plt.plot(range(293), y_matlab, label='matlab')
 plt.legend()
 plt.show()
 
-print('hi')
+print('')
