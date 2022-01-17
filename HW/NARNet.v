@@ -5,16 +5,16 @@ module NARNet(clk,enable,rst,x_in,x_ready,y_out);
 // parameters for NARNN
 parameter N=5;
 parameter feedbackDelay=16;
-parameter xoffset = 32'b01000000000011001100110011001101;//8'b01_111111; // 2.2
-parameter gain    = 32'b00111101110011001100110011001101;//8'b00_000110; // 0.1
-parameter ymin    = 32'b10111111100000000000000000000000;//8'b11_000000; // -1
-parameter ymin_opp    = 32'b00111111100000000000000000000000;//8'b11_000000; // 1
+//parameter xoffset = 32'b01000000000011001100110011001101;//8'b01_111111; // 2.2
+//parameter gain    = 32'b00111101110011001100110011001101;//8'b00_000110; // 0.1
+//parameter ymin    = 32'b10111111100000000000000000000000;//8'b11_000000; // -1
+//parameter ymin_opp    = 32'b00111111100000000000000000000000;//8'b11_000000; // 1
 
 
 // inputs/outputs 
 input wire clk, enable, rst, x_ready;
-input wire signed [31:0] x_in;
-output wire [31:0] y_out;
+input wire signed [7:0] x_in;
+output wire [7:0] y_out;
 
 wire [7:0] bram_addr;
 wire [7:0] bram_out;
@@ -23,7 +23,7 @@ wire [7:0] bram_out;
 weights_rom wrom ( .addr(bram_addr), .rom_out(bram_out));
 
 // registers for input, weights and biases
-reg signed [31:0] x_in_reg;
+reg signed [7:0] x_in_reg;
 reg signed [7:0] b1 [0:4];
 reg signed [7:0] w1 [0:4] [0:15];
 reg signed [7:0] b2;
@@ -61,7 +61,7 @@ always @(posedge clk) begin
 if (enable == 1) begin
     if (bram_counter < 5) begin
         b1[bram_counter] <= bram_out;
-        bram_counter = bram_counter + 1;
+        bram_counter <= bram_counter + 1;
     end 
     else if (bram_counter < (5 + 80)) begin
         w1[row][(bram_counter - 5) % 16] <= bram_out;    
@@ -111,9 +111,9 @@ reg [4:0] tap = 0, l1_ind = 0, l2_ind = 0;
 // initialize delay states
 initial begin 
     for (i = 0; i < 16; i = i + 1) begin
-        xdl[i] <= 16;
+        xdl[i] <= 8'b00011000;
     end
-    xdl[16] = 0;
+    xdl[16] <= 0;
 end
 
 // assign all the wire inputs for multiplication..
@@ -152,7 +152,8 @@ assign y_out = y_out_reg;
 //reg [7:0] acc_a, acc_b;
 reg [7:0] acc_res;
 //qadd acc (.a(acc_a), .b(acc_b), .c(acc_res));
-reg [7:0] temp;
+reg [7:0] xdts;
+
 
 always @(posedge clk) begin
 
@@ -162,9 +163,9 @@ if (rst == 1) begin
     
     // re-initialize delay states
     for (i = 0; i < 16; i = i + 1) begin
-        xdl[i] <= 16;
+        xdl[i] <= 8'b00011000; // 0.375 in S8.6 
     end
-    xdl[16] = 0;
+    xdl[16] <= 0;
 end
 else if (enable == 1) begin
     case (current_state)
@@ -178,12 +179,15 @@ else if (enable == 1) begin
         // intialize tap delays
         s_delay: begin
             if (delay_set != 1'b1) begin
-                temp = mapminmax_to_fixed(x_in_reg);
-                xdl[(ts + 16) % 17] = {x_in_reg[31], temp[27:20]};
+//                temp = mapminmax_to_fixed(x_in_reg);
+//                xdl[(ts + 16) % 17] = {x_in_reg[31], temp[27:20]};
+                xdl[(ts + 16) % 17] <= x_in_reg;
                 delay_set <= 1'b1;
+                xdts <= (ts + 16) % 17;
+
             end
             else if (tap < 16) begin
-                tapdelay1[tap] = xdl[(ts - tap - 1 ) % 17];
+                tapdelay1[tap] <= xdl[(xdts - tap - 1 ) % 17];
                 tap <= tap + 1;
             end 
             else begin
@@ -241,25 +245,13 @@ else if (enable == 1) begin
         end
         
         s_output: begin
-            y_out_reg <= {acc_res[7], acc_res};
+            y_out_reg <= acc_res;
+            current_state <= s_wait;
         end
     endcase
 end
 
 end
-
-function mapminmax_to_fixed;
-
-input [31:0] x;
-reg [31:0] temp;    
-
-begin
-temp = x - xoffset;
-mapminmax_to_fixed = temp * gain + 1;
-
-end
-
-endfunction
 
 function tanh_LUT;
 input [7:0] x;

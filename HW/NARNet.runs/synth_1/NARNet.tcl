@@ -70,6 +70,7 @@ proc create_report { reportName command } {
   }
 }
 OPTRACE "synth_1" START { ROLLUP_AUTO }
+set_param chipscope.maxJobs 8
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7s50csga324-2
 
@@ -87,8 +88,6 @@ OPTRACE "Adding files" START { }
 add_files F:/Research/NAR-Net/weights_quantized.coe
 read_verilog -library xil_defaultlib {
   F:/Research/NAR-Net/HW/NARNet.srcs/sources_1/new/neuron.v
-  F:/Research/NAR-Net/HW/NARNet.srcs/sources_1/new/qadd.v
-  F:/Research/NAR-Net/HW/NARNet.srcs/sources_1/new/qmult.v
   F:/Research/NAR-Net/HW/NARNet.srcs/sources_1/new/weights_rom.v
   F:/Research/NAR-Net/HW/NARNet.v
 }

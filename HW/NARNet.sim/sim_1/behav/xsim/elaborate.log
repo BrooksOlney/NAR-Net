@@ -4,6 +4,15 @@ Running: F:/Xilinx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe -wto 6d685ae838
 Using 2 slave threads.
 Starting static elaboration
 Pass Through NonSizing Optimizer
-WARNING: [VRFC 10-3705] select index 27 into 'temp' is out of bounds [F:/Research/NAR-Net/HW/NARNet.v:182]
 Completed static elaboration
-INFO: [XSIM 43-4323] No Change in HDL. Linking previously generated obj files to create kernel
+Starting simulation data flow analysis
+WARNING: [XSIM 43-4099] "F:/Research/NAR-Net/HW/NARNet.v" Line 3. Module NARNet doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "F:/Research/NAR-Net/HW/NARNet.v" Line 3. Module NARNet doesn't have a timescale but at least one module in design has a timescale.
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.weights_rom
+Compiling module xil_defaultlib.neuron
+Compiling module xil_defaultlib.NARNet
+Compiling module xil_defaultlib.NARNN_tb
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot NARNN_tb_behav
