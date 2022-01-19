@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7s50csga324-2" LaunchTime="1642568484">
-  <File Type="PA-TCL" Name="NARNet_NoCache.tcl"/>
-  <File Type="RDS-PROPCONSTRS" Name="NARNet_NoCache_drc_synth.rpt"/>
-  <File Type="REPORTS-TCL" Name="NARNet_NoCache_reports.tcl"/>
-  <File Type="RDS-RDS" Name="NARNet_NoCache.vds"/>
-  <File Type="RDS-UTIL" Name="NARNet_NoCache_utilization_synth.rpt"/>
-  <File Type="RDS-UTIL-PB" Name="NARNet_NoCache_utilization_synth.pb"/>
-  <File Type="RDS-DCP" Name="NARNet_NoCache.dcp"/>
-  <File Type="VDS-TIMINGSUMMARY" Name="NARNet_NoCache_timing_summary_synth.rpt"/>
-  <File Type="VDS-TIMING-PB" Name="NARNet_NoCache_timing_summary_synth.pb"/>
+<GenRun Id="synth_1" LaunchPart="xc7s50csga324-2" LaunchTime="1642571410">
+  <File Type="PA-TCL" Name="NARNet_SmallCache.tcl"/>
+  <File Type="RDS-PROPCONSTRS" Name="NARNet_SmallCache_drc_synth.rpt"/>
+  <File Type="REPORTS-TCL" Name="NARNet_SmallCache_reports.tcl"/>
+  <File Type="RDS-RDS" Name="NARNet_SmallCache.vds"/>
+  <File Type="RDS-UTIL" Name="NARNet_SmallCache_utilization_synth.rpt"/>
+  <File Type="RDS-UTIL-PB" Name="NARNet_SmallCache_utilization_synth.pb"/>
+  <File Type="RDS-DCP" Name="NARNet_SmallCache.dcp"/>
+  <File Type="VDS-TIMINGSUMMARY" Name="NARNet_SmallCache_timing_summary_synth.rpt"/>
+  <File Type="VDS-TIMING-PB" Name="NARNet_SmallCache_timing_summary_synth.pb"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PPRDIR/neuron.v">
@@ -49,7 +49,7 @@
     </File>
     <Config>
       <Option Name="DesignMode" Val="RTL"/>
-      <Option Name="TopModule" Val="NARNet_NoCache"/>
+      <Option Name="TopModule" Val="NARNet_SmallCache"/>
     </Config>
   </FileSet>
   <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">

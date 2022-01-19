@@ -1,12 +1,12 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
--------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-| Date         : Wed Jan 19 00:02:09 2022
+| Date         : Wed Jan 19 00:50:50 2022
 | Host         : BrooksRig running 64-bit major release  (build 9200)
-| Command      : report_control_sets -verbose -file NARNet_NoCache_control_sets_placed.rpt
-| Design       : NARNet_NoCache
+| Command      : report_control_sets -verbose -file NARNet_SmallCache_control_sets_placed.rpt
+| Design       : NARNet_SmallCache
 | Device       : xc7s50
--------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------
 
 Control Set Information
 
@@ -79,13 +79,13 @@ Table of Contents
 |  clk_IBUF_BUFG               | tap                       |                   |                2 |              5 |         2.50 |
 |  wrom/rom_reg_reg[7]_i_2_n_0 |                           |                   |                7 |              8 |         1.14 |
 |  clk_IBUF_BUFG               | acc_res                   |                   |                2 |              8 |         4.00 |
-|  clk_IBUF_BUFG               | param_cache[1][7]_i_1_n_0 |                   |                2 |              8 |         4.00 |
-|  clk_IBUF_BUFG               | param_cache[3][7]_i_1_n_0 |                   |                3 |              8 |         2.67 |
-|  clk_IBUF_BUFG               | param_cache               |                   |                3 |              8 |         2.67 |
 |  clk_IBUF_BUFG               | param_cache[4][7]_i_1_n_0 |                   |                5 |              8 |         1.60 |
 |  clk_IBUF_BUFG               | param_cache[2][7]_i_1_n_0 |                   |                4 |              8 |         2.00 |
-|  clk_IBUF_BUFG               | x_in_reg                  |                   |                3 |              8 |         2.67 |
+|  clk_IBUF_BUFG               | param_cache[1][7]_i_1_n_0 |                   |                2 |              8 |         4.00 |
+|  clk_IBUF_BUFG               | param_cache               |                   |                3 |              8 |         2.67 |
+|  clk_IBUF_BUFG               | param_cache[3][7]_i_1_n_0 |                   |                3 |              8 |         2.67 |
 |  clk_IBUF_BUFG               | xdl[16][7]_i_1_n_0        | rst_IBUF          |                5 |              8 |         1.60 |
+|  clk_IBUF_BUFG               | x_in_reg                  |                   |                3 |              8 |         2.67 |
 |  clk_IBUF_BUFG               | y_out_reg                 |                   |                4 |              8 |         2.00 |
 |  clk_IBUF_BUFG               |                           |                   |                4 |              9 |         2.25 |
 |  clk_IBUF_BUFG               | p_0_in__0                 |                   |                2 |             16 |         8.00 |

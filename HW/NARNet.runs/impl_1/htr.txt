@@ -6,4 +6,4 @@ REM          to be invoked for Vivado to track run status.
 REM Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 REM
 
-vivado -log NARNet_NoCache.vdi -applog -m64 -product Vivado -messageDb vivado.pb -mode batch -source NARNet_NoCache.tcl -notrace
+vivado -log NARNet_SmallCache.vdi -applog -m64 -product Vivado -messageDb vivado.pb -mode batch -source NARNet_SmallCache.tcl -notrace

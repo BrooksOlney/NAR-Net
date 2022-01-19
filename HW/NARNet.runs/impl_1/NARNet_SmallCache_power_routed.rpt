@@ -1,16 +1,16 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-| Date             : Wed Jan 19 00:02:21 2022
+| Date             : Wed Jan 19 00:51:03 2022
 | Host             : BrooksRig running 64-bit major release  (build 9200)
-| Command          : report_power -file NARNet_NoCache_power_routed.rpt -pb NARNet_NoCache_power_summary_routed.pb -rpx NARNet_NoCache_power_routed.rpx
-| Design           : NARNet_NoCache
+| Command          : report_power -file NARNet_SmallCache_power_routed.rpt -pb NARNet_SmallCache_power_summary_routed.pb -rpx NARNet_SmallCache_power_routed.rpx
+| Design           : NARNet_SmallCache
 | Device           : xc7s50csga324-2
 | Design State     : routed
 | Grade            : commercial
 | Process          : typical
 | Characterization : Production
-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Power Report
 
@@ -138,7 +138,7 @@ Table of Contents
 +--------------------------+-----------+
 | Name                     | Power (W) |
 +--------------------------+-----------+
-| NARNet_NoCache           |     6.907 |
+| NARNet_SmallCache        |     6.907 |
 |   n1                     |     0.859 |
 |   n2                     |     0.640 |
 |   n3                     |     0.833 |

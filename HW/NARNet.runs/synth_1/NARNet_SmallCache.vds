@@ -2,25 +2,25 @@
 # Vivado v2020.2 (64-bit)
 # SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
 # IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
-# Start of session at: Wed Jan 19 00:01:26 2022
-# Process ID: 17248
+# Start of session at: Wed Jan 19 00:50:12 2022
+# Process ID: 15824
 # Current directory: F:/Research/NAR-Net/HW/NARNet.runs/synth_1
-# Command line: vivado.exe -log NARNet_NoCache.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source NARNet_NoCache.tcl
-# Log file: F:/Research/NAR-Net/HW/NARNet.runs/synth_1/NARNet_NoCache.vds
+# Command line: vivado.exe -log NARNet_SmallCache.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source NARNet_SmallCache.tcl
+# Log file: F:/Research/NAR-Net/HW/NARNet.runs/synth_1/NARNet_SmallCache.vds
 # Journal file: F:/Research/NAR-Net/HW/NARNet.runs/synth_1\vivado.jou
 #-----------------------------------------------------------
-source NARNet_NoCache.tcl -notrace
-Command: synth_design -top NARNet_NoCache -part xc7s50csga324-2
+source NARNet_SmallCache.tcl -notrace
+Command: synth_design -top NARNet_SmallCache -part xc7s50csga324-2
 Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7s50'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7s50'
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 9708
+INFO: [Synth 8-7075] Helper process launched with PID 20292
 ---------------------------------------------------------------------------------
-Starting Synthesize : Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 1011.406 ; gain = 0.000
+Starting Synthesize : Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 1028.453 ; gain = 0.000
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-6157] synthesizing module 'NARNet_NoCache' [F:/Research/NAR-Net/HW/NARNet-NoCache.v:2]
+INFO: [Synth 8-6157] synthesizing module 'NARNet_SmallCache' [F:/Research/NAR-Net/HW/NARNet-NoCache.v:2]
 	Parameter N bound to: 5 - type: integer 
 	Parameter feedbackDelay bound to: 16 - type: integer 
 	Parameter s_wait bound to: 3'b000 
@@ -35,36 +35,36 @@ INFO: [Synth 8-155] case statement is not full and has no default [F:/Research/N
 INFO: [Synth 8-6155] done synthesizing module 'weights_rom' (1#1) [F:/Research/NAR-Net/HW/weights_rom.v:3]
 INFO: [Synth 8-6157] synthesizing module 'neuron' [F:/Research/NAR-Net/HW/neuron.v:4]
 INFO: [Synth 8-6155] done synthesizing module 'neuron' (2#1) [F:/Research/NAR-Net/HW/neuron.v:4]
-WARNING: [Synth 8-7071] port 'ovr' of module 'neuron' is unconnected for instance 'n1' [F:/Research/NAR-Net/HW/NARNet-NoCache.v:105]
-WARNING: [Synth 8-7023] instance 'n1' of module 'neuron' has 5 connections declared, but only 4 given [F:/Research/NAR-Net/HW/NARNet-NoCache.v:105]
-WARNING: [Synth 8-7071] port 'ovr' of module 'neuron' is unconnected for instance 'n2' [F:/Research/NAR-Net/HW/NARNet-NoCache.v:106]
-WARNING: [Synth 8-7023] instance 'n2' of module 'neuron' has 5 connections declared, but only 4 given [F:/Research/NAR-Net/HW/NARNet-NoCache.v:106]
-WARNING: [Synth 8-7071] port 'ovr' of module 'neuron' is unconnected for instance 'n3' [F:/Research/NAR-Net/HW/NARNet-NoCache.v:107]
-WARNING: [Synth 8-7023] instance 'n3' of module 'neuron' has 5 connections declared, but only 4 given [F:/Research/NAR-Net/HW/NARNet-NoCache.v:107]
-WARNING: [Synth 8-7071] port 'ovr' of module 'neuron' is unconnected for instance 'n4' [F:/Research/NAR-Net/HW/NARNet-NoCache.v:108]
-WARNING: [Synth 8-7023] instance 'n4' of module 'neuron' has 5 connections declared, but only 4 given [F:/Research/NAR-Net/HW/NARNet-NoCache.v:108]
-WARNING: [Synth 8-7071] port 'ovr' of module 'neuron' is unconnected for instance 'n5' [F:/Research/NAR-Net/HW/NARNet-NoCache.v:109]
-WARNING: [Synth 8-7023] instance 'n5' of module 'neuron' has 5 connections declared, but only 4 given [F:/Research/NAR-Net/HW/NARNet-NoCache.v:109]
-INFO: [Synth 8-155] case statement is not full and has no default [F:/Research/NAR-Net/HW/NARNet-NoCache.v:326]
-INFO: [Synth 8-155] case statement is not full and has no default [F:/Research/NAR-Net/HW/NARNet-NoCache.v:127]
-INFO: [Synth 8-6155] done synthesizing module 'NARNet_NoCache' (3#1) [F:/Research/NAR-Net/HW/NARNet-NoCache.v:2]
+WARNING: [Synth 8-7071] port 'ovr' of module 'neuron' is unconnected for instance 'n1' [F:/Research/NAR-Net/HW/NARNet-NoCache.v:103]
+WARNING: [Synth 8-7023] instance 'n1' of module 'neuron' has 5 connections declared, but only 4 given [F:/Research/NAR-Net/HW/NARNet-NoCache.v:103]
+WARNING: [Synth 8-7071] port 'ovr' of module 'neuron' is unconnected for instance 'n2' [F:/Research/NAR-Net/HW/NARNet-NoCache.v:104]
+WARNING: [Synth 8-7023] instance 'n2' of module 'neuron' has 5 connections declared, but only 4 given [F:/Research/NAR-Net/HW/NARNet-NoCache.v:104]
+WARNING: [Synth 8-7071] port 'ovr' of module 'neuron' is unconnected for instance 'n3' [F:/Research/NAR-Net/HW/NARNet-NoCache.v:105]
+WARNING: [Synth 8-7023] instance 'n3' of module 'neuron' has 5 connections declared, but only 4 given [F:/Research/NAR-Net/HW/NARNet-NoCache.v:105]
+WARNING: [Synth 8-7071] port 'ovr' of module 'neuron' is unconnected for instance 'n4' [F:/Research/NAR-Net/HW/NARNet-NoCache.v:106]
+WARNING: [Synth 8-7023] instance 'n4' of module 'neuron' has 5 connections declared, but only 4 given [F:/Research/NAR-Net/HW/NARNet-NoCache.v:106]
+WARNING: [Synth 8-7071] port 'ovr' of module 'neuron' is unconnected for instance 'n5' [F:/Research/NAR-Net/HW/NARNet-NoCache.v:107]
+WARNING: [Synth 8-7023] instance 'n5' of module 'neuron' has 5 connections declared, but only 4 given [F:/Research/NAR-Net/HW/NARNet-NoCache.v:107]
+INFO: [Synth 8-155] case statement is not full and has no default [F:/Research/NAR-Net/HW/NARNet-NoCache.v:316]
+INFO: [Synth 8-155] case statement is not full and has no default [F:/Research/NAR-Net/HW/NARNet-NoCache.v:125]
+INFO: [Synth 8-6155] done synthesizing module 'NARNet_SmallCache' (3#1) [F:/Research/NAR-Net/HW/NARNet-NoCache.v:2]
 ---------------------------------------------------------------------------------
-Finished Synthesize : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 1011.406 ; gain = 0.000
+Finished Synthesize : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 1028.453 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1011.406 ; gain = 0.000
+Finished Constraint Validation : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1028.453 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7s50csga324-2
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1028.453 ; gain = 0.000
+---------------------------------------------------------------------------------
 INFO: [Device 21-403] Loading part xc7s50csga324-2
----------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1011.406 ; gain = 0.000
----------------------------------------------------------------------------------
 WARNING: [Synth 8-327] inferring latch for variable 'rom_reg_reg' [F:/Research/NAR-Net/HW/weights_rom.v:11]
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 1011.406 ; gain = 0.000
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1028.453 ; gain = 0.000
 ---------------------------------------------------------------------------------
 No constraint files found.
 ---------------------------------------------------------------------------------
@@ -121,36 +121,36 @@ No constraint files found.
 Start Cross Boundary and Area Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:09 ; elapsed = 00:00:12 . Memory (MB): peak = 1011.406 ; gain = 0.000
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 1028.453 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
 ---------------------------------------------------------------------------------
 
 ROM: Preliminary Mapping	Report
-+---------------+--------------+---------------+----------------+
-|Module Name    | RTL Object   | Depth x Width | Implemented As | 
-+---------------+--------------+---------------+----------------+
-|NARNet_NoCache | tanh_LUT     | 256x1         | LUT            | 
-|NARNet_NoCache | tanh_LUT     | 256x1         | LUT            | 
-|NARNet_NoCache | tanh_LUT     | 256x1         | LUT            | 
-|NARNet_NoCache | tanh_LUT     | 256x1         | LUT            | 
-|NARNet_NoCache | tanh_LUT     | 256x1         | LUT            | 
-|NARNet_NoCache | wrom/rom_reg | 128x8         | LUT            | 
-|NARNet_NoCache | tanh_LUT     | 256x1         | LUT            | 
-|NARNet_NoCache | tanh_LUT     | 256x1         | LUT            | 
-|NARNet_NoCache | tanh_LUT     | 256x1         | LUT            | 
-|NARNet_NoCache | tanh_LUT     | 256x1         | LUT            | 
-|NARNet_NoCache | tanh_LUT     | 256x1         | LUT            | 
-+---------------+--------------+---------------+----------------+
++------------------+--------------+---------------+----------------+
+|Module Name       | RTL Object   | Depth x Width | Implemented As | 
++------------------+--------------+---------------+----------------+
+|NARNet_SmallCache | tanh_LUT     | 256x1         | LUT            | 
+|NARNet_SmallCache | tanh_LUT     | 256x1         | LUT            | 
+|NARNet_SmallCache | tanh_LUT     | 256x1         | LUT            | 
+|NARNet_SmallCache | tanh_LUT     | 256x1         | LUT            | 
+|NARNet_SmallCache | tanh_LUT     | 256x1         | LUT            | 
+|NARNet_SmallCache | wrom/rom_reg | 128x8         | LUT            | 
+|NARNet_SmallCache | tanh_LUT     | 256x1         | LUT            | 
+|NARNet_SmallCache | tanh_LUT     | 256x1         | LUT            | 
+|NARNet_SmallCache | tanh_LUT     | 256x1         | LUT            | 
+|NARNet_SmallCache | tanh_LUT     | 256x1         | LUT            | 
+|NARNet_SmallCache | tanh_LUT     | 256x1         | LUT            | 
++------------------+--------------+---------------+----------------+
 
 
 Distributed RAM: Preliminary Mapping	Report (see note below)
-+---------------+---------------+-----------+----------------------+-------------+
-|Module Name    | RTL Object    | Inference | Size (Depth x Width) | Primitives  | 
-+---------------+---------------+-----------+----------------------+-------------+
-|NARNet_NoCache | tapdelay1_reg | Implied   | 16 x 8               | RAM32M x 2	 | 
-+---------------+---------------+-----------+----------------------+-------------+
++------------------+---------------+-----------+----------------------+-------------+
+|Module Name       | RTL Object    | Inference | Size (Depth x Width) | Primitives  | 
++------------------+---------------+-----------+----------------------+-------------+
+|NARNet_SmallCache | tapdelay1_reg | Implied   | 16 x 8               | RAM32M x 2	 | 
++------------------+---------------+-----------+----------------------+-------------+
 
 Note: The table above is a preliminary report that shows the Distributed RAMs at the current stage of the synthesis flow. Some Distributed RAMs may be reimplemented as non Distributed RAM primitives later in the synthesis flow. Multiple instantiated RAMs are reported only once.
 ---------------------------------------------------------------------------------
@@ -161,18 +161,18 @@ No constraint files found.
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:09 ; elapsed = 00:00:12 . Memory (MB): peak = 1011.406 ; gain = 0.000
+Finished Timing Optimization : Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 1028.453 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
 ---------------------------------------------------------------------------------
 
 Distributed RAM: Final Mapping	Report
-+---------------+---------------+-----------+----------------------+-------------+
-|Module Name    | RTL Object    | Inference | Size (Depth x Width) | Primitives  | 
-+---------------+---------------+-----------+----------------------+-------------+
-|NARNet_NoCache | tapdelay1_reg | Implied   | 16 x 8               | RAM32M x 2	 | 
-+---------------+---------------+-----------+----------------------+-------------+
++------------------+---------------+-----------+----------------------+-------------+
+|Module Name       | RTL Object    | Inference | Size (Depth x Width) | Primitives  | 
++------------------+---------------+-----------+----------------------+-------------+
+|NARNet_SmallCache | tapdelay1_reg | Implied   | 16 x 8               | RAM32M x 2	 | 
++------------------+---------------+-----------+----------------------+-------------+
 
 ---------------------------------------------------------------------------------
 Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
@@ -181,7 +181,7 @@ Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:09 ; elapsed = 00:00:12 . Memory (MB): peak = 1011.406 ; gain = 0.000
+Finished Technology Mapping : Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 1028.453 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -199,37 +199,37 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:11 ; elapsed = 00:00:14 . Memory (MB): peak = 1011.406 ; gain = 0.000
+Finished IO Insertion : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1028.453 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:11 ; elapsed = 00:00:14 . Memory (MB): peak = 1011.406 ; gain = 0.000
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1028.453 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:11 ; elapsed = 00:00:14 . Memory (MB): peak = 1011.406 ; gain = 0.000
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1028.453 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:11 ; elapsed = 00:00:14 . Memory (MB): peak = 1011.406 ; gain = 0.000
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1028.453 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:11 ; elapsed = 00:00:14 . Memory (MB): peak = 1011.406 ; gain = 0.000
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1028.453 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:11 ; elapsed = 00:00:14 . Memory (MB): peak = 1011.406 ; gain = 0.000
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1028.453 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -274,18 +274,18 @@ Report Instance Areas:
 |7     |  wrom   |weights_rom |    48|
 +------+---------+------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:11 ; elapsed = 00:00:14 . Memory (MB): peak = 1011.406 ; gain = 0.000
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1028.453 ; gain = 0.000
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 11 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:11 ; elapsed = 00:00:14 . Memory (MB): peak = 1011.406 ; gain = 0.000
-Synthesis Optimization Complete : Time (s): cpu = 00:00:11 ; elapsed = 00:00:14 . Memory (MB): peak = 1011.406 ; gain = 0.000
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1028.453 ; gain = 0.000
+Synthesis Optimization Complete : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1028.453 ; gain = 0.000
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.014 . Memory (MB): peak = 1011.406 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.015 . Memory (MB): peak = 1028.453 ; gain = 0.000
 INFO: [Netlist 29-17] Analyzing 118 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1011.406 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1028.453 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 10 instances were transformed.
   LD => LDCE: 8 instances
@@ -294,7 +294,7 @@ INFO: [Project 1-111] Unisim Transformation Summary:
 INFO: [Common 17-83] Releasing license: Synthesis
 21 Infos, 11 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:13 ; elapsed = 00:00:17 . Memory (MB): peak = 1011.406 ; gain = 0.000
-INFO: [Common 17-1381] The checkpoint 'F:/Research/NAR-Net/HW/NARNet.runs/synth_1/NARNet_NoCache.dcp' has been generated.
-INFO: [runtcl-4] Executing : report_utilization -file NARNet_NoCache_utilization_synth.rpt -pb NARNet_NoCache_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Wed Jan 19 00:01:46 2022...
+synth_design: Time (s): cpu = 00:00:13 ; elapsed = 00:00:14 . Memory (MB): peak = 1028.453 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'F:/Research/NAR-Net/HW/NARNet.runs/synth_1/NARNet_SmallCache.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file NARNet_SmallCache_utilization_synth.rpt -pb NARNet_SmallCache_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Wed Jan 19 00:50:27 2022...

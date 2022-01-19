@@ -4,7 +4,7 @@
 
 set TIME_start [clock seconds] 
 namespace eval ::optrace {
-  variable script "F:/Research/NAR-Net/HW/NARNet.runs/synth_1/NARNet_NoCache.tcl"
+  variable script "F:/Research/NAR-Net/HW/NARNet.runs/synth_1/NARNet_SmallCache.tcl"
   variable category "vivado_synth"
 }
 
@@ -70,6 +70,7 @@ proc create_report { reportName command } {
   }
 }
 OPTRACE "synth_1" START { ROLLUP_AUTO }
+set_param chipscope.maxJobs 8
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7s50csga324-2
 
@@ -103,7 +104,7 @@ set_param ips.enableIPCacheLiteLoad 1
 close [open __synthesis_is_running__ w]
 
 OPTRACE "synth_design" START { }
-synth_design -top NARNet_NoCache -part xc7s50csga324-2
+synth_design -top NARNet_SmallCache -part xc7s50csga324-2
 OPTRACE "synth_design" END { }
 if { [get_msg_config -count -severity {CRITICAL WARNING}] > 0 } {
  send_msg_id runtcl-6 info "Synthesis results are not added to the cache due to CRITICAL_WARNING"
@@ -113,10 +114,10 @@ if { [get_msg_config -count -severity {CRITICAL WARNING}] > 0 } {
 OPTRACE "write_checkpoint" START { CHECKPOINT }
 # disable binary constraint mode for synth run checkpoints
 set_param constraints.enableBinaryConstraints false
-write_checkpoint -force -noxdef NARNet_NoCache.dcp
+write_checkpoint -force -noxdef NARNet_SmallCache.dcp
 OPTRACE "write_checkpoint" END { }
 OPTRACE "synth reports" START { REPORT }
-create_report "synth_1_synth_report_utilization_0" "report_utilization -file NARNet_NoCache_utilization_synth.rpt -pb NARNet_NoCache_utilization_synth.pb"
+create_report "synth_1_synth_report_utilization_0" "report_utilization -file NARNet_SmallCache_utilization_synth.rpt -pb NARNet_SmallCache_utilization_synth.pb"
 OPTRACE "synth reports" END { }
 file delete __synthesis_is_running__
 close [open __synthesis_is_complete__ w]
