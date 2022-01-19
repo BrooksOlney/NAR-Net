@@ -1,8 +1,8 @@
 # compile verilog/system verilog design source files
 verilog xil_defaultlib  \
-"../../../../NARNet.v" \
-"../../../../NARNet.srcs/sources_1/new/neuron.v" \
-"../../../../NARNet.srcs/sources_1/new/weights_rom.v" \
+"../../../../NARNet-NoCache.v" \
+"../../../../neuron.v" \
+"../../../../weights_rom.v" \
 "../../../../NARNet.srcs/sim_1/new/NARNN_tb.v" \
 
 # compile glbl module

@@ -40,4 +40,4 @@ EAStep()
      fi
 }
 
-EAStep vivado -log NARNet.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source NARNet.tcl
+EAStep vivado -log NARNet_NoCache.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source NARNet_NoCache.tcl

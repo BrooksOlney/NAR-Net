@@ -9,7 +9,7 @@ wire [7:0] y_out;
 reg [7:0] x_in;
 
 
-NARNet uut (.clk(clk), .enable(enable), .rst(rst), .x_in(x_in), .x_ready(x_ready), .y_out(y_out));
+NARNet_SmallCache uut (.clk(clk), .enable(enable), .rst(rst), .x_in(x_in), .x_ready(x_ready), .y_out(y_out));
 
 always begin
     

@@ -1,24 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7s50csga324-2" LaunchTime="1642454923">
-  <File Type="PA-TCL" Name="NARNet.tcl"/>
-  <File Type="RDS-PROPCONSTRS" Name="NARNet_drc_synth.rpt"/>
-  <File Type="REPORTS-TCL" Name="NARNet_reports.tcl"/>
-  <File Type="RDS-RDS" Name="NARNet.vds"/>
-  <File Type="RDS-UTIL" Name="NARNet_utilization_synth.rpt"/>
-  <File Type="RDS-UTIL-PB" Name="NARNet_utilization_synth.pb"/>
-  <File Type="RDS-DCP" Name="NARNet.dcp"/>
-  <File Type="VDS-TIMINGSUMMARY" Name="NARNet_timing_summary_synth.rpt"/>
-  <File Type="VDS-TIMING-PB" Name="NARNet_timing_summary_synth.pb"/>
+<GenRun Id="synth_1" LaunchPart="xc7s50csga324-2" LaunchTime="1642568484">
+  <File Type="PA-TCL" Name="NARNet_NoCache.tcl"/>
+  <File Type="RDS-PROPCONSTRS" Name="NARNet_NoCache_drc_synth.rpt"/>
+  <File Type="REPORTS-TCL" Name="NARNet_NoCache_reports.tcl"/>
+  <File Type="RDS-RDS" Name="NARNet_NoCache.vds"/>
+  <File Type="RDS-UTIL" Name="NARNet_NoCache_utilization_synth.rpt"/>
+  <File Type="RDS-UTIL-PB" Name="NARNet_NoCache_utilization_synth.pb"/>
+  <File Type="RDS-DCP" Name="NARNet_NoCache.dcp"/>
+  <File Type="VDS-TIMINGSUMMARY" Name="NARNet_NoCache_timing_summary_synth.rpt"/>
+  <File Type="VDS-TIMING-PB" Name="NARNet_NoCache_timing_summary_synth.pb"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>
-    <File Path="$PSRCDIR/sources_1/new/neuron.v">
+    <File Path="$PPRDIR/neuron.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PSRCDIR/sources_1/new/weights_rom.v">
+    <File Path="$PPRDIR/weights_rom.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/NARNet-NoCache.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
@@ -26,21 +33,6 @@
       </FileInfo>
     </File>
     <File Path="$PPRDIR/NARNet.v">
-      <FileInfo>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="implementation"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
-    <File Path="$PSRCDIR/sources_1/new/qadd.v">
-      <FileInfo>
-        <Attr Name="AutoDisabled" Val="1"/>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="implementation"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
-    <File Path="$PSRCDIR/sources_1/new/qmult.v">
       <FileInfo>
         <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
@@ -57,8 +49,7 @@
     </File>
     <Config>
       <Option Name="DesignMode" Val="RTL"/>
-      <Option Name="TopModule" Val="NARNet"/>
-      <Option Name="TopAutoSet" Val="TRUE"/>
+      <Option Name="TopModule" Val="NARNet_NoCache"/>
     </Config>
   </FileSet>
   <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">

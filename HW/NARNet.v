@@ -58,31 +58,52 @@ reg weights_loaded = 0;
 assign bram_addr = bram_counter;
 
 always @(posedge clk) begin
-if (enable == 1) begin
-    if (bram_counter < 5) begin
-        b1[bram_counter] <= bram_out;
-        bram_counter <= bram_counter + 1;
-    end 
-    else if (bram_counter < (5 + 80)) begin
-        w1[row][(bram_counter - 5) % 16] <= bram_out;    
-        if ((bram_counter - 5 + 1) % 16 == 0) begin
-            row <= row + 1;
+    if (enable == 1) begin
+        if (bram_counter < 5) begin
+            b1[bram_counter] <= bram_out;
+            bram_counter <= bram_counter + 1;
+        end 
+        else if (bram_counter < (5 + 80)) begin
+            w1[row][(bram_counter - 5) % 16] <= bram_out;    
+            if ((bram_counter - 5 + 1) % 16 == 0) begin
+                row <= row + 1;
+            end
+            bram_counter <= bram_counter + 1;
         end
-        bram_counter <= bram_counter + 1;
+        else if (bram_counter == 85) begin
+            b2 <= bram_out;
+            bram_counter <= bram_counter + 1;
+            row <= 0;
+        end
+        else if (bram_counter < 91) begin
+            w2[row] <= bram_out;
+            row <= row + 1;
+            bram_counter <= bram_counter + 1;
+        end else weights_loaded <= 1;
     end
-    else if (bram_counter == 85) begin
-        b2 <= bram_out;
-        bram_counter <= bram_counter + 1;
-        row <= 0;
-    end
-    else if (bram_counter < 91) begin
-        w2[row] <= bram_out;
-        row <= row + 1;
-        bram_counter <= bram_counter + 1;
-    end else weights_loaded <= 1;
-end
 end
 
+//initial begin
+
+//    for (bram_counter = 0; bram_counter < 5; bram_counter = bram_counter + 1) begin
+//        b1[bram_counter] = rom_reg(bram_counter);
+//    end
+    
+    
+//    for (bram_counter = 5; bram_counter < 85; bram_counter = bram_counter + 1) begin
+//        if ((bram_counter - 5 + 1) % 16 == 0) begin
+//            row = row + 1;
+//            w1[row + 1][(bram_counter - 5) % 16] = rom_reg(bram_counter);
+//        end else w1[row][(bram_counter - 5) % 16] = rom_reg(bram_counter);
+//    end
+    
+//    b2 = rom_reg(bram_counter);
+    
+//    for (bram_counter = 86; bram_counter < 91; bram_counter = bram_counter + 1) begin
+//        w2[bram_counter % 86] = rom_reg(bram_counter);
+//    end
+
+//end
 // NARNet pipeline states
 parameter s_wait = 3'b000;
 parameter s_delay = 3'b001;
@@ -101,7 +122,6 @@ wire signed [7:0] w_n1, w_n2, w_n3, w_n4, w_n5, qmi1, qmi2, qmi3, qmi4, qmi5;
 //reg signed [7:0] r_w_n1, r_w_n2, r_w_n3, r_w_n4, r_w_n5, r_qmi1, r_qmi2, r_qmi3, r_qmi4, r_qmi5;
 reg signed [7:0] b_n1, b_n2, b_n3, b_n4, b_n5;
 wire signed [7:0] n_out1, n_out2, n_out3, n_out4, n_out5;
-wire signed [7:0] s1, s2, s3, s4, s5;
 
 reg signed [7:0] n_reg1, n_reg2, n_reg3, n_reg4, n_reg5;
 reg signed [7:0] tapdelay1 [0:15];
@@ -252,6 +272,107 @@ else if (enable == 1) begin
 end
 
 end
+
+function rom_reg; 
+input [7:0] addr;
+begin
+        case (addr) 
+            8'b00000000 : rom_reg = 8'b00111110;
+            8'b00000001 : rom_reg = 8'b00110110;
+            8'b00000010 : rom_reg = 8'b11110110;
+            8'b00000011 : rom_reg = 8'b01000001;
+            8'b00000100 : rom_reg = 8'b11000010;
+            8'b00000101 : rom_reg = 8'b01001010;
+            8'b00000110 : rom_reg = 8'b00011111;
+            8'b00000111 : rom_reg = 8'b00001101;
+            8'b00001000 : rom_reg = 8'b11101001;
+            8'b00001001 : rom_reg = 8'b11011000;
+            8'b00001010 : rom_reg = 8'b00010000;
+            8'b00001011 : rom_reg = 8'b11100010;
+            8'b00001100 : rom_reg = 8'b00011100;
+            8'b00001101 : rom_reg = 8'b00101001;
+            8'b00001110 : rom_reg = 8'b11101011;
+            8'b00001111 : rom_reg = 8'b00011110;
+            8'b00010000 : rom_reg = 8'b00101011;
+            8'b00010001 : rom_reg = 8'b11110110;
+            8'b00010010 : rom_reg = 8'b11111110;
+            8'b00010011 : rom_reg = 8'b11011111;
+            8'b00010100 : rom_reg = 8'b10110011;
+            8'b00010101 : rom_reg = 8'b10000110;
+            8'b00010110 : rom_reg = 8'b00010111;
+            8'b00010111 : rom_reg = 8'b00001111;
+            8'b00011000 : rom_reg = 8'b00011011;
+            8'b00011001 : rom_reg = 8'b11111110;
+            8'b00011010 : rom_reg = 8'b11101010;
+            8'b00011011 : rom_reg = 8'b00000000;
+            8'b00011100 : rom_reg = 8'b00000000;
+            8'b00011101 : rom_reg = 8'b00001000;
+            8'b00011110 : rom_reg = 8'b11111001;
+            8'b00011111 : rom_reg = 8'b00001000;
+            8'b00100000 : rom_reg = 8'b11111111;
+            8'b00100001 : rom_reg = 8'b11111000;
+            8'b00100010 : rom_reg = 8'b00001101;
+            8'b00100011 : rom_reg = 8'b11111111;
+            8'b00100100 : rom_reg = 8'b11111101;
+            8'b00100101 : rom_reg = 8'b00101101;
+            8'b00100110 : rom_reg = 8'b00001100;
+            8'b00100111 : rom_reg = 8'b00100011;
+            8'b00101000 : rom_reg = 8'b00000000;
+            8'b00101001 : rom_reg = 8'b00000110;
+            8'b00101010 : rom_reg = 8'b00100100;
+            8'b00101011 : rom_reg = 8'b00111000;
+            8'b00101100 : rom_reg = 8'b00000011;
+            8'b00101101 : rom_reg = 8'b00011101;
+            8'b00101110 : rom_reg = 8'b00000010;
+            8'b00101111 : rom_reg = 8'b00111010;
+            8'b00110000 : rom_reg = 8'b00110010;
+            8'b00110001 : rom_reg = 8'b11111000;
+            8'b00110010 : rom_reg = 8'b00010110;
+            8'b00110011 : rom_reg = 8'b00001100;
+            8'b00110100 : rom_reg = 8'b00000110;
+            8'b00110101 : rom_reg = 8'b00000000;
+            8'b00110110 : rom_reg = 8'b00001111;
+            8'b00110111 : rom_reg = 8'b01000111;
+            8'b00111000 : rom_reg = 8'b01000010;
+            8'b00111001 : rom_reg = 8'b00001111;
+            8'b00111010 : rom_reg = 8'b00110010;
+            8'b00111011 : rom_reg = 8'b00010011;
+            8'b00111100 : rom_reg = 8'b00000111;
+            8'b00111101 : rom_reg = 8'b00011001;
+            8'b00111110 : rom_reg = 8'b11111110;
+            8'b00111111 : rom_reg = 8'b11100110;
+            8'b01000000 : rom_reg = 8'b11010001;
+            8'b01000001 : rom_reg = 8'b11100001;
+            8'b01000010 : rom_reg = 8'b11011011;
+            8'b01000011 : rom_reg = 8'b00000011;
+            8'b01000100 : rom_reg = 8'b11110011;
+            8'b01000101 : rom_reg = 8'b11001100;
+            8'b01000110 : rom_reg = 8'b11011011;
+            8'b01000111 : rom_reg = 8'b00100001;
+            8'b01001000 : rom_reg = 8'b00001110;
+            8'b01001001 : rom_reg = 8'b11111011;
+            8'b01001010 : rom_reg = 8'b00001011;
+            8'b01001011 : rom_reg = 8'b00000000;
+            8'b01001100 : rom_reg = 8'b00001101;
+            8'b01001101 : rom_reg = 8'b11101001;
+            8'b01001110 : rom_reg = 8'b11111111;
+            8'b01001111 : rom_reg = 8'b00010110;
+            8'b01010000 : rom_reg = 8'b00011011;
+            8'b01010001 : rom_reg = 8'b11110111;
+            8'b01010010 : rom_reg = 8'b11101010;
+            8'b01010011 : rom_reg = 8'b11101101;
+            8'b01010100 : rom_reg = 8'b11111000;
+            8'b01010101 : rom_reg = 8'b11101100;
+            8'b01010110 : rom_reg = 8'b00010000;
+            8'b01010111 : rom_reg = 8'b11010001;
+            8'b01011000 : rom_reg = 8'b00000001;
+            8'b01011001 : rom_reg = 8'b00000101;
+            8'b01011010 : rom_reg = 8'b11001111;
+
+    endcase
+
+end
+endfunction
 
 function tanh_LUT;
 input [7:0] x;

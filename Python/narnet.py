@@ -80,27 +80,27 @@ def NAR_inference(weights, x):
         # layer 1
         tapdelay1 = Fxp(np.array([xd1[(xdts - i - 1) % 17] for i in range(16)]), like=fxp_rng)
         # a1 = fxp_rng(tansig(map(add, list(sum(map(mul, neuron, tapdelay1)) for neuron in w1), b1)))
-        a1 = Fxp(np.zeros(5), like=fxp_rng)
-        for i in range(5):
-            acc = Fxp(b1[i], like=fxp_rng)
-            for j in range(16):
-                acc += Fxp(w1[i][j] * tapdelay1[j], like=fxp_rng)
+        # a1 = Fxp(np.zeros(5), like=fxp_rng)
+        # for i in range(5):
+        #     acc = Fxp(b1[i], like=fxp_rng)
+        #     for j in range(16):
+        #         acc += Fxp(w1[i][j] * tapdelay1[j], like=fxp_rng) 
             
-            # acc += 
-            a1[i] = acc
+        #     # acc += 
+        #     a1[i] = acc
             
-        a1 = tansig(a1)
+        # a1 = tansig(a1)
         
-        # a1 = Fxp(tansig(Fxp(np.matmul(w1, tapdelay1), like=fxp_rng) + b1), like=fxp_rng)
+        a1 = Fxp(tansig(Fxp(np.matmul(w1, tapdelay1), like=fxp_rng) + b1), like=fxp_rng)
         
         # layer 2 
         # a2  = sum(map(mul, w2, a1)) + b2[0]
-        # a2 = Fxp(np.matmul(w2, a1), like=fxp_rng) + b2
-        a2 = Fxp(0, like=fxp_rng)
-        for i in range(5):
-            a2 += Fxp(w2[i] * a1[i], like=fxp_rng)
+        a2 = Fxp(np.matmul(w2, a1), like=fxp_rng) + b2
+        # a2 = Fxp(0, like=fxp_rng)
+        # for i in range(5):
+        #     a2 += Fxp(w2[i] * a1[i], like=fxp_rng)
         
-        a2 += b2
+        # a2 += b2
         
         
         # output

@@ -1,90 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="impl_1" LaunchPart="xc7s50csga324-2" LaunchTime="1642454924">
-  <File Type="BITSTR-BMM" Name="NARNet_bd.bmm"/>
-  <File Type="OPT-METHODOLOGY-DRC" Name="NARNet_methodology_drc_opted.rpt"/>
-  <File Type="INIT-TIMING" Name="NARNet_timing_summary_init.rpt"/>
-  <File Type="ROUTE-PWR" Name="NARNet_power_routed.rpt"/>
-  <File Type="PA-TCL" Name="NARNet.tcl"/>
-  <File Type="OPT-TIMING" Name="NARNet_timing_summary_opted.rpt"/>
-  <File Type="OPT-DCP" Name="NARNet_opt.dcp"/>
-  <File Type="ROUTE-PWR-SUM" Name="NARNet_power_summary_routed.pb"/>
-  <File Type="REPORTS-TCL" Name="NARNet_reports.tcl"/>
-  <File Type="OPT-DRC" Name="NARNet_drc_opted.rpt"/>
-  <File Type="OPT-HWDEF" Name="NARNet.hwdef"/>
-  <File Type="PWROPT-DCP" Name="NARNet_pwropt.dcp"/>
-  <File Type="PWROPT-DRC" Name="NARNet_drc_pwropted.rpt"/>
-  <File Type="PWROPT-TIMING" Name="NARNet_timing_summary_pwropted.rpt"/>
-  <File Type="PLACE-DCP" Name="NARNet_placed.dcp"/>
-  <File Type="PLACE-IO" Name="NARNet_io_placed.rpt"/>
-  <File Type="PLACE-CLK" Name="NARNet_clock_utilization_placed.rpt"/>
-  <File Type="PLACE-UTIL" Name="NARNet_utilization_placed.rpt"/>
-  <File Type="PLACE-UTIL-PB" Name="NARNet_utilization_placed.pb"/>
-  <File Type="PLACE-CTRL" Name="NARNet_control_sets_placed.rpt"/>
-  <File Type="PLACE-SIMILARITY" Name="NARNet_incremental_reuse_placed.rpt"/>
-  <File Type="PLACE-PRE-SIMILARITY" Name="NARNet_incremental_reuse_pre_placed.rpt"/>
-  <File Type="PLACE-TIMING" Name="NARNet_timing_summary_placed.rpt"/>
-  <File Type="POSTPLACE-PWROPT-DCP" Name="NARNet_postplace_pwropt.dcp"/>
-  <File Type="BG-BIN" Name="NARNet.bin"/>
-  <File Type="POSTPLACE-PWROPT-TIMING" Name="NARNet_timing_summary_postplace_pwropted.rpt"/>
-  <File Type="PHYSOPT-DCP" Name="NARNet_physopt.dcp"/>
-  <File Type="PHYSOPT-DRC" Name="NARNet_drc_physopted.rpt"/>
-  <File Type="BITSTR-MSK" Name="NARNet.msk"/>
-  <File Type="PHYSOPT-TIMING" Name="NARNet_timing_summary_physopted.rpt"/>
-  <File Type="ROUTE-ERROR-DCP" Name="NARNet_routed_error.dcp"/>
-  <File Type="ROUTE-DCP" Name="NARNet_routed.dcp"/>
-  <File Type="ROUTE-BLACKBOX-DCP" Name="NARNet_routed_bb.dcp"/>
-  <File Type="ROUTE-DRC" Name="NARNet_drc_routed.rpt"/>
-  <File Type="ROUTE-DRC-PB" Name="NARNet_drc_routed.pb"/>
-  <File Type="ROUTE-DRC-RPX" Name="NARNet_drc_routed.rpx"/>
-  <File Type="BITSTR-MMI" Name="NARNet.mmi"/>
-  <File Type="ROUTE-METHODOLOGY-DRC" Name="NARNet_methodology_drc_routed.rpt"/>
-  <File Type="ROUTE-METHODOLOGY-DRC-RPX" Name="NARNet_methodology_drc_routed.rpx"/>
-  <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="NARNet_methodology_drc_routed.pb"/>
-  <File Type="ROUTE-PWR-RPX" Name="NARNet_power_routed.rpx"/>
-  <File Type="ROUTE-STATUS" Name="NARNet_route_status.rpt"/>
-  <File Type="ROUTE-STATUS-PB" Name="NARNet_route_status.pb"/>
-  <File Type="ROUTE-TIMINGSUMMARY" Name="NARNet_timing_summary_routed.rpt"/>
-  <File Type="ROUTE-TIMING-PB" Name="NARNet_timing_summary_routed.pb"/>
-  <File Type="ROUTE-TIMING-RPX" Name="NARNet_timing_summary_routed.rpx"/>
-  <File Type="ROUTE-SIMILARITY" Name="NARNet_incremental_reuse_routed.rpt"/>
-  <File Type="ROUTE-CLK" Name="NARNet_clock_utilization_routed.rpt"/>
-  <File Type="ROUTE-BUS-SKEW" Name="NARNet_bus_skew_routed.rpt"/>
-  <File Type="ROUTE-BUS-SKEW-PB" Name="NARNet_bus_skew_routed.pb"/>
-  <File Type="ROUTE-BUS-SKEW-RPX" Name="NARNet_bus_skew_routed.rpx"/>
-  <File Type="POSTROUTE-PHYSOPT-DCP" Name="NARNet_postroute_physopt.dcp"/>
-  <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="NARNet_postroute_physopt_bb.dcp"/>
-  <File Type="POSTROUTE-PHYSOPT-TIMING" Name="NARNet_timing_summary_postroute_physopted.rpt"/>
-  <File Type="POSTROUTE-PHYSOPT-TIMING-PB" Name="NARNet_timing_summary_postroute_physopted.pb"/>
-  <File Type="POSTROUTE-PHYSOPT-TIMING-RPX" Name="NARNet_timing_summary_postroute_physopted.rpx"/>
-  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW" Name="NARNet_bus_skew_postroute_physopted.rpt"/>
-  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-PB" Name="NARNet_bus_skew_postroute_physopted.pb"/>
-  <File Type="BG-BIT" Name="NARNet.bit"/>
-  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-RPX" Name="NARNet_bus_skew_postroute_physopted.rpx"/>
-  <File Type="BITSTR-RBT" Name="NARNet.rbt"/>
-  <File Type="BITSTR-NKY" Name="NARNet.nky"/>
-  <File Type="PDI-FILE" Name="NARNet.pdi"/>
-  <File Type="RCFI_FILE" Name="NARNet.rcfi"/>
-  <File Type="CFI_FILE" Name="NARNet.cfi"/>
-  <File Type="RNPI_FILE" Name="NARNet.rnpi"/>
-  <File Type="NPI_FILE" Name="NARNet.npi"/>
-  <File Type="RBD_FILE" Name="NARNet.rbd"/>
+<GenRun Id="impl_1" LaunchPart="xc7s50csga324-2" LaunchTime="1642568484">
+  <File Type="BITSTR-BMM" Name="NARNet_NoCache_bd.bmm"/>
+  <File Type="OPT-METHODOLOGY-DRC" Name="NARNet_NoCache_methodology_drc_opted.rpt"/>
+  <File Type="INIT-TIMING" Name="NARNet_NoCache_timing_summary_init.rpt"/>
+  <File Type="ROUTE-PWR" Name="NARNet_NoCache_power_routed.rpt"/>
+  <File Type="PA-TCL" Name="NARNet_NoCache.tcl"/>
+  <File Type="OPT-TIMING" Name="NARNet_NoCache_timing_summary_opted.rpt"/>
+  <File Type="OPT-DCP" Name="NARNet_NoCache_opt.dcp"/>
+  <File Type="ROUTE-PWR-SUM" Name="NARNet_NoCache_power_summary_routed.pb"/>
+  <File Type="REPORTS-TCL" Name="NARNet_NoCache_reports.tcl"/>
+  <File Type="OPT-DRC" Name="NARNet_NoCache_drc_opted.rpt"/>
+  <File Type="OPT-HWDEF" Name="NARNet_NoCache.hwdef"/>
+  <File Type="PWROPT-DCP" Name="NARNet_NoCache_pwropt.dcp"/>
+  <File Type="PWROPT-DRC" Name="NARNet_NoCache_drc_pwropted.rpt"/>
+  <File Type="PWROPT-TIMING" Name="NARNet_NoCache_timing_summary_pwropted.rpt"/>
+  <File Type="PLACE-DCP" Name="NARNet_NoCache_placed.dcp"/>
+  <File Type="PLACE-IO" Name="NARNet_NoCache_io_placed.rpt"/>
+  <File Type="PLACE-CLK" Name="NARNet_NoCache_clock_utilization_placed.rpt"/>
+  <File Type="PLACE-UTIL" Name="NARNet_NoCache_utilization_placed.rpt"/>
+  <File Type="PLACE-UTIL-PB" Name="NARNet_NoCache_utilization_placed.pb"/>
+  <File Type="PLACE-CTRL" Name="NARNet_NoCache_control_sets_placed.rpt"/>
+  <File Type="PLACE-SIMILARITY" Name="NARNet_NoCache_incremental_reuse_placed.rpt"/>
+  <File Type="PLACE-PRE-SIMILARITY" Name="NARNet_NoCache_incremental_reuse_pre_placed.rpt"/>
+  <File Type="PLACE-TIMING" Name="NARNet_NoCache_timing_summary_placed.rpt"/>
+  <File Type="POSTPLACE-PWROPT-DCP" Name="NARNet_NoCache_postplace_pwropt.dcp"/>
+  <File Type="BG-BIN" Name="NARNet_NoCache.bin"/>
+  <File Type="POSTPLACE-PWROPT-TIMING" Name="NARNet_NoCache_timing_summary_postplace_pwropted.rpt"/>
+  <File Type="PHYSOPT-DCP" Name="NARNet_NoCache_physopt.dcp"/>
+  <File Type="PHYSOPT-DRC" Name="NARNet_NoCache_drc_physopted.rpt"/>
+  <File Type="BITSTR-MSK" Name="NARNet_NoCache.msk"/>
+  <File Type="PHYSOPT-TIMING" Name="NARNet_NoCache_timing_summary_physopted.rpt"/>
+  <File Type="ROUTE-ERROR-DCP" Name="NARNet_NoCache_routed_error.dcp"/>
+  <File Type="ROUTE-DCP" Name="NARNet_NoCache_routed.dcp"/>
+  <File Type="ROUTE-BLACKBOX-DCP" Name="NARNet_NoCache_routed_bb.dcp"/>
+  <File Type="ROUTE-DRC" Name="NARNet_NoCache_drc_routed.rpt"/>
+  <File Type="ROUTE-DRC-PB" Name="NARNet_NoCache_drc_routed.pb"/>
+  <File Type="ROUTE-DRC-RPX" Name="NARNet_NoCache_drc_routed.rpx"/>
+  <File Type="BITSTR-MMI" Name="NARNet_NoCache.mmi"/>
+  <File Type="ROUTE-METHODOLOGY-DRC" Name="NARNet_NoCache_methodology_drc_routed.rpt"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-RPX" Name="NARNet_NoCache_methodology_drc_routed.rpx"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="NARNet_NoCache_methodology_drc_routed.pb"/>
+  <File Type="ROUTE-PWR-RPX" Name="NARNet_NoCache_power_routed.rpx"/>
+  <File Type="ROUTE-STATUS" Name="NARNet_NoCache_route_status.rpt"/>
+  <File Type="ROUTE-STATUS-PB" Name="NARNet_NoCache_route_status.pb"/>
+  <File Type="ROUTE-TIMINGSUMMARY" Name="NARNet_NoCache_timing_summary_routed.rpt"/>
+  <File Type="ROUTE-TIMING-PB" Name="NARNet_NoCache_timing_summary_routed.pb"/>
+  <File Type="ROUTE-TIMING-RPX" Name="NARNet_NoCache_timing_summary_routed.rpx"/>
+  <File Type="ROUTE-SIMILARITY" Name="NARNet_NoCache_incremental_reuse_routed.rpt"/>
+  <File Type="ROUTE-CLK" Name="NARNet_NoCache_clock_utilization_routed.rpt"/>
+  <File Type="ROUTE-BUS-SKEW" Name="NARNet_NoCache_bus_skew_routed.rpt"/>
+  <File Type="ROUTE-BUS-SKEW-PB" Name="NARNet_NoCache_bus_skew_routed.pb"/>
+  <File Type="ROUTE-BUS-SKEW-RPX" Name="NARNet_NoCache_bus_skew_routed.rpx"/>
+  <File Type="POSTROUTE-PHYSOPT-DCP" Name="NARNet_NoCache_postroute_physopt.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="NARNet_NoCache_postroute_physopt_bb.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING" Name="NARNet_NoCache_timing_summary_postroute_physopted.rpt"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING-PB" Name="NARNet_NoCache_timing_summary_postroute_physopted.pb"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING-RPX" Name="NARNet_NoCache_timing_summary_postroute_physopted.rpx"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW" Name="NARNet_NoCache_bus_skew_postroute_physopted.rpt"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-PB" Name="NARNet_NoCache_bus_skew_postroute_physopted.pb"/>
+  <File Type="BG-BIT" Name="NARNet_NoCache.bit"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-RPX" Name="NARNet_NoCache_bus_skew_postroute_physopted.rpx"/>
+  <File Type="BITSTR-RBT" Name="NARNet_NoCache.rbt"/>
+  <File Type="BITSTR-NKY" Name="NARNet_NoCache.nky"/>
+  <File Type="PDI-FILE" Name="NARNet_NoCache.pdi"/>
+  <File Type="RCFI_FILE" Name="NARNet_NoCache.rcfi"/>
+  <File Type="CFI_FILE" Name="NARNet_NoCache.cfi"/>
+  <File Type="RNPI_FILE" Name="NARNet_NoCache.rnpi"/>
+  <File Type="NPI_FILE" Name="NARNet_NoCache.npi"/>
+  <File Type="RBD_FILE" Name="NARNet_NoCache.rbd"/>
   <File Type="BITSTR-LTX" Name="debug_nets.ltx"/>
-  <File Type="BITSTR-LTX" Name="NARNet.ltx"/>
-  <File Type="BITSTR-SYSDEF" Name="NARNet.sysdef"/>
-  <File Type="BG-BGN" Name="NARNet.bgn"/>
-  <File Type="BG-DRC" Name="NARNet.drc"/>
-  <File Type="RDI-RDI" Name="NARNet.vdi"/>
+  <File Type="BITSTR-LTX" Name="NARNet_NoCache.ltx"/>
+  <File Type="BITSTR-SYSDEF" Name="NARNet_NoCache.sysdef"/>
+  <File Type="BG-BGN" Name="NARNet_NoCache.bgn"/>
+  <File Type="BG-DRC" Name="NARNet_NoCache.drc"/>
+  <File Type="RDI-RDI" Name="NARNet_NoCache.vdi"/>
   <File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>
-    <File Path="$PSRCDIR/sources_1/new/neuron.v">
+    <File Path="$PPRDIR/neuron.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PSRCDIR/sources_1/new/weights_rom.v">
+    <File Path="$PPRDIR/weights_rom.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/NARNet-NoCache.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
@@ -92,21 +99,6 @@
       </FileInfo>
     </File>
     <File Path="$PPRDIR/NARNet.v">
-      <FileInfo>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="implementation"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
-    <File Path="$PSRCDIR/sources_1/new/qadd.v">
-      <FileInfo>
-        <Attr Name="AutoDisabled" Val="1"/>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="implementation"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
-    <File Path="$PSRCDIR/sources_1/new/qmult.v">
       <FileInfo>
         <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
@@ -123,8 +115,7 @@
     </File>
     <Config>
       <Option Name="DesignMode" Val="RTL"/>
-      <Option Name="TopModule" Val="NARNet"/>
-      <Option Name="TopAutoSet" Val="TRUE"/>
+      <Option Name="TopModule" Val="NARNet_NoCache"/>
     </Config>
   </FileSet>
   <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">

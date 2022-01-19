@@ -23,7 +23,7 @@ eval( EAInclude(ISEJScriptLib) );
 
 
 ISEStep( "vivado",
-         "-log NARNet.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source NARNet.tcl" );
+         "-log NARNet_NoCache.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source NARNet_NoCache.tcl" );
 
 
 

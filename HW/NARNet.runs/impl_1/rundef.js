@@ -25,7 +25,7 @@ eval( EAInclude(ISEJScriptLib) );
 // pre-commands:
 ISETouchFile( "init_design", "begin" );
 ISEStep( "vivado",
-         "-log NARNet.vdi -applog -m64 -product Vivado -messageDb vivado.pb -mode batch -source NARNet.tcl -notrace" );
+         "-log NARNet_NoCache.vdi -applog -m64 -product Vivado -messageDb vivado.pb -mode batch -source NARNet_NoCache.tcl -notrace" );
 
 
 
