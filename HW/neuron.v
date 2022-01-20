@@ -34,12 +34,13 @@ module neuron
 //        else begin
 //            add_res = mult_res + b;
 //        end
+    
     end
     
     always @* begin
         
         if (overflow) begin
-            out = {1'b0, {7{1'b1}}}; 
+            out = {1'b0, {7{1'b1}}};
         end else if (underflow) begin
             out = {1'b1, {7{1'b0}}};
         end else begin

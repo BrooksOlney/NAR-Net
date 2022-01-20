@@ -13,7 +13,13 @@ class settings:
         self.xoffset = xoffset
         self.gain = gain
         self.ymin = ymin 
-        
+
+xsettings = settings(2.2, 0.1, -1)
+ysettings = settings(2.2, 0.1, -1)
+
+fxp_float = Fxp(None, dtype='fxp-s32/23')
+
+fxp_rng = Fxp(None, dtype='fxp-s8/6')
         
 def generate_tanh_lut():
     
@@ -27,7 +33,8 @@ def generate_tanh_lut():
         for l,out in zip(lut.bin(),lutOut.bin()):
             ofile.write(f"\t\t8'b{l} : tanh_out_reg <= 8'b{out};\n")
 
-
+def mapminmax_reverse(y):
+    return (y - ysettings.ymin) / ysettings.gain + ysettings.xoffset
 
 def write_quantized_weights(weights):
     b1, w1, b2, w2 = weights
@@ -53,16 +60,13 @@ def write_quantized_weights(weights):
 def NAR_inference(weights, x):
     n = 5
     feedbackDelay = 16
-    fxp_float = Fxp(None, dtype='fxp-s32/23')
-    
-    fxp_rng = Fxp(None, dtype='fxp-s8/6', rounding='trunc')
+
     
     b1, w1, b2, w2 = [Fxp(w, like=fxp_rng) for w in weights]
 
     write_quantized_weights((b1,w1,b2,w2))
 
-    xsettings = settings(2.2, 0.1, -1)
-    ysettings = settings(2.2, 0.1, -1)
+
 
     # xd1 = [16] * 16    
     # y = [0] * len(x)
@@ -134,7 +138,20 @@ def NAR_inference(weights, x):
  
     return y
 
- 
+def plot_fpga_output(x_test):
+    
+    outputs = open("verilog_output.txt",'r').read().splitlines()
+    outputs = Fxp(outputs, dtype='fxp-s8/6', rounding='trunc')
+    
+    y_test = list(map(mapminmax_reverse, Fxp(outputs, like=fxp_float)))
+    plt.plot(x_test, label='ground truth')
+    plt.plot(y_test, label='from fpga')
+    # y_python = NAR_inference(weights, x_test)
+    # plt.plot(y_python, label='from python')
+    plt.legend()
+    plt.show()
+
+
 # load weights
 weights = open("Python/modelWeights.txt", "r").read().splitlines()
 weights = list(np.array(list(map(float, w.split()))) for w in weights)
@@ -143,7 +160,7 @@ weights[1] = weights[1].reshape(5, 16)
 # load testing data
 x_test = open("Python/S1_test.txt", "r").read().splitlines()
 x_test = list(np.array(list(map(float, x.split()))) for x in x_test)
-
+# plot_fpga_output(x_test[0])
 
 delays = [16 for _ in range(16)]
 y_test = NAR_inference(weights, x_test[0])

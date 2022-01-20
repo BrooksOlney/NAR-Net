@@ -57,7 +57,7 @@ always @(posedge clk) begin
     end else if (out_ready == 1) begin
         test_output[trace_ind - 1] <= y_out;
         $display("%b", y_out);
-        $fwrite(f, "%b\n", y_out);
+        $fwrite(f, "8b%b\n", y_out);
         waiting <= 0;
     end else begin 
         x_ready <= 0;

@@ -8,7 +8,8 @@ INFO: [VRFC 10-2263] Analyzing Verilog file "F:/Research/NAR-Net/HW/weights_rom.
 INFO: [VRFC 10-311] analyzing module weights_rom
 INFO: [VRFC 10-2263] Analyzing Verilog file "F:/Research/NAR-Net/HW/NARNet-SmallCache.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module NARNet_SmallCache
-WARNING: [VRFC 10-8370] keyword 'unsigned' is not allowed here in this mode of Verilog [F:/Research/NAR-Net/HW/NARNet-SmallCache.v:42]
+INFO: [VRFC 10-2263] Analyzing Verilog file "F:/Research/NAR-Net/HW/accumulator.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module accumulator
 INFO: [VRFC 10-2263] Analyzing Verilog file "F:/Research/NAR-Net/HW/NARNet.srcs/sim_1/new/NARNN_tb.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module NARNN_tb
 INFO: [VRFC 10-2263] Analyzing Verilog file "F:/Research/NAR-Net/HW/NARNet.srcs/sim_1/new/neuron_tb.v" into library xil_defaultlib

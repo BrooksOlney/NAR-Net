@@ -39,7 +39,7 @@ parameter s_layer2 = 3'b110;
 parameter s_output = 3'b111;
 
 reg [2:0] current_state = s_wait;
-reg unsigned [8:0] ts = 0;
+reg signed [9:0] ts = 0;
 
 reg delay_set = 0;
 
@@ -69,9 +69,9 @@ initial begin
 end
 
 reg signed [7:0] param_cache [0:4];
-reg [7:0] y_out_reg;
-reg [2:0] w_ind = 0;
-reg [7:0] acc_res;
+reg signed [7:0] y_out_reg;
+reg signed [3:0] w_ind = 0;
+reg signed [7:0] acc_res;
 reg signed [8:0] xdts;
 
 assign w_n1 = param_cache[0];
@@ -151,6 +151,11 @@ else if (enable == 1) begin
                 tap <= 0;
                 current_state <= s_loadw1;
                 delay_set <= 1'b0;
+                n_reg1 <= 62;
+                n_reg2 <= 54;
+                n_reg3 <= -10;
+                n_reg4 <= 65;
+                n_reg5 <= -62;
             end
         end
         
@@ -160,6 +165,7 @@ else if (enable == 1) begin
             if (w_ind == 4) begin
                 current_state <= s_layer1;
                 w_ind <= 0;
+
             end else w_ind <= w_ind + 1;
         end
         
@@ -227,6 +233,15 @@ else if (enable == 1) begin
         
         s_layer2: begin
             acc_res <= n_out1 + n_out2 + n_out3 + n_out4 + n_out5;
+            
+//            if (w_ind == 0) begin
+//                param_cache[0] <= n_out1;
+//                param_cache[1] <= n_out2;
+//                param_cache[2] <= n_out3;
+//                param_cache[3] <= n_out4;
+//                param_cache[4] <= n_out5;
+//            end
+            
             current_state <= s_output;
         end
         
