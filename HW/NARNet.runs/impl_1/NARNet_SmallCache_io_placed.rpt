@@ -1,7 +1,7 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------
 | Tool Version              : Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-| Date                      : Wed Jan 19 00:50:50 2022
+| Date                      : Thu Jan 20 11:02:31 2022
 | Host                      : BrooksRig running 64-bit major release  (build 9200)
 | Command                   : report_io -file NARNet_SmallCache_io_placed.rpt
 | Design                    : NARNet_SmallCache
@@ -25,7 +25,7 @@ Table of Contents
 +---------------+
 | Total User IO |
 +---------------+
-|            20 |
+|            21 |
 +---------------+
 
 
@@ -340,7 +340,7 @@ Table of Contents
 | U15        | y_out[3]    | High Range | IO_L18P_T2_D28_14            | OUTPUT      | LVCMOS18*   |      14 |         12 | SLOW |                     |            FP_VTT_50 |         | UNFIXED    |           |          |      | NONE             |              |                   |              |
 | U16        | y_out[7]    | High Range | IO_L16P_T2_CSI_B_14          | OUTPUT      | LVCMOS18*   |      14 |         12 | SLOW |                     |            FP_VTT_50 |         | UNFIXED    |           |          |      | NONE             |              |                   |              |
 | U17        |             | High Range | IO_L15P_T2_DQS_RDWR_B_14     | User IO     |             |      14 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
-| U18        |             | High Range | IO_L15N_T2_DQS_DOUT_CSO_B_14 | User IO     |             |      14 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
+| U18        | out_ready   | High Range | IO_L15N_T2_DQS_DOUT_CSO_B_14 | OUTPUT      | LVCMOS18*   |      14 |         12 | SLOW |                     |            FP_VTT_50 |         | UNFIXED    |           |          |      | NONE             |              |                   |              |
 | V1         |             |            | GND                          | GND         |             |         |            |      |                     |                      |     0.0 |            |           |          |      |                  |              |                   |              |
 | V2         |             | High Range | IO_L16N_T2_34                | User IO     |             |      34 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
 | V3         |             | High Range | IO_L16P_T2_34                | User IO     |             |      34 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |

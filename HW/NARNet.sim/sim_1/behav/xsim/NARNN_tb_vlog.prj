@@ -1,9 +1,12 @@
 # compile verilog/system verilog design source files
 verilog xil_defaultlib  \
-"../../../../NARNet-NoCache.v" \
+"../../../../NARNet.v" \
 "../../../../neuron.v" \
+"../../../../tanh_lut.v" \
 "../../../../weights_rom.v" \
+"../../../../NARNet-SmallCache.v" \
 "../../../../NARNet.srcs/sim_1/new/NARNN_tb.v" \
+"../../../../NARNet.srcs/sim_1/new/neuron_tb.v" \
 
 # compile glbl module
 verilog xil_defaultlib "glbl.v"

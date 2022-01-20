@@ -1,16 +1,16 @@
 `timescale 1ns / 1ps
 
 module weights_rom(
-    addr, rom_out
+    clk, addr, rom_out
     );
-    
+    input wire clk;
     input wire [7:0] addr;
     output wire [7:0] rom_out;
     
     reg [7:0] rom_reg = 0;
     assign rom_out = rom_reg;
      
-    always @(addr) begin
+    always @(negedge clk) begin
         case (addr) 
             8'b00000000 : rom_reg <= 8'b00111110;
             8'b00000001 : rom_reg <= 8'b00110110;
@@ -105,7 +105,7 @@ module weights_rom(
             8'b01011010 : rom_reg <= 8'b11001111;
 
 
-//            default : rom_reg <= 8'b00000000;  
+            default : rom_reg <= 8'b00000000;  
         endcase
     end
 endmodule

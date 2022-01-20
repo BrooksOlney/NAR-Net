@@ -1,7 +1,7 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-| Date             : Wed Jan 19 00:51:03 2022
+| Date             : Thu Jan 20 11:02:43 2022
 | Host             : BrooksRig running 64-bit major release  (build 9200)
 | Command          : report_power -file NARNet_SmallCache_power_routed.rpt -pb NARNet_SmallCache_power_summary_routed.pb -rpx NARNet_SmallCache_power_routed.rpx
 | Design           : NARNet_SmallCache
@@ -30,14 +30,14 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 7.009        |
+| Total On-Chip Power (W)  | 8.993        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 6.907        |
-| Device Static (W)        | 0.102        |
+| Dynamic (W)              | 8.870        |
+| Device Static (W)        | 0.123        |
 | Effective TJA (C/W)      | 4.9          |
-| Max Ambient (C)          | 50.4         |
-| Junction Temperature (C) | 59.6         |
+| Max Ambient (C)          | 40.6         |
+| Junction Temperature (C) | 69.4         |
 | Confidence Level         | Low          |
 | Setting File             | ---          |
 | Simulation Activity File | ---          |
@@ -52,18 +52,18 @@ Table of Contents
 +--------------------------+-----------+----------+-----------+-----------------+
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
-| Slice Logic              |     3.499 |     1066 |       --- |             --- |
-|   LUT as Logic           |     3.236 |      672 |     32600 |            2.06 |
-|   CARRY4                 |     0.209 |      102 |      8150 |            1.25 |
-|   LUT as Distributed RAM |     0.025 |        8 |      9600 |            0.08 |
-|   F7/F8 Muxes            |     0.016 |        6 |     32600 |            0.02 |
-|   Register               |     0.007 |      139 |     65200 |            0.21 |
+| Slice Logic              |     4.682 |     1123 |       --- |             --- |
+|   LUT as Logic           |     4.248 |      688 |     32600 |            2.11 |
+|   CARRY4                 |     0.391 |      102 |      8150 |            1.25 |
+|   LUT as Distributed RAM |     0.024 |        8 |      9600 |            0.08 |
+|   Register               |     0.014 |      140 |     65200 |            0.21 |
 |   BUFG                   |     0.006 |        1 |        32 |            3.13 |
-|   Others                 |     0.000 |       14 |       --- |             --- |
-| Signals                  |     2.876 |      877 |       --- |             --- |
-| I/O                      |     0.532 |       20 |       210 |            9.52 |
-| Static Power             |     0.102 |          |           |                 |
-| Total                    |     7.009 |          |           |                 |
+|   Others                 |     0.000 |       16 |       --- |             --- |
+| Signals                  |     3.734 |      894 |       --- |             --- |
+| Block RAM                |     0.065 |        1 |        75 |            1.33 |
+| I/O                      |     0.388 |       21 |       210 |           10.00 |
+| Static Power             |     0.123 |          |           |                 |
+| Total                    |     8.993 |          |           |                 |
 +--------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -73,16 +73,16 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint    |       1.000 |     6.455 |       6.419 |      0.036 |       NA    | Unspecified | NA         |
-| Vccaux    |       1.800 |     0.055 |       0.040 |      0.015 |       NA    | Unspecified | NA         |
+| Vccint    |       1.000 |     8.573 |       8.520 |      0.053 |       NA    | Unspecified | NA         |
+| Vccaux    |       1.800 |     0.045 |       0.028 |      0.017 |       NA    | Unspecified | NA         |
 | Vcco33    |       3.300 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
-| Vcco18    |       1.800 |     0.232 |       0.231 |      0.001 |       NA    | Unspecified | NA         |
+| Vcco18    |       1.800 |     0.164 |       0.163 |      0.001 |       NA    | Unspecified | NA         |
 | Vcco15    |       1.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco135   |       1.350 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco12    |       1.200 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vccaux_io |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
-| Vccbram   |       1.000 |     0.001 |       0.000 |      0.001 |       NA    | Unspecified | NA         |
+| Vccbram   |       1.000 |     0.006 |       0.005 |      0.001 |       NA    | Unspecified | NA         |
 | Vccadc    |       1.800 |     0.020 |       0.000 |      0.020 |       NA    | Unspecified | NA         |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 
@@ -138,15 +138,16 @@ Table of Contents
 +--------------------------+-----------+
 | Name                     | Power (W) |
 +--------------------------+-----------+
-| NARNet_SmallCache        |     6.907 |
-|   n1                     |     0.859 |
-|   n2                     |     0.640 |
-|   n3                     |     0.833 |
-|   n4                     |     0.814 |
-|   n5                     |     0.623 |
-|   tapdelay1_reg_0_15_0_5 |     0.171 |
-|   tapdelay1_reg_0_15_6_7 |     0.060 |
-|   wrom                   |     0.501 |
+| NARNet_SmallCache        |     8.870 |
+|   n1                     |     1.326 |
+|   n2                     |     1.168 |
+|   n3                     |     1.330 |
+|   n4                     |     1.297 |
+|   n5                     |     1.058 |
+|   tanhlut                |     0.040 |
+|   tapdelay1_reg_0_15_0_5 |     0.145 |
+|   tapdelay1_reg_0_15_6_7 |     0.051 |
+|   wrom                   |     0.538 |
 +--------------------------+-----------+
 
 
