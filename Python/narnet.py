@@ -94,6 +94,7 @@ def NAR_inference(weights, x):
         xd1[ts] = 0.375
         
     # time loop
+    tapdelayInds = []
     for ts in range(len(x)):
         
         # rotating delay state position
@@ -101,6 +102,9 @@ def NAR_inference(weights, x):
         xd1[xdts] = mapminmax_apply(x[ts])
 
         # layer 1
+        
+        test = [(xdts - i - 1) % 17 for i in range(16)]
+        tapdelayInds.append(test)
         tapdelay1 = Fxp(np.array([xd1[(xdts - i - 1) % 17] for i in range(16)]), like=fxp_rng)
         # a1 = fxp_rng(tansig(map(add, list(sum(map(mul, neuron, tapdelay1)) for neuron in w1), b1)))
         a1 = Fxp(np.zeros(5), like=fxp_rng)

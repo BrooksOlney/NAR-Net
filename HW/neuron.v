@@ -2,7 +2,6 @@
 
 
 module neuron
-#(parameter N = 8)
 (
         w, x, b, ovr, out
     );

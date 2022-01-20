@@ -1,7 +1,7 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------
 | Tool Version              : Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-| Date                      : Thu Jan 20 11:02:31 2022
+| Date                      : Thu Jan 20 14:47:48 2022
 | Host                      : BrooksRig running 64-bit major release  (build 9200)
 | Command                   : report_io -file NARNet_SmallCache_io_placed.rpt
 | Design                    : NARNet_SmallCache

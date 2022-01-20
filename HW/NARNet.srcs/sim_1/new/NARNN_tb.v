@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 `define TRACE_SOURCE "F:\\Research\\NAR-Net\\trace.txt"
-
+`define OUTPUT_LOC "F:\\Research\\NAR-Net\\verilog_output.txt"
 
 module NARNN_tb(
 
@@ -33,17 +33,10 @@ always begin
     #1;
 end
 
-//initial begin
-    
-//    enable = 1;
-//    #200;
-//    x_in <= 8'b11110110;
-//    x_ready <= 1;
-//    #5;
-//    x_ready <= 0;
-//    #100;
-
-//end
+integer f;
+initial begin
+  f = $fopen(`OUTPUT_LOC,"w");
+end
     
 always @(posedge clk) begin
 
@@ -56,13 +49,15 @@ always @(posedge clk) begin
             trace_ind <= trace_ind + 1;
             
         end else begin
+            $fclose(f);
             $stop;
         end
     
 
     end else if (out_ready == 1) begin
         test_output[trace_ind - 1] <= y_out;
-        $display("%h", y_out);
+        $display("%b", y_out);
+        $fwrite(f, "%b\n", y_out);
         waiting <= 0;
     end else begin 
         x_ready <= 0;

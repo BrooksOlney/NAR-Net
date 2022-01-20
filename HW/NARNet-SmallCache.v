@@ -39,7 +39,7 @@ parameter s_layer2 = 3'b110;
 parameter s_output = 3'b111;
 
 reg [2:0] current_state = s_wait;
-reg [8:0] ts = 0;
+reg unsigned [8:0] ts = 0;
 
 reg delay_set = 0;
 
@@ -50,7 +50,7 @@ wire signed [7:0] n_out1, n_out2, n_out3, n_out4, n_out5;
 reg signed [7:0] n_reg1, n_reg2, n_reg3, n_reg4, n_reg5;
 reg signed [7:0] tapdelay1 [0:15];
 reg signed [7:0] xdl [0:16];
-reg [4:0] tap = 0, l1_ind = 0, l2_ind = 0;
+reg signed [5:0] tap = 0, l1_ind = 0, l2_ind = 0;
 
 // initialize delay states
 initial begin 
@@ -72,7 +72,7 @@ reg signed [7:0] param_cache [0:4];
 reg [7:0] y_out_reg;
 reg [2:0] w_ind = 0;
 reg [7:0] acc_res;
-reg [7:0] xdts;
+reg signed [8:0] xdts;
 
 assign w_n1 = param_cache[0];
 assign w_n2 = param_cache[1];
@@ -144,14 +144,13 @@ else if (enable == 1) begin
                 xdts <= (ts + 16) % 17;
             end
             else if (tap < 16) begin
-                tapdelay1[tap] <= xdl[(xdts - tap - 1 ) % 17];
+                tapdelay1[tap] <= xdl[(((xdts - tap - 1) % 17) + 17) % 17];
                 tap <= tap + 1;
             end 
             else begin
                 tap <= 0;
                 current_state <= s_loadw1;
                 delay_set <= 1'b0;
-                tap <= 3'b000;
             end
         end
         
@@ -235,7 +234,7 @@ else if (enable == 1) begin
             y_out_reg <= acc_res;
             out_ready <= 1;
             current_state <= s_wait;
-            
+            ts <= ts + 1;
         end
     endcase
 end
