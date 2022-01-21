@@ -5,7 +5,7 @@ module weights_rom(
     );
     input wire clk;
     input wire [7:0] addr;
-    output wire [7:0] rom_out;
+    output wire signed [7:0] rom_out;
     
     reg [7:0] rom_reg = 0;
     assign rom_out = rom_reg;

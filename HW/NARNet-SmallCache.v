@@ -8,12 +8,12 @@ parameter feedbackDelay=16;
 // inputs/outputs 
 input wire clk, enable, rst, x_ready;
 input wire signed [7:0] x_in;
-output wire [7:0] y_out;
+output wire signed [7:0] y_out;
 output reg out_ready;
 
 wire [7:0] bram_addr;
-wire [7:0] bram_out;
-wire [7:0] tanh_out;
+wire signed [7:0] bram_out;
+wire signed [7:0] tanh_out;
 reg [7:0] tanh_addr;
 
 

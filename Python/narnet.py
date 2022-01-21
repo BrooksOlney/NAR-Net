@@ -19,7 +19,7 @@ ysettings = settings(2.2, 0.1, -1)
 
 fxp_float = Fxp(None, dtype='fxp-s32/23')
 
-fxp_rng = Fxp(None, dtype='fxp-s8/6')
+fxp_rng = Fxp(None, dtype='fxp-s8/6', rounding='trunc')
         
 def generate_tanh_lut():
     
@@ -32,6 +32,18 @@ def generate_tanh_lut():
         
         for l,out in zip(lut.bin(),lutOut.bin()):
             ofile.write(f"\t\t8'b{l} : tanh_out_reg <= 8'b{out};\n")
+
+def generate_trace_init(trace):
+    
+    with open("trace.txt", "w") as ofile:
+        fxptrace = Fxp(list(map(mapminmax_apply, trace)), like=fxp_rng)
+        ofile.write('\n'.join(fxptrace.bin()))
+
+def mapminmax_apply(x):
+    return (x - xsettings.xoffset) * xsettings.gain + xsettings.ymin
+
+def mapminmax_reverse(y):
+    return (y - ysettings.ymin) / ysettings.gain + ysettings.xoffset
 
 def mapminmax_reverse(y):
     return (y - ysettings.ymin) / ysettings.gain + ysettings.xoffset
@@ -61,27 +73,9 @@ def NAR_inference(weights, x):
     n = 5
     feedbackDelay = 16
 
-    
     b1, w1, b2, w2 = [Fxp(w, like=fxp_rng) for w in weights]
 
     write_quantized_weights((b1,w1,b2,w2))
-
-
-
-    # xd1 = [16] * 16    
-    # y = [0] * len(x)
-    def generate_trace_init(trace):
-        
-        with open("trace.txt", "w") as ofile:
-            fxptrace = Fxp(list(map(mapminmax_apply, trace)), like=fxp_rng)
-            ofile.write('\n'.join(fxptrace.bin()))
-
-    
-    def mapminmax_apply(x):
-        return (x - xsettings.xoffset) * xsettings.gain + xsettings.ymin
-    
-    def mapminmax_reverse(y):
-        return (y - ysettings.ymin) / ysettings.gain + ysettings.xoffset
     
     def tansig(n):
         # return [2 / (1 + math.exp(-2*ni)) - 1 for ni in n]
@@ -94,8 +88,8 @@ def NAR_inference(weights, x):
     xd1[:16] = 16   
     
     for ts in range(16):
-        # xd1[ts] = mapminmax_apply(xd1[ts],x1_step)
-        xd1[ts] = 0.375
+        xd1[ts] = mapminmax_apply(xd1[ts],x1_step)
+        # xd1[ts] = 0.375
         
     # time loop
     tapdelayInds = []
@@ -111,17 +105,17 @@ def NAR_inference(weights, x):
         tapdelayInds.append(test)
         tapdelay1 = Fxp(np.array([xd1[(xdts - i - 1) % 17] for i in range(16)]), like=fxp_rng)
         # a1 = fxp_rng(tansig(map(add, list(sum(map(mul, neuron, tapdelay1)) for neuron in w1), b1)))
-        a1 = Fxp(np.zeros(5), like=fxp_rng)
-        for i in range(5):
-            acc = Fxp(b1[i], like=fxp_rng)
-            for j in range(16):
-                acc = Fxp(acc + w1[i][j] * tapdelay1[j], like=fxp_rng) 
+        # a1 = Fxp(np.zeros(5), like=fxp_rng)
+        # for i in range(5):
+        #     acc = Fxp(b1[i], like=fxp_rng)
+        #     for j in range(16):
+        #         acc = Fxp(acc + w1[i][j] * tapdelay1[j], like=fxp_rng) 
             
-            a1[i] = acc
+        #     a1[i] = acc
             
-        a1 = tansig(a1)
+        # a1 = tansig(a1)
         
-        # a1 = Fxp(tansig(Fxp(np.matmul(w1, tapdelay1), like=fxp_rng) + b1), like=fxp_rng)
+        a1 = Fxp(tansig(Fxp(np.matmul(w1, tapdelay1), like=fxp_rng) + b1), like=fxp_rng)
         
         # layer 2 
         # a2  = sum(map(mul, w2, a1)) + b2[0]
@@ -141,14 +135,18 @@ def NAR_inference(weights, x):
 def plot_fpga_output(x_test):
     
     outputs = open("verilog_output.txt",'r').read().splitlines()
-    outputs = Fxp(outputs, dtype='fxp-s8/6', rounding='trunc')
+    outputs = Fxp(outputs, like=fxp_rng)
     
-    y_test = list(map(mapminmax_reverse, Fxp(outputs, like=fxp_float)))
+    # y_test = list(map(mapminmax_reverse, Fxp(outputs, like=fxp_float)))
+    y_test = np.array([mapminmax_reverse(Fxp(o, like=fxp_float)) - 9 for o in outputs])
+    rmse = math.sqrt(np.sum((y_test - x_test) ** 2) / y_test.size)
+    
     plt.plot(x_test, label='ground truth')
     plt.plot(y_test, label='from fpga')
     # y_python = NAR_inference(weights, x_test)
     # plt.plot(y_python, label='from python')
     plt.legend()
+    plt.text(x=30, y=16, s=f'RMSE = {rmse}')
     plt.show()
 
 
@@ -160,7 +158,7 @@ weights[1] = weights[1].reshape(5, 16)
 # load testing data
 x_test = open("Python/S1_test.txt", "r").read().splitlines()
 x_test = list(np.array(list(map(float, x.split()))) for x in x_test)
-# plot_fpga_output(x_test[0])
+plot_fpga_output(x_test[0])
 
 delays = [16 for _ in range(16)]
 y_test = NAR_inference(weights, x_test[0])
