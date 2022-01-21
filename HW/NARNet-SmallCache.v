@@ -12,9 +12,11 @@ output wire signed [7:0] y_out;
 output reg out_ready;
 
 wire [7:0] bram_addr;
+reg [7:0] bram_addr_reg;
 wire signed [7:0] bram_out;
 wire signed [7:0] tanh_out;
 reg [7:0] tanh_addr;
+reg signed [7:0] b2;
 
 
 weights_rom wrom (.clk(clk), .addr(bram_addr), .rom_out(bram_out));
@@ -23,9 +25,6 @@ tanh_lut tanhlut (.clk(clk), .addr(tanh_addr), .tanh_out(tanh_out));
 // register for input
 reg signed [7:0] x_in_reg;
 integer i, j;
-
-reg [2:0] row  = 0;
-reg [6:0] count = 0;
 
 //end
 // NARNet pipeline states
@@ -41,7 +40,7 @@ parameter s_output = 3'b111;
 reg [2:0] current_state = s_wait;
 reg signed [9:0] ts = 0;
 
-reg delay_set = 0;
+reg delay_set = 0, load_bias = 0;
 
 wire signed [7:0] w_n1, w_n2, w_n3, w_n4, w_n5, qmi1, qmi2, qmi3, qmi4, qmi5;
 wire signed [7:0] b_n1, b_n2, b_n3, b_n4, b_n5;
@@ -50,7 +49,8 @@ wire signed [7:0] n_out1, n_out2, n_out3, n_out4, n_out5;
 reg signed [7:0] n_reg1, n_reg2, n_reg3, n_reg4, n_reg5;
 reg signed [7:0] tapdelay1 [0:15];
 reg signed [7:0] xdl [0:16];
-reg signed [5:0] tap = 0, l1_ind = 0, l2_ind = 0;
+reg signed [5:0] tap = 0;
+reg signed [5:0] l1_ind = 0;
 
 // initialize delay states
 initial begin 
@@ -60,13 +60,13 @@ initial begin
     xdl[16] <= 0;
 end
 
-initial begin
-    n_reg1 <= 62;
-    n_reg2 <= 54;
-    n_reg3 <= -10;
-    n_reg4 <= 65;
-    n_reg5 <= -62;
-end
+//initial begin
+//    n_reg1 <= -10;
+//    n_reg2 <= 11;
+//    n_reg3 <= -5;
+//    n_reg4 <= -13;
+//    n_reg5 <= 5;
+//end
 
 reg signed [7:0] param_cache [0:4];
 reg signed [7:0] y_out_reg;
@@ -91,17 +91,18 @@ assign qmi4 = (current_state == s_layer1 || current_state == s_loadw1) ? tapdela
 assign qmi5 = (current_state == s_layer1 || current_state == s_loadw1) ? tapdelay1[l1_ind] : 
               (current_state == s_layer2 || current_state == s_loadw2) ? n_reg5 : 'bx;
               
-assign b_n1 = (current_state == s_layer1 || current_state == s_loadw1) ? n_reg1 :
-              (current_state == s_layer2 || current_state == s_loadw2) ? -20 : 'bx;
+assign b_n1 = (current_state == s_layer1 || current_state == s_loadw1) ? n_reg1 : 8'h00;
+//              (current_state == s_layer2 || current_state == s_loadw2) ? n_reg1 : 'b00;
           
 assign b_n2 = (current_state == s_layer1 || current_state == s_loadw1) ? n_reg2 : 8'h00;
 assign b_n3 = (current_state == s_layer1 || current_state == s_loadw1) ? n_reg3 : 8'h00;
 assign b_n4 = (current_state == s_layer1 || current_state == s_loadw1) ? n_reg4 : 8'h00;
 assign b_n5 = (current_state == s_layer1 || current_state == s_loadw1) ? n_reg5 : 8'h00;
      
-assign bram_addr = (current_state == s_loadw1 || current_state == s_layer1 ) ? l1_ind + 5 + (16 * w_ind) : 
-                   (current_state == s_loadw2 || current_state == s_layer2) ? w_ind + 86 : 8'h00;
-                   
+//assign bram_addr = (current_state == s_loadw1 || current_state == s_layer1 ) ? l1_ind + 5 + (16 * w_ind) : 
+//                   (current_state == s_loadw2 || current_state == s_layer2) ? w_ind + 86 : 8'h00;
+
+assign bram_addr = bram_addr_reg;
                    
 //assign out_ready = (current_state == s_output) ? 1 : 0;
           
@@ -151,22 +152,47 @@ else if (enable == 1) begin
                 tap <= 0;
                 current_state <= s_loadw1;
                 delay_set <= 1'b0;
-                n_reg1 <= 62;
-                n_reg2 <= 54;
-                n_reg3 <= -10;
-                n_reg4 <= 65;
-                n_reg5 <= -62;
+//                n_reg1 <= 62;
+//                n_reg2 <= 54;
+//                n_reg3 <= -10;
+//                n_reg4 <= 65;
+//                n_reg5 <= -62;
+                load_bias <= 1;
+                bram_addr_reg <= 0;
             end
         end
         
         s_loadw1: begin
-            param_cache[w_ind] <= bram_out;
+            if (load_bias == 1 && w_ind < 5) begin
+                param_cache[w_ind] <= bram_out;
+                w_ind <= w_ind + 1;
+                bram_addr_reg <= bram_addr_reg + 1;
+            end else if (load_bias == 1 && w_ind == 5) begin
+                n_reg1 <= param_cache[0];
+                n_reg2 <= param_cache[1];
+                n_reg3 <= param_cache[2];
+                n_reg4 <= param_cache[3];
+                n_reg5 <= param_cache[4];
+                load_bias <= 0;
+                w_ind <= 0;
+//                bram_addr_reg <= bram_addr_reg + 1;
+            end else if (w_ind < 5) begin
+                param_cache[w_ind] <= bram_out;
+                w_ind <= w_ind + 1;
+                bram_addr_reg <= bram_addr_reg + 16;
 
-            if (w_ind == 4) begin
+            end else begin
                 current_state <= s_layer1;
                 w_ind <= 0;
+                bram_addr_reg <= 0;
+            end
+            
+            
+//            if (w_ind == 4) begin
+//                current_state <= s_layer1;
+//                w_ind <= 0;
 
-            end else w_ind <= w_ind + 1;
+//            end else w_ind <= w_ind + 1;
         end
         
         // perform layer 1 computation
@@ -181,23 +207,23 @@ else if (enable == 1) begin
             n_reg5 <= n_out5;
             if (l1_ind == 15) begin
                 l1_ind <= l1_ind + 1;
-//                n_reg1 = tanh_LUT(n_out1);
-//                n_reg2 = tanh_LUT(n_out2);
-//                n_reg3 = tanh_LUT(n_out3);
-//                n_reg4 = tanh_LUT(n_out4);
-//                n_reg5 = tanh_LUT(n_out5);
                 param_cache[0] <= n_out1;
                 param_cache[1] <= n_out2;
                 param_cache[2] <= n_out3;
                 param_cache[3] <= n_out4;
                 param_cache[4] <= n_out5;
                 tanh_addr <= n_out1;
+//                current_state <= s_tanh;
+                l1_ind <= 17;
+
             end else if (l1_ind < 16) begin
                 current_state <= s_loadw1;
+                bram_addr_reg <= 5 + l1_ind;
                 l1_ind <= l1_ind + 1;
+            
             end else begin
-                l1_ind <= 0;
                 current_state <= s_tanh;
+                l1_ind <= 0;
             end
         end
         
@@ -215,24 +241,33 @@ else if (enable == 1) begin
                 n_reg4 <= param_cache[3];
                 n_reg5 <= param_cache[4];
                 current_state <= s_loadw2;
+                load_bias <= 1;
+                bram_addr_reg <= 85;
             end
         end
         
         s_loadw2: begin
         
-            param_cache[w_ind] <= bram_out;
-            
-            
-            if (w_ind == 4) begin
-                current_state <= s_layer2;
-                w_ind <= 0;
+            if (load_bias == 1) begin
+                b2 <= bram_out;
+                load_bias <= 0;
+                bram_addr_reg <= bram_addr_reg + 1;
             end else begin
-                w_ind <= w_ind + 1; 
+        
+                param_cache[w_ind] <= bram_out;
+                
+                if (w_ind == 4) begin
+                    current_state <= s_layer2;
+                    w_ind <= 0;
+                end else begin
+                    w_ind <= w_ind + 1; 
+                end
+            
             end
         end
         
         s_layer2: begin
-            acc_res <= n_out1 + n_out2 + n_out3 + n_out4 + n_out5;
+            acc_res <= n_out1 + n_out2 + n_out3 + n_out4 + n_out5 + b2;
             
 //            if (w_ind == 0) begin
 //                param_cache[0] <= n_out1;

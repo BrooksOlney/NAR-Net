@@ -3,15 +3,15 @@
 
 module neuron
 (
-        w, x, b, ovr, out
+        w, x, b, out
     );
     
 //  input wire clk, enable, rst;
     input wire signed [7:0] w, x, b;
-    output wire ovr;
+//    output wire ovr;
     output wire signed [7:0] out;
     
-    reg signed  [7:0] mult_res; 
+//    reg signed  [7:0] mult_res; 
     reg signed [15:0] tmp, add_res;
     reg overflow, underflow, extra;
     

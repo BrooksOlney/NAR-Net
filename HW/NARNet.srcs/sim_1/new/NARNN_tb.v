@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
-`define TRACE_SOURCE "F:\\Research\\NAR-Net\\trace.txt"
-`define OUTPUT_LOC "F:\\Research\\NAR-Net\\verilog_output.txt"
+`define TRACE_SOURCE "F:\\Research\\NAR-Net\\HW\\InputVectors\\S1_D1.txt"
+`define OUTPUT_LOC "F:\\Research\\NAR-Net\\VerilogOutputs\\S1_D1.txt"
 
 module NARNN_tb(
 
@@ -9,8 +9,8 @@ module NARNN_tb(
 reg clk = 0, rst = 0, enable = 1, x_ready = 0;
 wire [7:0] y_out;
 reg [7:0] x_in;
-reg [7:0] trace_data [0:292];
-reg [7:0] test_output [0:292];
+reg [7:0] trace_data [0:293];
+reg [7:0] test_output [0:293];
 
 reg [8:0] trace_ind = 0;
 reg waiting = 0;
