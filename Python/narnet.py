@@ -63,7 +63,7 @@ def write_quantized_weights(weights,fname):
         allweights = it.chain([*b1, *w1_bins, *b2, *w2])
         # ofile.write('memory_initialization_radix = 2;\nmemory_initialization_vector =\n')
         ofile.write('\n'.join(map(str, [w.bin() for w in allweights])));
-        # ofile.write('\n')
+        ofile.write('\n')
         ofile.write('\n'.join(['00000000'] * (255 - len(list(allweights)))))
         # test = list(map(str, [w.bin() for w in allweights]))
         # for i,w in enumerate(test):
@@ -131,7 +131,7 @@ def plot_fpga_output(x_test):
     outputs = Fxp(outputs, like=fxp_rng)
     
     # y_test = list(map(mapminmax_reverse, Fxp(outputs, like=fxp_float)))
-    y_test = np.array([mapminmax_reverse(Fxp(o, like=fxp_float)) - 2 for o in outputs])
+    y_test = np.array([mapminmax_reverse(Fxp(o, like=fxp_float)) for o in outputs])
     rmse = math.sqrt(np.sum((y_test - x_test) ** 2) / y_test.size)
     
     plt.plot(x_test, label='Ground Truth')
@@ -157,7 +157,7 @@ weights = load_weights()
 # load testing data
 x_test = open("SubjectData/S1.txt", "r").read().splitlines()
 x_test = list(np.array(list(map(float, x.split()))) for x in x_test)
-plot_fpga_output(x_test[1])
+# plot_fpga_output(x_test[1])
 
 # for i in np.arange(len(x_test))[1:]:
 #     generate_trace_init(x_test[i],f'HW/InputVectors/S1_D{i}.txt')

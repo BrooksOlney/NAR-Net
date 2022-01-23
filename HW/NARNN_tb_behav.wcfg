@@ -11,12 +11,12 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="42332160fs"></ZoomStartTime>
-      <ZoomEndTime time="43149161fs"></ZoomEndTime>
-      <Cursor1Time time="90247000fs"></Cursor1Time>
+      <ZoomStartTime time="50000fs"></ZoomStartTime>
+      <ZoomEndTime time="115901fs"></ZoomEndTime>
+      <Cursor1Time time="70200fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="153"></NameColumnWidth>
+      <NameColumnWidth column_width="149"></NameColumnWidth>
       <ValueColumnWidth column_width="58"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="40" />
@@ -35,6 +35,10 @@
    <wvobject fp_name="/NARNN_tb/uut/x_ready" type="logic">
       <obj_property name="ElementShortName">x_ready</obj_property>
       <obj_property name="ObjectShortName">x_ready</obj_property>
+   </wvobject>
+   <wvobject fp_name="/NARNN_tb/out_ready" type="logic">
+      <obj_property name="ElementShortName">out_ready</obj_property>
+      <obj_property name="ObjectShortName">out_ready</obj_property>
    </wvobject>
    <wvobject fp_name="/NARNN_tb/uut/x_in" type="array">
       <obj_property name="ElementShortName">x_in[7:0]</obj_property>
@@ -55,14 +59,6 @@
    <wvobject fp_name="/NARNN_tb/uut/x_in_reg" type="array">
       <obj_property name="ElementShortName">x_in_reg[7:0]</obj_property>
       <obj_property name="ObjectShortName">x_in_reg[7:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/NARNN_tb/uut/row" type="array">
-      <obj_property name="ElementShortName">row[2:0]</obj_property>
-      <obj_property name="ObjectShortName">row[2:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/NARNN_tb/uut/count" type="array">
-      <obj_property name="ElementShortName">count[6:0]</obj_property>
-      <obj_property name="ObjectShortName">count[6:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/NARNN_tb/uut/ts" type="array">
       <obj_property name="ElementShortName">ts[9:0]</obj_property>
@@ -168,6 +164,7 @@
    <wvobject fp_name="group60" type="group">
       <obj_property name="label">biases</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
       <wvobject fp_name="/NARNN_tb/uut/b_n1" type="array">
          <obj_property name="ElementShortName">b_n1[7:0]</obj_property>
          <obj_property name="ObjectShortName">b_n1[7:0]</obj_property>
@@ -294,6 +291,10 @@
          <obj_property name="radix_otherWidth">0</obj_property>
       </wvobject>
    </wvobject>
+   <wvobject fp_name="/NARNN_tb/uut/load_bias" type="logic">
+      <obj_property name="ElementShortName">load_bias</obj_property>
+      <obj_property name="ObjectShortName">load_bias</obj_property>
+   </wvobject>
    <wvobject fp_name="/NARNN_tb/uut/param_cache" type="array">
       <obj_property name="ElementShortName">param_cache[0:4][7:0]</obj_property>
       <obj_property name="ObjectShortName">param_cache[0:4][7:0]</obj_property>
@@ -326,10 +327,6 @@
       <obj_property name="ElementShortName">l1_ind[5:0]</obj_property>
       <obj_property name="ObjectShortName">l1_ind[5:0]</obj_property>
       <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/NARNN_tb/uut/l2_ind" type="array">
-      <obj_property name="ElementShortName">l2_ind[5:0]</obj_property>
-      <obj_property name="ObjectShortName">l2_ind[5:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/NARNN_tb/uut/y_out_reg" type="array">
       <obj_property name="ElementShortName">y_out_reg[7:0]</obj_property>
@@ -375,14 +372,11 @@
       <obj_property name="ElementShortName">s_output[2:0]</obj_property>
       <obj_property name="ObjectShortName">s_output[2:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="group388" type="group">
+   <wvobject fp_name="group976" type="group">
       <obj_property name="label">neuron1</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <wvobject fp_name="/NARNN_tb/uut/w_ind" type="array">
-         <obj_property name="ElementShortName">w_ind[3:0]</obj_property>
-         <obj_property name="ObjectShortName">w_ind[3:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/NARNN_tb/uut/n5/w" type="array">
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject fp_name="/NARNN_tb/uut/n1/w" type="array">
          <obj_property name="ElementShortName">w[7:0]</obj_property>
          <obj_property name="ObjectShortName">w[7:0]</obj_property>
          <obj_property name="Radix">REALRADIX</obj_property>
@@ -390,7 +384,7 @@
          <obj_property name="radix_fractionWidth">6</obj_property>
          <obj_property name="radix_otherWidth">0</obj_property>
       </wvobject>
-      <wvobject fp_name="/NARNN_tb/uut/n5/x" type="array">
+      <wvobject fp_name="/NARNN_tb/uut/n1/x" type="array">
          <obj_property name="ElementShortName">x[7:0]</obj_property>
          <obj_property name="ObjectShortName">x[7:0]</obj_property>
          <obj_property name="Radix">REALRADIX</obj_property>
@@ -398,7 +392,7 @@
          <obj_property name="radix_fractionWidth">6</obj_property>
          <obj_property name="radix_otherWidth">0</obj_property>
       </wvobject>
-      <wvobject fp_name="/NARNN_tb/uut/n5/b" type="array">
+      <wvobject fp_name="/NARNN_tb/uut/n1/b" type="array">
          <obj_property name="ElementShortName">b[7:0]</obj_property>
          <obj_property name="ObjectShortName">b[7:0]</obj_property>
          <obj_property name="Radix">REALRADIX</obj_property>
@@ -406,35 +400,47 @@
          <obj_property name="radix_fractionWidth">6</obj_property>
          <obj_property name="radix_otherWidth">0</obj_property>
       </wvobject>
-      <wvobject fp_name="/NARNN_tb/uut/n5/out" type="array">
+      <wvobject fp_name="/NARNN_tb/uut/n1/out" type="array">
          <obj_property name="ElementShortName">out[7:0]</obj_property>
          <obj_property name="ObjectShortName">out[7:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/NARNN_tb/uut/n5/add_res" type="array">
-         <obj_property name="ElementShortName">add_res[15:0]</obj_property>
-         <obj_property name="ObjectShortName">add_res[15:0]</obj_property>
          <obj_property name="Radix">REALRADIX</obj_property>
          <obj_property name="radix_realType">SIGNEDFIXEDPOINTRADIX</obj_property>
          <obj_property name="radix_fractionWidth">6</obj_property>
          <obj_property name="radix_otherWidth">0</obj_property>
       </wvobject>
-      <wvobject fp_name="/NARNN_tb/uut/n5/tmp" type="array">
-         <obj_property name="ElementShortName">tmp[15:0]</obj_property>
-         <obj_property name="ObjectShortName">tmp[15:0]</obj_property>
+      <wvobject fp_name="/NARNN_tb/uut/n1/add_res" type="array">
+         <obj_property name="ElementShortName">add_res[15:0]</obj_property>
+         <obj_property name="ObjectShortName">add_res[15:0]</obj_property>
          <obj_property name="Radix">REALRADIX</obj_property>
          <obj_property name="radix_realType">SIGNEDFIXEDPOINTRADIX</obj_property>
          <obj_property name="radix_fractionWidth">12</obj_property>
          <obj_property name="radix_otherWidth">0</obj_property>
       </wvobject>
-      <wvobject fp_name="/NARNN_tb/uut/n5/overflow" type="logic">
+      <wvobject fp_name="/NARNN_tb/uut/n1/tmp" type="array">
+         <obj_property name="ElementShortName">tmp[7:0]</obj_property>
+         <obj_property name="ObjectShortName">tmp[7:0]</obj_property>
+         <obj_property name="Radix">REALRADIX</obj_property>
+         <obj_property name="radix_realType">SIGNEDFIXEDPOINTRADIX</obj_property>
+         <obj_property name="radix_fractionWidth">6</obj_property>
+         <obj_property name="radix_otherWidth">0</obj_property>
+      </wvobject>
+      <wvobject fp_name="/NARNN_tb/uut/n1/mult_res" type="array">
+         <obj_property name="ElementShortName">mult_res[15:0]</obj_property>
+         <obj_property name="ObjectShortName">mult_res[15:0]</obj_property>
+         <obj_property name="Radix">REALRADIX</obj_property>
+         <obj_property name="radix_realType">SIGNEDFIXEDPOINTRADIX</obj_property>
+         <obj_property name="radix_fractionWidth">12</obj_property>
+         <obj_property name="radix_otherWidth">0</obj_property>
+      </wvobject>
+      <wvobject fp_name="/NARNN_tb/uut/n1/overflow" type="logic">
          <obj_property name="ElementShortName">overflow</obj_property>
          <obj_property name="ObjectShortName">overflow</obj_property>
       </wvobject>
-      <wvobject fp_name="/NARNN_tb/uut/n5/underflow" type="logic">
+      <wvobject fp_name="/NARNN_tb/uut/n1/underflow" type="logic">
          <obj_property name="ElementShortName">underflow</obj_property>
          <obj_property name="ObjectShortName">underflow</obj_property>
       </wvobject>
-      <wvobject fp_name="/NARNN_tb/uut/n5/extra" type="logic">
+      <wvobject fp_name="/NARNN_tb/uut/n1/extra" type="logic">
          <obj_property name="ElementShortName">extra</obj_property>
          <obj_property name="ObjectShortName">extra</obj_property>
       </wvobject>
@@ -484,14 +490,6 @@
          <obj_property name="radix_otherWidth">0</obj_property>
          <obj_property name="isExpanded"></obj_property>
       </wvobject>
-      <wvobject fp_name="/NARNN_tb/uut/n3/tmp" type="array">
-         <obj_property name="ElementShortName">tmp[15:0]</obj_property>
-         <obj_property name="ObjectShortName">tmp[15:0]</obj_property>
-         <obj_property name="Radix">REALRADIX</obj_property>
-         <obj_property name="radix_realType">SIGNEDFIXEDPOINTRADIX</obj_property>
-         <obj_property name="radix_fractionWidth">12</obj_property>
-         <obj_property name="radix_otherWidth">0</obj_property>
-      </wvobject>
       <wvobject fp_name="/NARNN_tb/uut/n3/overflow" type="logic">
          <obj_property name="ElementShortName">overflow</obj_property>
          <obj_property name="ObjectShortName">overflow</obj_property>
@@ -508,5 +506,13 @@
    <wvobject fp_name="/NARNN_tb/uut/wrom/rom" type="array">
       <obj_property name="ElementShortName">rom[0:255][7:0]</obj_property>
       <obj_property name="ObjectShortName">rom[0:255][7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/NARNN_tb/uut/b2" type="array">
+      <obj_property name="ElementShortName">b2[7:0]</obj_property>
+      <obj_property name="ObjectShortName">b2[7:0]</obj_property>
+      <obj_property name="Radix">REALRADIX</obj_property>
+      <obj_property name="radix_realType">SIGNEDFIXEDPOINTRADIX</obj_property>
+      <obj_property name="radix_fractionWidth">6</obj_property>
+      <obj_property name="radix_otherWidth">0</obj_property>
    </wvobject>
 </wave_config>

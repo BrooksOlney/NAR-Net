@@ -7,10 +7,10 @@ module NARNN_tb(
     );
     
 reg clk = 0, rst = 0, enable = 1, x_ready = 0;
-wire [7:0] y_out;
-reg [7:0] x_in;
-reg [7:0] trace_data [0:293];
-reg [7:0] test_output [0:293];
+wire signed [7:0] y_out;
+reg signed [7:0] x_in;
+reg signed [7:0] trace_data [0:293];
+reg signed [7:0] test_output [0:293];
 
 reg [8:0] trace_ind = 0;
 reg waiting = 0;
@@ -45,7 +45,7 @@ always @(posedge clk) begin
         if (trace_ind < 293) begin
             x_ready <= 1;
             waiting <= 1;
-            x_in <= trace_data[trace_ind];        
+            x_in <= trace_data[trace_ind]; 
             trace_ind <= trace_ind + 1;
             
         end else begin

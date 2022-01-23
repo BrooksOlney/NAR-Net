@@ -11,33 +11,61 @@ module neuron
 //    output wire ovr;
     output wire signed [7:0] out;
     
-//    reg signed  [7:0] mult_res; 
-    reg signed [15:0] tmp, add_res;
+//    reg signed  [7:0] w_reg, x_reg, add_res; 
+    reg signed [15:0] mult_res, add_res;
+    reg signed [7:0] tmp;
     reg overflow, underflow, extra;
     
-    
-//    assign int_res = {w[7] ^ x[7], tmp[12:6]};    
-        
-//    assign out = (mult_res[7] == 1 && add_res[7] == 1) ? 8'b01111111 : 
-//                 (mult_res[7] == 0 && add_res[7] == 0) ? 8'b10000000 : add_res;
-//    assign out = mult_res + b;
-    assign out = {add_res[15], add_res[12:6]};
+
+//    assign out = {add_res[15], add_res[12:6]};
+    assign out = tmp + b;
+
     always @(w or x or b) begin
+//        if (x[7] == 1) begin
+//            x_reg <= ~x + 1;
+//        end else begin
+//            x_reg <= x;
+//        end
+    
+//        if (w[7] == 1) begin
+//            w_reg <= ~w + 1;
+//        end else begin
+//            w_reg <= w;
+//        end
         
-        tmp = w * x;
-        add_res = tmp + {b, {6{1'b0}}};
+//        w_reg <= w;
+//        x_reg <= x;
         
-//        {extra, add_res} = {mult_res[7], mult_res} + {b[7], b};
+        mult_res = w * x;
+//        tmp = (mult_res >> 6);
+        tmp = {mult_res[15], mult_res[12:6]};        
+//        if (tmp[7] == 1) 
+//            tmp = tmp ^ mult_res[5];
+//        else
+//            tmp = tmp | mult_res[5];        
+//        add_res = mult_res + (b << 6);
+        
+//        {extra, add_res} = {tmp[15], tmp} + {b[7], 1'b0, b, {6{1'b0}}};
 //        overflow = ({extra, add_res[7]} == 2'b01);
 //        underflow = ({extra, add_res[7]} == 2'b10);
-//        if (b[7] == 1) begin
-//            add_res = mult_res - b;
-//        end
-//        else begin
-//            add_res = mult_res + b;
-//        end
     
     end
+    
+//    always @(w_reg, x_reg) begin
+        
+//        mult_res <= w_reg * x_reg;
+        
+//    end
+    
+//    always @(mult_res) begin
+//        if (w[7] ^ x[7] == 1) begin
+//            add_res[7] <= 1;
+//            add_res[6:0] <= ~mult_res[12:6] + 1;
+//        end else begin
+//            add_res[7] <= 0;
+//            add_res[6:0] <= mult_res[12:6];
+//        end
+//    end
     
 //    always @* begin
         
@@ -50,9 +78,5 @@ module neuron
 //        end
     
 //    end
-    
-//    qmult mult (.i_multiplicand(w), .i_multiplier(x), .o_result(int_res), .ovr(ovr));
-//    qadd acc (.a(int_res), .b(b), .c(out));
-    
     
 endmodule

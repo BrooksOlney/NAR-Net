@@ -72,7 +72,7 @@ reg signed [7:0] param_cache [0:4];
 reg signed [7:0] y_out_reg;
 reg signed [3:0] w_ind = 0;
 reg signed [7:0] acc_res;
-reg signed [8:0] xdts;
+reg signed [9:0] xdts;
 
 assign w_n1 = param_cache[0];
 assign w_n2 = param_cache[1];
@@ -159,6 +159,7 @@ else if (enable == 1) begin
 //                n_reg5 <= -62;
                 load_bias <= 1;
                 bram_addr_reg <= 0;
+                w_ind <= 0;
             end
         end
         
@@ -200,11 +201,7 @@ else if (enable == 1) begin
         
 //            if (l1_ind < 16) begin
             // capture output, feedback into neurons
-            n_reg1 <= n_out1;
-            n_reg2 <= n_out2;
-            n_reg3 <= n_out3;
-            n_reg4 <= n_out4;
-            n_reg5 <= n_out5;
+
             if (l1_ind == 15) begin
                 l1_ind <= l1_ind + 1;
                 param_cache[0] <= n_out1;
@@ -214,13 +211,17 @@ else if (enable == 1) begin
                 param_cache[4] <= n_out5;
                 tanh_addr <= n_out1;
 //                current_state <= s_tanh;
-                l1_ind <= 17;
+                l1_ind <= 16;
 
             end else if (l1_ind < 16) begin
                 current_state <= s_loadw1;
-                bram_addr_reg <= 5 + l1_ind;
+                bram_addr_reg <= 5 + l1_ind + 1;
                 l1_ind <= l1_ind + 1;
-            
+                n_reg1 <= n_out1;
+                n_reg2 <= n_out2;
+                n_reg3 <= n_out3;
+                n_reg4 <= n_out4;
+                n_reg5 <= n_out5;
             end else begin
                 current_state <= s_tanh;
                 l1_ind <= 0;
