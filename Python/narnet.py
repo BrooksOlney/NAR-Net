@@ -17,16 +17,13 @@ class settings:
 xsettings = settings(2.2, 0.1, -1)
 ysettings = settings(2.2, 0.1, -1)
 
-fxp_float = Fxp(None, dtype='fxp-s32/23')
 
-fxp_rng = Fxp(None, dtype='fxp-s8/6', rounding='trunc')
-        
 def generate_tanh_lut():
     
-    lut = Fxp([0]*256, dtype='fxp-s8/6')
+    lut = Fxp([0]*256, like=fxp_rng)
     for i in range(256): lut[i] |= i
     
-    lutOut = Fxp(np.tanh(lut), dtype='fxp-s8/6')
+    lutOut = Fxp(np.tanh(lut), like=fxp_rng)
     
     with open("tanh_lut.txt", 'w') as ofile:
         
@@ -100,25 +97,26 @@ def NAR_inference(weights, x):
         # test = [(xdts - i - 1) % 17 for i in range(16)]
         # tapdelayInds.append(test)
         tapdelay1 = Fxp(np.array([xd1[(xdts - i - 1) % 17] for i in range(16)]), like=fxp_rng)
-        # a1 = fxp_rng(tansig(map(add, list(sum(map(mul, neuron, tapdelay1)) for neuron in w1), b1)))
-        a1 = Fxp(np.zeros(5), like=fxp_rng)
-        for i in range(5):
-            acc = Fxp(b1[i], like=fxp_rng)
-            for j in range(16):
-                acc = Fxp(acc + w1[i][j] * tapdelay1[j], like=fxp_rng) 
+        a1 = list(map(add, list(sum(map(mul, neuron, tapdelay1)) for neuron in w1), b1))
+        # a1 = Fxp(np.zeros(5), like=fxp_rng)
+        # for i in range(5):
+        #     # acc = Fxp(b1[i], like=fxp_rng)
+        #     acc = b1[i]
+        #     for j in range(16):
+        #         acc = Fxp(acc + w1[i][j] * tapdelay1[j], like=fxp_rng) 
             
-            a1[i] = acc
+            # a1[i] = acc
             
         a1 = tansig(a1)
-        
-        # a1 = Fxp(tansig(Fxp(np.matmul(w1, tapdelay1), like=fxp_rng) + b1), like=fxp_rng)
+        # test = np.matmul(w1, tapdelay1)
+        # a1 = tansig(np.matmul(w1, tapdelay1) + b1)
         
         # layer 2 
-        # a2  = sum(map(mul, w2, a1)) + b2[0]
+        a2  = sum(map(mul, w2, a1)) + b2
         # a2 = Fxp(np.matmul(w2, a1), like=fxp_rng) + b2
-        a2 = Fxp(b2, like=fxp_rng)
-        for i in range(5):
-            a2 = Fxp(a2 + w2[i] * a1[i], like=fxp_rng)
+        # a2 = Fxp(b2, like=fxp_rng)
+        # for i in range(5):
+        #     a2 = Fxp(a2 + w2[i] * a1[i], like=fxp_rng)
         
         # output
         y[ts] = mapminmax_reverse(Fxp(a2, like=fxp_float))
@@ -136,8 +134,8 @@ def plot_fpga_output(x_test):
     
     plt.plot(x_test, label='Ground Truth')
     plt.plot(y_test, label='FPGA')
-    y_python = NAR_inference(weights, x_test)
-    plt.plot(y_python, label='Python')
+    # y_python = NAR_inference(weights, x_test)
+    # plt.plot(y_python, label='Python')
     plt.legend()
     plt.text(x=30, y=16, s=f'RMSE = {rmse}')
     plt.show()
@@ -151,8 +149,15 @@ def load_weights(fname="SubjectNNWeights/S1.txt"):
 
     return weights
 
+
+fxp_float = Fxp(None, dtype='fxp-s32/23')
+
+fxp_rng = Fxp(None, dtype='fxp-s8/7', n_word_max=8, rounding='trunc', op_input_siz='same', op_sizing='same')
+        
+
 weights = load_weights()
 # write_quantized_weights(weights, "HW/Weights/S1.txt")
+# generate_tanh_lut()
 
 # load testing data
 x_test = open("SubjectData/S1.txt", "r").read().splitlines()
@@ -161,20 +166,20 @@ x_test = list(np.array(list(map(float, x.split()))) for x in x_test)
 
 # for i in np.arange(len(x_test))[1:]:
 #     generate_trace_init(x_test[i],f'HW/InputVectors/S1_D{i}.txt')
-    # generate_trace_init(x_test[1],'HW/InputVectors/S1_D1.txt')
+#     generate_trace_init(x_test[1],'HW/InputVectors/S1_D1.txt')
 
 # delays = [16 for _ in range(16)]
-y_test = NAR_inference(weights, x_test[1])
-y_matlab = x_test[0]
+y_test = NAR_inference(weights, x_test[2])
+y_true = x_test[2]
 
-diff = mean([abs(yti - ymi) for yti,ymi in zip(y_test, y_matlab)])
-rmse = math.sqrt(np.sum((y_test - y_matlab) ** 2) / y_test.size)
+diff = mean([abs(yti - ymi) for yti,ymi in zip(y_test, y_true)])
+rmse = math.sqrt(np.sum((y_test - y_true) ** 2) / y_test.size)
 
-# plt.plot(range(293), y_test, label='test')
-# plt.plot(range(293), y_matlab, label='true')
+plt.plot(y_test, label='test')
+plt.plot(y_true, label='true')
 # plt.plot(range(293), x_test[1], label='matlab')
 
-# plt.legend()
-# plt.show()
+plt.legend()
+plt.show()
 
 print('')

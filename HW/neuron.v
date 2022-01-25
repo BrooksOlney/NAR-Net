@@ -20,7 +20,7 @@ module neuron
 //    assign out = {add_res[15], add_res[12:6]};
     assign out = tmp + b;
 
-    always @(w or x or b) begin
+    always @* begin
 //        if (x[7] == 1) begin
 //            x_reg <= ~x + 1;
 //        end else begin
@@ -37,8 +37,14 @@ module neuron
 //        x_reg <= x;
         
         mult_res = w * x;
-//        tmp = (mult_res >> 6);
-        tmp = {mult_res[15], mult_res[12:6]};        
+        tmp = (mult_res >> 7);
+
+//        tmp = {mult_res[15], mult_res[12:6]};  
+        
+//        if (mult_res[5:0] >= 32 && mult_res[12:6] < 127 && tmp[7] == 1) begin
+//            tmp = tmp + {8'b00000001};
+//        end
+              
 //        if (tmp[7] == 1) 
 //            tmp = tmp ^ mult_res[5];
 //        else

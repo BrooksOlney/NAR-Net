@@ -270,14 +270,6 @@ else if (enable == 1) begin
         s_layer2: begin
             acc_res <= n_out1 + n_out2 + n_out3 + n_out4 + n_out5 + b2;
             
-//            if (w_ind == 0) begin
-//                param_cache[0] <= n_out1;
-//                param_cache[1] <= n_out2;
-//                param_cache[2] <= n_out3;
-//                param_cache[3] <= n_out4;
-//                param_cache[4] <= n_out5;
-//            end
-            
             current_state <= s_output;
         end
         
