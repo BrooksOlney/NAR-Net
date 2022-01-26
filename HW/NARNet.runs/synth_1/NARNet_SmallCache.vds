@@ -2,8 +2,8 @@
 # Vivado v2020.2 (64-bit)
 # SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
 # IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
-# Start of session at: Fri Jan 21 01:44:36 2022
-# Process ID: 33164
+# Start of session at: Tue Jan 25 23:05:36 2022
+# Process ID: 31924
 # Current directory: F:/Research/NAR-Net/HW/NARNet.runs/synth_1
 # Command line: vivado.exe -log NARNet_SmallCache.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source NARNet_SmallCache.tcl
 # Log file: F:/Research/NAR-Net/HW/NARNet.runs/synth_1/NARNet_SmallCache.vds
@@ -16,13 +16,21 @@ Attempting to get a license for feature 'Synthesis' and/or device 'xc7s50'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7s50'
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 33796
+INFO: [Synth 8-7075] Helper process launched with PID 32496
+WARNING: [Synth 8-2507] parameter declaration becomes local in NARNet_SmallCache with formal parameter declaration list [F:/Research/NAR-Net/HW/NARNet-SmallCache.v:25]
+WARNING: [Synth 8-2507] parameter declaration becomes local in NARNet_SmallCache with formal parameter declaration list [F:/Research/NAR-Net/HW/NARNet-SmallCache.v:26]
+WARNING: [Synth 8-2507] parameter declaration becomes local in NARNet_SmallCache with formal parameter declaration list [F:/Research/NAR-Net/HW/NARNet-SmallCache.v:27]
+WARNING: [Synth 8-2507] parameter declaration becomes local in NARNet_SmallCache with formal parameter declaration list [F:/Research/NAR-Net/HW/NARNet-SmallCache.v:28]
+WARNING: [Synth 8-2507] parameter declaration becomes local in NARNet_SmallCache with formal parameter declaration list [F:/Research/NAR-Net/HW/NARNet-SmallCache.v:29]
+WARNING: [Synth 8-2507] parameter declaration becomes local in NARNet_SmallCache with formal parameter declaration list [F:/Research/NAR-Net/HW/NARNet-SmallCache.v:30]
+WARNING: [Synth 8-2507] parameter declaration becomes local in NARNet_SmallCache with formal parameter declaration list [F:/Research/NAR-Net/HW/NARNet-SmallCache.v:31]
+WARNING: [Synth 8-2507] parameter declaration becomes local in NARNet_SmallCache with formal parameter declaration list [F:/Research/NAR-Net/HW/NARNet-SmallCache.v:32]
 ---------------------------------------------------------------------------------
-Starting Synthesize : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 1029.223 ; gain = 0.000
+Starting Synthesize : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 1029.207 ; gain = 0.000
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-6157] synthesizing module 'NARNet_SmallCache' [F:/Research/NAR-Net/HW/NARNet-SmallCache.v:2]
-	Parameter N bound to: 5 - type: integer 
-	Parameter feedbackDelay bound to: 16 - type: integer 
+	Parameter N bound to: 8 - type: integer 
+	Parameter Q bound to: 7 - type: integer 
 	Parameter s_wait bound to: 3'b000 
 	Parameter s_delay bound to: 3'b001 
 	Parameter s_loadw1 bound to: 3'b010 
@@ -32,28 +40,136 @@ INFO: [Synth 8-6157] synthesizing module 'NARNet_SmallCache' [F:/Research/NAR-Ne
 	Parameter s_layer2 bound to: 3'b110 
 	Parameter s_output bound to: 3'b111 
 INFO: [Synth 8-6157] synthesizing module 'weights_rom' [F:/Research/NAR-Net/HW/weights_rom.v:3]
+	Parameter N bound to: 8 - type: integer 
+	Parameter Q bound to: 7 - type: integer 
+INFO: [Synth 8-3876] $readmem data file 'F:\Research\NAR-Net\HW\Weights\S1.mem' is read successfully [F:/Research/NAR-Net/HW/weights_rom.v:15]
 INFO: [Synth 8-6155] done synthesizing module 'weights_rom' (1#1) [F:/Research/NAR-Net/HW/weights_rom.v:3]
-INFO: [Synth 8-6157] synthesizing module 'tanh_lut' [F:/Research/NAR-Net/HW/tanh_lut.v:4]
-INFO: [Synth 8-6155] done synthesizing module 'tanh_lut' (2#1) [F:/Research/NAR-Net/HW/tanh_lut.v:4]
-INFO: [Synth 8-6157] synthesizing module 'neuron' [F:/Research/NAR-Net/HW/neuron.v:4]
-INFO: [Synth 8-6155] done synthesizing module 'neuron' (3#1) [F:/Research/NAR-Net/HW/neuron.v:4]
+INFO: [Synth 8-6157] synthesizing module 'tanh_lut' [F:/Research/NAR-Net/HW/tanh_lut.v:2]
+	Parameter N bound to: 8 - type: integer 
+	Parameter Q bound to: 7 - type: integer 
+WARNING: [Synth 8-151] case item 10'b0100000000 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:268]
+WARNING: [Synth 8-151] case item 10'b0100000001 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:269]
+WARNING: [Synth 8-151] case item 10'b0100000010 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:270]
+WARNING: [Synth 8-151] case item 10'b0100000011 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:271]
+WARNING: [Synth 8-151] case item 10'b0100000100 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:272]
+WARNING: [Synth 8-151] case item 10'b0100000101 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:273]
+WARNING: [Synth 8-151] case item 10'b0100000110 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:274]
+WARNING: [Synth 8-151] case item 10'b0100000111 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:275]
+WARNING: [Synth 8-151] case item 10'b0100001000 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:276]
+WARNING: [Synth 8-151] case item 10'b0100001001 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:277]
+WARNING: [Synth 8-151] case item 10'b0100001010 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:278]
+WARNING: [Synth 8-151] case item 10'b0100001011 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:279]
+WARNING: [Synth 8-151] case item 10'b0100001100 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:280]
+WARNING: [Synth 8-151] case item 10'b0100001101 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:281]
+WARNING: [Synth 8-151] case item 10'b0100001110 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:282]
+WARNING: [Synth 8-151] case item 10'b0100001111 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:283]
+WARNING: [Synth 8-151] case item 10'b0100010000 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:284]
+WARNING: [Synth 8-151] case item 10'b0100010001 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:285]
+WARNING: [Synth 8-151] case item 10'b0100010010 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:286]
+WARNING: [Synth 8-151] case item 10'b0100010011 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:287]
+WARNING: [Synth 8-151] case item 10'b0100010100 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:288]
+WARNING: [Synth 8-151] case item 10'b0100010101 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:289]
+WARNING: [Synth 8-151] case item 10'b0100010110 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:290]
+WARNING: [Synth 8-151] case item 10'b0100010111 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:291]
+WARNING: [Synth 8-151] case item 10'b0100011000 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:292]
+WARNING: [Synth 8-151] case item 10'b0100011001 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:293]
+WARNING: [Synth 8-151] case item 10'b0100011010 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:294]
+WARNING: [Synth 8-151] case item 10'b0100011011 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:295]
+WARNING: [Synth 8-151] case item 10'b0100011100 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:296]
+WARNING: [Synth 8-151] case item 10'b0100011101 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:297]
+WARNING: [Synth 8-151] case item 10'b0100011110 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:298]
+WARNING: [Synth 8-151] case item 10'b0100011111 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:299]
+WARNING: [Synth 8-151] case item 10'b0100100000 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:300]
+WARNING: [Synth 8-151] case item 10'b0100100001 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:301]
+WARNING: [Synth 8-151] case item 10'b0100100010 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:302]
+WARNING: [Synth 8-151] case item 10'b0100100011 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:303]
+WARNING: [Synth 8-151] case item 10'b0100100100 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:304]
+WARNING: [Synth 8-151] case item 10'b0100100101 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:305]
+WARNING: [Synth 8-151] case item 10'b0100100110 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:306]
+WARNING: [Synth 8-151] case item 10'b0100100111 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:307]
+WARNING: [Synth 8-151] case item 10'b0100101000 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:308]
+WARNING: [Synth 8-151] case item 10'b0100101001 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:309]
+WARNING: [Synth 8-151] case item 10'b0100101010 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:310]
+WARNING: [Synth 8-151] case item 10'b0100101011 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:311]
+WARNING: [Synth 8-151] case item 10'b0100101100 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:312]
+WARNING: [Synth 8-151] case item 10'b0100101101 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:313]
+WARNING: [Synth 8-151] case item 10'b0100101110 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:314]
+WARNING: [Synth 8-151] case item 10'b0100101111 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:315]
+WARNING: [Synth 8-151] case item 10'b0100110000 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:316]
+WARNING: [Synth 8-151] case item 10'b0100110001 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:317]
+WARNING: [Synth 8-151] case item 10'b0100110010 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:318]
+WARNING: [Synth 8-151] case item 10'b0100110011 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:319]
+WARNING: [Synth 8-151] case item 10'b0100110100 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:320]
+WARNING: [Synth 8-151] case item 10'b0100110101 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:321]
+WARNING: [Synth 8-151] case item 10'b0100110110 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:322]
+WARNING: [Synth 8-151] case item 10'b0100110111 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:323]
+WARNING: [Synth 8-151] case item 10'b0100111000 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:324]
+WARNING: [Synth 8-151] case item 10'b0100111001 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:325]
+WARNING: [Synth 8-151] case item 10'b0100111010 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:326]
+WARNING: [Synth 8-151] case item 10'b0100111011 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:327]
+WARNING: [Synth 8-151] case item 10'b0100111100 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:328]
+WARNING: [Synth 8-151] case item 10'b0100111101 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:329]
+WARNING: [Synth 8-151] case item 10'b0100111110 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:330]
+WARNING: [Synth 8-151] case item 10'b0100111111 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:331]
+WARNING: [Synth 8-151] case item 10'b0101000000 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:332]
+WARNING: [Synth 8-151] case item 10'b0101000001 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:333]
+WARNING: [Synth 8-151] case item 10'b0101000010 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:334]
+WARNING: [Synth 8-151] case item 10'b0101000011 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:335]
+WARNING: [Synth 8-151] case item 10'b0101000100 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:336]
+WARNING: [Synth 8-151] case item 10'b0101000101 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:337]
+WARNING: [Synth 8-151] case item 10'b0101000110 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:338]
+WARNING: [Synth 8-151] case item 10'b0101000111 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:339]
+WARNING: [Synth 8-151] case item 10'b0101001000 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:340]
+WARNING: [Synth 8-151] case item 10'b0101001001 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:341]
+WARNING: [Synth 8-151] case item 10'b0101001010 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:342]
+WARNING: [Synth 8-151] case item 10'b0101001011 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:343]
+WARNING: [Synth 8-151] case item 10'b0101001100 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:344]
+WARNING: [Synth 8-151] case item 10'b0101001101 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:345]
+WARNING: [Synth 8-151] case item 10'b0101001110 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:346]
+WARNING: [Synth 8-151] case item 10'b0101001111 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:347]
+WARNING: [Synth 8-151] case item 10'b0101010000 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:348]
+WARNING: [Synth 8-151] case item 10'b0101010001 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:349]
+WARNING: [Synth 8-151] case item 10'b0101010010 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:350]
+WARNING: [Synth 8-151] case item 10'b0101010011 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:351]
+WARNING: [Synth 8-151] case item 10'b0101010100 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:352]
+WARNING: [Synth 8-151] case item 10'b0101010101 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:353]
+WARNING: [Synth 8-151] case item 10'b0101010110 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:354]
+WARNING: [Synth 8-151] case item 10'b0101010111 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:355]
+WARNING: [Synth 8-151] case item 10'b0101011000 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:356]
+WARNING: [Synth 8-151] case item 10'b0101011001 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:357]
+WARNING: [Synth 8-151] case item 10'b0101011010 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:358]
+WARNING: [Synth 8-151] case item 10'b0101011011 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:359]
+WARNING: [Synth 8-151] case item 10'b0101011100 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:360]
+WARNING: [Synth 8-151] case item 10'b0101011101 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:361]
+WARNING: [Synth 8-151] case item 10'b0101011110 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:362]
+WARNING: [Synth 8-151] case item 10'b0101011111 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:363]
+WARNING: [Synth 8-151] case item 10'b0101100000 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:364]
+WARNING: [Synth 8-151] case item 10'b0101100001 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:365]
+WARNING: [Synth 8-151] case item 10'b0101100010 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:366]
+WARNING: [Synth 8-151] case item 10'b0101100011 is unreachable [F:/Research/NAR-Net/HW/tanh_lut.v:367]
+INFO: [Common 17-14] Message 'Synth 8-151' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Synth 8-6155] done synthesizing module 'tanh_lut' (2#1) [F:/Research/NAR-Net/HW/tanh_lut.v:2]
+INFO: [Synth 8-6157] synthesizing module 'neuron_v2' [F:/Research/NAR-Net/HW/neuron-v2.v:3]
+	Parameter N bound to: 8 - type: integer 
+	Parameter Q bound to: 7 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'neuron_v2' (3#1) [F:/Research/NAR-Net/HW/neuron-v2.v:3]
 INFO: [Synth 8-6155] done synthesizing module 'NARNet_SmallCache' (4#1) [F:/Research/NAR-Net/HW/NARNet-SmallCache.v:2]
 ---------------------------------------------------------------------------------
-Finished Synthesize : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1029.223 ; gain = 0.000
+Finished Synthesize : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1029.207 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1029.223 ; gain = 0.000
+Finished Constraint Validation : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1029.207 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7s50csga324-2
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1029.223 ; gain = 0.000
----------------------------------------------------------------------------------
 INFO: [Device 21-403] Loading part xc7s50csga324-2
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1029.207 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:04 . Memory (MB): peak = 1029.223 ; gain = 0.000
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 1029.207 ; gain = 0.000
 ---------------------------------------------------------------------------------
 No constraint files found.
 ---------------------------------------------------------------------------------
@@ -63,43 +179,43 @@ Detailed RTL Component Info :
 +---Adders : 
 	   2 Input   32 Bit       Adders := 7     
 	   3 Input   32 Bit       Adders := 1     
+	   6 Input   16 Bit       Adders := 1     
+	   2 Input   12 Bit       Adders := 1     
 	   2 Input   11 Bit       Adders := 1     
-	   2 Input   10 Bit       Adders := 1     
-	   2 Input    9 Bit       Adders := 1     
-	   5 Input    8 Bit       Adders := 1     
-	   2 Input    7 Bit       Adders := 1     
-	   2 Input    6 Bit       Adders := 2     
+	   2 Input   10 Bit       Adders := 2     
+	   2 Input    8 Bit       Adders := 8     
+	   2 Input    6 Bit       Adders := 1     
 	   2 Input    5 Bit       Adders := 2     
 	   2 Input    4 Bit       Adders := 1     
 	   2 Input    3 Bit       Adders := 1     
 +---Registers : 
-	               10 Bit    Registers := 1     
-	                9 Bit    Registers := 1     
-	                8 Bit    Registers := 32    
-	                7 Bit    Registers := 1     
-	                6 Bit    Registers := 3     
+	               15 Bit    Registers := 5     
+	               11 Bit    Registers := 1     
+	               10 Bit    Registers := 2     
+	                8 Bit    Registers := 38    
+	                6 Bit    Registers := 1     
 	                4 Bit    Registers := 2     
 	                3 Bit    Registers := 1     
-	                1 Bit    Registers := 2     
+	                1 Bit    Registers := 10    
 +---RAMs : 
 	              128 Bit	(16 X 8 bit)          RAMs := 1     
 +---ROMs : 
-	                    ROMs := 2     
+	                    ROMs := 1     
 +---Muxes : 
 	   2 Input   32 Bit        Muxes := 6     
-	   2 Input    9 Bit        Muxes := 1     
-	   8 Input    8 Bit        Muxes := 11    
+	   2 Input   10 Bit        Muxes := 2     
+	 257 Input    8 Bit        Muxes := 1     
+	   8 Input    8 Bit        Muxes := 8     
 	  17 Input    8 Bit        Muxes := 1     
-	   2 Input    8 Bit        Muxes := 11    
-	   2 Input    7 Bit        Muxes := 1     
-	   2 Input    6 Bit        Muxes := 3     
+	   2 Input    8 Bit        Muxes := 7     
+	   2 Input    6 Bit        Muxes := 1     
 	   2 Input    5 Bit        Muxes := 1     
-	   2 Input    4 Bit        Muxes := 3     
-	   8 Input    4 Bit        Muxes := 2     
+	   8 Input    4 Bit        Muxes := 1     
+	   2 Input    4 Bit        Muxes := 2     
 	   9 Input    3 Bit        Muxes := 1     
 	   2 Input    3 Bit        Muxes := 1     
 	   8 Input    1 Bit        Muxes := 33    
-	   2 Input    1 Bit        Muxes := 14    
+	   2 Input    1 Bit        Muxes := 23    
 	   9 Input    1 Bit        Muxes := 1     
 ---------------------------------------------------------------------------------
 Finished RTL Component Statistics 
@@ -118,19 +234,18 @@ No constraint files found.
 Start Cross Boundary and Area Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1029.223 ; gain = 0.000
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:13 ; elapsed = 00:00:16 . Memory (MB): peak = 1029.207 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
 ---------------------------------------------------------------------------------
 
 ROM: Preliminary Mapping	Report
-+------------------+------------------+---------------+----------------+
-|Module Name       | RTL Object       | Depth x Width | Implemented As | 
-+------------------+------------------+---------------+----------------+
-|NARNet_SmallCache | wrom/rom_reg_reg | 256x8         | Block RAM      | 
-|NARNet_SmallCache | tanh_addr_reg    | 256x7         | Block RAM      | 
-+------------------+------------------+---------------+----------------+
++------------------+---------------+---------------+----------------+
+|Module Name       | RTL Object    | Depth x Width | Implemented As | 
++------------------+---------------+---------------+----------------+
+|NARNet_SmallCache | tanh_addr_reg | 256x8         | Block RAM      | 
++------------------+---------------+---------------+----------------+
 
 
 Distributed RAM: Preliminary Mapping	Report (see note below)
@@ -149,7 +264,7 @@ No constraint files found.
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1029.223 ; gain = 0.000
+Finished Timing Optimization : Time (s): cpu = 00:00:13 ; elapsed = 00:00:16 . Memory (MB): peak = 1029.207 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
@@ -168,10 +283,9 @@ Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
 ---------------------------------------------------------------------------------
 Start Technology Mapping
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-7052] The timing for the instance wrom/rom_reg_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
 INFO: [Synth 8-7052] The timing for the instance tanh_addr_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:13 ; elapsed = 00:00:14 . Memory (MB): peak = 1029.223 ; gain = 0.000
+Finished Technology Mapping : Time (s): cpu = 00:00:13 ; elapsed = 00:00:17 . Memory (MB): peak = 1029.207 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -189,37 +303,37 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:16 ; elapsed = 00:00:16 . Memory (MB): peak = 1029.223 ; gain = 0.000
+Finished IO Insertion : Time (s): cpu = 00:00:16 ; elapsed = 00:00:19 . Memory (MB): peak = 1029.207 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:16 ; elapsed = 00:00:16 . Memory (MB): peak = 1029.223 ; gain = 0.000
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:16 ; elapsed = 00:00:19 . Memory (MB): peak = 1029.207 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:16 ; elapsed = 00:00:16 . Memory (MB): peak = 1029.223 ; gain = 0.000
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:16 ; elapsed = 00:00:19 . Memory (MB): peak = 1029.207 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:16 ; elapsed = 00:00:16 . Memory (MB): peak = 1029.223 ; gain = 0.000
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:16 ; elapsed = 00:00:19 . Memory (MB): peak = 1029.207 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:16 ; elapsed = 00:00:16 . Memory (MB): peak = 1029.223 ; gain = 0.000
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:16 ; elapsed = 00:00:19 . Memory (MB): peak = 1029.207 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:16 ; elapsed = 00:00:16 . Memory (MB): peak = 1029.223 ; gain = 0.000
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:16 ; elapsed = 00:00:19 . Memory (MB): peak = 1029.207 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -236,55 +350,56 @@ Report Cell Usage:
 |      |Cell     |Count |
 +------+---------+------+
 |1     |BUFG     |     1|
-|2     |CARRY4   |   287|
-|3     |LUT1     |    77|
-|4     |LUT2     |   269|
-|5     |LUT3     |   389|
-|6     |LUT4     |   382|
-|7     |LUT5     |   436|
-|8     |LUT6     |   603|
-|9     |RAM32M   |     2|
-|10    |RAMB18E1 |     2|
-|11    |FDRE     |   253|
-|12    |FDSE     |    32|
-|13    |IBUF     |    12|
-|14    |OBUF     |     9|
+|2     |CARRY4   |   306|
+|3     |LUT1     |    83|
+|4     |LUT2     |   406|
+|5     |LUT3     |   417|
+|6     |LUT4     |   300|
+|7     |LUT5     |   447|
+|8     |LUT6     |   658|
+|9     |MUXF7    |     8|
+|10    |RAM32M   |     2|
+|11    |RAMB18E1 |     1|
+|12    |FDRE     |   386|
+|13    |FDSE     |    32|
+|14    |IBUF     |    12|
+|15    |OBUF     |     9|
 +------+---------+------+
 
 Report Instance Areas: 
 +------+----------+------------+------+
 |      |Instance  |Module      |Cells |
 +------+----------+------------+------+
-|1     |top       |            |  2754|
-|2     |  n1      |neuron      |   120|
-|3     |  n2      |neuron_0    |   119|
-|4     |  n3      |neuron_1    |   119|
-|5     |  n4      |neuron_2    |   119|
-|6     |  n5      |neuron_3    |   119|
-|7     |  tanhlut |tanh_lut    |     7|
-|8     |  wrom    |weights_rom |    56|
+|1     |top       |            |  3068|
+|2     |  n1      |neuron_v2   |   181|
+|3     |  n2      |neuron_v2_0 |   164|
+|4     |  n3      |neuron_v2_1 |   178|
+|5     |  n4      |neuron_v2_2 |   160|
+|6     |  n5      |neuron_v2_3 |   160|
+|7     |  tanhlut |tanh_lut    |     8|
+|8     |  wrom    |weights_rom |    40|
 +------+----------+------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:16 ; elapsed = 00:00:16 . Memory (MB): peak = 1029.223 ; gain = 0.000
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:16 ; elapsed = 00:00:19 . Memory (MB): peak = 1029.207 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:16 ; elapsed = 00:00:16 . Memory (MB): peak = 1029.223 ; gain = 0.000
-Synthesis Optimization Complete : Time (s): cpu = 00:00:16 ; elapsed = 00:00:16 . Memory (MB): peak = 1029.223 ; gain = 0.000
+Synthesis finished with 0 errors, 0 critical warnings and 776 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:16 ; elapsed = 00:00:19 . Memory (MB): peak = 1029.207 ; gain = 0.000
+Synthesis Optimization Complete : Time (s): cpu = 00:00:16 ; elapsed = 00:00:19 . Memory (MB): peak = 1029.207 ; gain = 0.000
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.027 . Memory (MB): peak = 1029.223 ; gain = 0.000
-INFO: [Netlist 29-17] Analyzing 291 Unisim elements for replacement
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.030 . Memory (MB): peak = 1029.207 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 317 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
-INFO: [Opt 31-138] Pushed 1 inverter(s) to 1 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 1029.223 ; gain = 0.000
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1029.207 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 2 instances were transformed.
   RAM32M => RAM32M (RAMD32(x6), RAMS32(x2)): 2 instances
 
 INFO: [Common 17-83] Releasing license: Synthesis
-22 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+23 Infos, 108 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:18 ; elapsed = 00:00:19 . Memory (MB): peak = 1029.223 ; gain = 0.000
+synth_design: Time (s): cpu = 00:00:18 ; elapsed = 00:00:23 . Memory (MB): peak = 1029.207 ; gain = 0.000
 INFO: [Common 17-1381] The checkpoint 'F:/Research/NAR-Net/HW/NARNet.runs/synth_1/NARNet_SmallCache.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file NARNet_SmallCache_utilization_synth.rpt -pb NARNet_SmallCache_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Fri Jan 21 01:44:57 2022...
+INFO: [Common 17-206] Exiting Vivado at Tue Jan 25 23:06:01 2022...

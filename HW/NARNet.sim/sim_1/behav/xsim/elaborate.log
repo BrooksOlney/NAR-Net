@@ -8,10 +8,10 @@ Completed static elaboration
 Starting simulation data flow analysis
 Completed simulation data flow analysis
 Time Resolution for simulation is 1ps
-Compiling module xil_defaultlib.weights_rom
-Compiling module xil_defaultlib.tanh_lut
-Compiling module xil_defaultlib.neuron
-Compiling module xil_defaultlib.NARNet_SmallCache
+Compiling module xil_defaultlib.weights_rom(N=10,Q=9)
+Compiling module xil_defaultlib.tanh_lut(N=10,Q=9)
+Compiling module xil_defaultlib.neuron_v2
+Compiling module xil_defaultlib.NARNet_SmallCache(N=10,Q=9)
 Compiling module xil_defaultlib.NARNN_tb
 Compiling module xil_defaultlib.glbl
 Built simulation snapshot NARNN_tb_behav

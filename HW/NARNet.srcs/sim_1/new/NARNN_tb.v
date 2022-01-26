@@ -5,12 +5,15 @@
 module NARNN_tb(
 
     );
-    
+
+
+parameter N=10;
+parameter Q = 9;
 reg clk = 0, rst = 0, enable = 1, x_ready = 0;
-wire signed [7:0] y_out;
-reg signed [7:0] x_in;
-reg signed [7:0] trace_data [0:293];
-reg signed [7:0] test_output [0:293];
+wire signed [N-1:0] y_out;
+reg signed [N-1:0] x_in;
+reg signed [N-1:0] trace_data [0:293];
+reg signed [N-1:0] test_output [0:293];
 
 reg [8:0] trace_ind = 0;
 reg waiting = 0;
@@ -23,7 +26,7 @@ initial begin
 
 end
 
-NARNet_SmallCache uut (.clk(clk), .enable(enable), .rst(rst), .x_in(x_in), .x_ready(x_ready), .y_out(y_out), .out_ready(out_ready));
+NARNet_SmallCache #(N,Q) uut (.clk(clk), .enable(enable), .rst(rst), .x_in(x_in), .x_ready(x_ready), .y_out(y_out), .out_ready(out_ready));
 
 always begin
     
@@ -36,6 +39,7 @@ end
 integer f;
 initial begin
   f = $fopen(`OUTPUT_LOC,"w");
+  
 end
     
 always @(posedge clk) begin
@@ -57,7 +61,8 @@ always @(posedge clk) begin
     end else if (out_ready == 1) begin
         test_output[trace_ind - 1] <= y_out;
         $display("%b", y_out);
-        $fwrite(f, "8b%b\n", y_out);
+        $fwrite(f, "b%b\n", y_out);
+//        $fwrite(f, "%d\n", y_out);
         waiting <= 0;
     end else begin 
         x_ready <= 0;

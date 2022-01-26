@@ -70,8 +70,6 @@ proc create_report { reportName command } {
   }
 }
 OPTRACE "synth_1" START { ROLLUP_AUTO }
-set_param chipscope.maxJobs 8
-set_msg_config -id {Common 17-41} -limit 10000000
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7s50csga324-2
 
@@ -87,6 +85,7 @@ set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
 add_files F:/Research/NAR-Net/weights_quantized.coe
+read_mem F:/Research/NAR-Net/HW/Weights/S1.mem
 read_verilog -library xil_defaultlib {
   F:/Research/NAR-Net/HW/NARNet.v
   F:/Research/NAR-Net/HW/neuron.v
@@ -94,6 +93,7 @@ read_verilog -library xil_defaultlib {
   F:/Research/NAR-Net/HW/weights_rom.v
   F:/Research/NAR-Net/HW/NARNet-SmallCache.v
   F:/Research/NAR-Net/HW/accumulator.v
+  F:/Research/NAR-Net/HW/neuron-v2.v
 }
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being

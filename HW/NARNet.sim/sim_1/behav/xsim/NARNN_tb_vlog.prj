@@ -6,6 +6,7 @@ verilog xil_defaultlib  \
 "../../../../weights_rom.v" \
 "../../../../NARNet-SmallCache.v" \
 "../../../../accumulator.v" \
+"../../../../neuron-v2.v" \
 "../../../../NARNet.srcs/sim_1/new/NARNN_tb.v" \
 "../../../../NARNet.srcs/sim_1/new/neuron_tb.v" \
 

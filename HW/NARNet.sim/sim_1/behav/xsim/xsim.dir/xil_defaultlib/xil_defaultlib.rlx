@@ -2,12 +2,13 @@
 2020.2
 Nov 18 2020
 09:47:47
-F:/Research/NAR-Net/HW/NARNet-SmallCache.v,1642988374,verilog,,F:/Research/NAR-Net/HW/accumulator.v,,NARNet_SmallCache,,,,,,,,
+F:/Research/NAR-Net/HW/NARNet-SmallCache.v,1643172794,verilog,,F:/Research/NAR-Net/HW/accumulator.v,,NARNet_SmallCache,,,,,,,,
 F:/Research/NAR-Net/HW/NARNet.sim/sim_1/behav/xsim/glbl.v,1605673889,verilog,,,,glbl,,,,,,,,
-F:/Research/NAR-Net/HW/NARNet.srcs/sim_1/new/NARNN_tb.v,1642916940,verilog,,F:/Research/NAR-Net/HW/NARNet.srcs/sim_1/new/neuron_tb.v,,NARNN_tb,,,,,,,,
+F:/Research/NAR-Net/HW/NARNet.srcs/sim_1/new/NARNN_tb.v,1643144622,verilog,,F:/Research/NAR-Net/HW/NARNet.srcs/sim_1/new/neuron_tb.v,,NARNN_tb,,,,,,,,
 F:/Research/NAR-Net/HW/NARNet.srcs/sim_1/new/neuron_tb.v,1642453639,verilog,,,,neuron_tb,,,,,,,,
 F:/Research/NAR-Net/HW/NARNet.v,1642656439,verilog,,F:/Research/NAR-Net/HW/neuron.v,,NARNet,,,,,,,,
-F:/Research/NAR-Net/HW/accumulator.v,1642712474,verilog,,F:/Research/NAR-Net/HW/NARNet.srcs/sim_1/new/NARNN_tb.v,,accumulator,,,,,,,,
-F:/Research/NAR-Net/HW/neuron.v,1643073016,verilog,,F:/Research/NAR-Net/HW/tanh_lut.v,,neuron,,,,,,,,
-F:/Research/NAR-Net/HW/tanh_lut.v,1643070878,verilog,,F:/Research/NAR-Net/HW/weights_rom.v,,tanh_lut,,,,,,,,
-F:/Research/NAR-Net/HW/weights_rom.v,1642753829,verilog,,F:/Research/NAR-Net/HW/NARNet-SmallCache.v,,weights_rom,,,,,,,,
+F:/Research/NAR-Net/HW/accumulator.v,1642712474,verilog,,F:/Research/NAR-Net/HW/neuron-v2.v,,accumulator,,,,,,,,
+F:/Research/NAR-Net/HW/neuron-v2.v,1643160408,verilog,,F:/Research/NAR-Net/HW/NARNet.srcs/sim_1/new/NARNN_tb.v,,neuron_v2,,,,,,,,
+F:/Research/NAR-Net/HW/neuron.v,1643150832,verilog,,F:/Research/NAR-Net/HW/tanh_lut.v,,neuron,,,,,,,,
+F:/Research/NAR-Net/HW/tanh_lut.v,1643170118,verilog,,F:/Research/NAR-Net/HW/weights_rom.v,,tanh_lut,,,,,,,,
+F:/Research/NAR-Net/HW/weights_rom.v,1643130875,verilog,,F:/Research/NAR-Net/HW/NARNet-SmallCache.v,,weights_rom,,,,,,,,

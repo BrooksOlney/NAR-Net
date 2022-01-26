@@ -10,6 +10,8 @@ INFO: [VRFC 10-2263] Analyzing Verilog file "F:/Research/NAR-Net/HW/NARNet-Small
 INFO: [VRFC 10-311] analyzing module NARNet_SmallCache
 INFO: [VRFC 10-2263] Analyzing Verilog file "F:/Research/NAR-Net/HW/accumulator.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module accumulator
+INFO: [VRFC 10-2263] Analyzing Verilog file "F:/Research/NAR-Net/HW/neuron-v2.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module neuron_v2
 INFO: [VRFC 10-2263] Analyzing Verilog file "F:/Research/NAR-Net/HW/NARNet.srcs/sim_1/new/NARNN_tb.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module NARNN_tb
 INFO: [VRFC 10-2263] Analyzing Verilog file "F:/Research/NAR-Net/HW/NARNet.srcs/sim_1/new/neuron_tb.v" into library xil_defaultlib
