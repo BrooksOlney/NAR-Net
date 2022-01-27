@@ -1,4 +1,4 @@
-Running: xsim.dir/NARNN_tb_behav/xsimk.exe -simmode gui -wdb NARNN_tb_behav.wdb -simrunnum 0 -socket 52069
+Running: xsim.dir/NARNN_tb_behav/xsimk.exe -simmode gui -wdb NARNN_tb_behav.wdb -simrunnum 0 -socket 50810
 Design successfully loaded
-Design Loading Memory Usage: 6516 KB (Peak: 6516 KB)
-Design Loading CPU Usage: 0 ms
+Design Loading Memory Usage: 5988 KB (Peak: 5988 KB)
+Design Loading CPU Usage: 15 ms

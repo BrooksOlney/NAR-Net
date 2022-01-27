@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
-`define TRACE_SOURCE "F:\\Research\\NAR-Net\\HW\\InputVectors\\S1_D1.txt"
-`define OUTPUT_LOC "F:\\Research\\NAR-Net\\VerilogOutputs\\S1_D1.txt"
+`define TRACE_SOURCE "F:\\Research\\NAR-Net\\HW\\InputVectors\\S1_D3.txt"
+`define OUTPUT_LOC "F:\\Research\\NAR-Net\\VerilogOutputs\\S1_D3.txt"
 
 module NARNN_tb(
 
@@ -12,8 +12,8 @@ parameter Q = 9;
 reg clk = 0, rst = 0, enable = 1, x_ready = 0;
 wire signed [N-1:0] y_out;
 reg signed [N-1:0] x_in;
-reg signed [N-1:0] trace_data [0:293];
-reg signed [N-1:0] test_output [0:293];
+reg signed [N-1:0] trace_data [0:294];
+reg signed [N-1:0] test_output [0:294];
 
 reg [8:0] trace_ind = 0;
 reg waiting = 0;
@@ -42,15 +42,14 @@ initial begin
   
 end
     
-always @(posedge clk) begin
+always @(negedge clk) begin
 
     if (out_ready == 0 && waiting == 0) begin
         
-        if (trace_ind < 293) begin
+        if (trace_ind < 294) begin
             x_ready <= 1;
             waiting <= 1;
-            x_in <= trace_data[trace_ind]; 
-            trace_ind <= trace_ind + 1;
+            x_in <= trace_data[trace_ind];
             
         end else begin
             $fclose(f);
@@ -59,11 +58,13 @@ always @(posedge clk) begin
     
 
     end else if (out_ready == 1) begin
-        test_output[trace_ind - 1] <= y_out;
+        test_output[trace_ind] <= y_out;
         $display("%b", y_out);
         $fwrite(f, "b%b\n", y_out);
 //        $fwrite(f, "%d\n", y_out);
         waiting <= 0;
+        trace_ind <= trace_ind + 1;
+
     end else begin 
         x_ready <= 0;
     end

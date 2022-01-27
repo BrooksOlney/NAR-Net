@@ -95,12 +95,12 @@ def load_weights(fname="SubjectNNWeights/S1.txt"):
 
 fxp_float = Fxp(None, dtype='fxp-s32/23')
 
-fxp_rng = Fxp(None, dtype='fxp-s10/9', n_word_max=8, rounding='trunc', op_input_siz='same', op_sizing='same')
+fxp_rng = Fxp(None, dtype='fxp-s10/9', n_word_max=10, rounding='trunc', op_input_siz='same', op_sizing='same')
         
 
 if __name__ == "__main__":
     weights = load_weights()
-
+ 
 
     # load testing data
     x_test = open("SubjectData/S1.txt", "r").read().splitlines()

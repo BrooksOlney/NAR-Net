@@ -56,8 +56,10 @@ end
 
 reg signed [N-1:0] param_cache [0:4];
 reg signed [N-1:0] y_out_reg;
+wire signed [N-1:0] acc_out;
+
 reg signed [3:0] w_ind = 0;
-reg signed [2*N - 1:0] acc_res;
+reg signed [N-1:0] acc_term;
 reg signed [9:0] xdts;
 
 assign w_n1 = param_cache[0];
@@ -82,12 +84,16 @@ assign bram_addr = bram_addr_reg;
 reg nReset = 0, finalSum = 0;
 reg nReady = 0;
 wire nDone, n1Done, n2Done, n3Done, n4Done, n5Done;
+reg accRst = 0;
 
-neuron_v2 #(N,Q) n1 (.clk(clk), .inptReady(nReady), .rst(nReset), .w(w_n1), .x(qmi1), .out(n_out1), .outReady(n1Done));
-neuron_v2 #(N,Q) n2 (.clk(clk), .inptReady(nReady), .rst(nReset), .w(w_n2), .x(qmi2), .out(n_out2), .outReady(n2Done));
-neuron_v2 #(N,Q) n3 (.clk(clk), .inptReady(nReady), .rst(nReset), .w(w_n3), .x(qmi3), .out(n_out3), .outReady(n3Done));
-neuron_v2 #(N,Q) n4 (.clk(clk), .inptReady(nReady), .rst(nReset), .w(w_n4), .x(qmi4), .out(n_out4), .outReady(n4Done));
-neuron_v2 #(N,Q) n5 (.clk(clk), .inptReady(nReady), .rst(nReset), .w(w_n5), .x(qmi5), .out(n_out5), .outReady(n5Done));
+
+neuron_v2 #(N,Q) n1 (.clk(clk), .inptReady(nReady), .rst(nReset), .w(w_n1), .x(qmi1), .b(b_n1), .out(n_out1), .outReady(n1Done));
+neuron_v2 #(N,Q) n2 (.clk(clk), .inptReady(nReady), .rst(nReset), .w(w_n2), .x(qmi2), .b(b_n2), .out(n_out2), .outReady(n2Done));
+neuron_v2 #(N,Q) n3 (.clk(clk), .inptReady(nReady), .rst(nReset), .w(w_n3), .x(qmi3), .b(b_n3), .out(n_out3), .outReady(n3Done));
+neuron_v2 #(N,Q) n4 (.clk(clk), .inptReady(nReady), .rst(nReset), .w(w_n4), .x(qmi4), .b(b_n4), .out(n_out4), .outReady(n4Done));
+neuron_v2 #(N,Q) n5 (.clk(clk), .inptReady(nReady), .rst(nReset), .w(w_n5), .x(qmi5), .b(b_n5), .out(n_out5), .outReady(n5Done));
+accumulator #(N,Q) acc (.clk(clk), .rst(accRst), .a(acc_term), .add(finalSum), .out(acc_out));
+
 
 assign y_out = y_out_reg;
 assign nDone = n1Done & n2Done & n3Done & n4Done & n5Done;
@@ -112,11 +118,15 @@ else if (enable == 1) begin
     case (current_state)
         s_wait: begin
             out_ready <= 0;
+            accRst <= 1;
             if (x_ready == 1'b1) begin
                 x_in_reg <= x_in;
                 current_state <= s_delay;
-                nReset <= 0;
-                acc_res <= 0;
+                
+                acc_term <= 0;
+                finalSum <= 0;
+                accRst <= 0;
+
             end
         end
         
@@ -156,6 +166,7 @@ else if (enable == 1) begin
                 b_n3 <= param_cache[2];
                 b_n4 <= param_cache[3];
                 b_n5 <= param_cache[4];
+                nReset <= 0;
                 load_bias <= 0;
                 w_ind <= 0;
 
@@ -180,16 +191,21 @@ else if (enable == 1) begin
             // capture output, feedback into neurons
             if (l1_ind == 15) begin
                 l1_ind <= l1_ind + 1;
-                param_cache[0] <= n_out1 + b_n1;
-                param_cache[1] <= n_out2 + b_n2;
-                param_cache[2] <= n_out3 + b_n3;
-                param_cache[3] <= n_out4 + b_n4;
-                param_cache[4] <= n_out5 + b_n5;
-                tanh_addr <= n_out1 + b_n1;
+                param_cache[0] <= n_out1;
+                param_cache[1] <= n_out2;
+                param_cache[2] <= n_out3;
+                param_cache[3] <= n_out4;
+                param_cache[4] <= n_out5;
+                b_n1 <= 0;
+                b_n2 <= 0;
+                b_n3 <= 0;
+                b_n4 <= 0;
+                b_n5 <= 0;
+                tanh_addr <= n_out1;
                 current_state <= s_tanh;
                 nReset <= 1;
-                l1_ind <= 0;
-
+                l1_ind <= 1;
+                nReady <= 0;
             // not done with computation, load next column of weights and tapdelay
             end else if (l1_ind < 16) begin
                 current_state <= s_loadw1;
@@ -201,11 +217,11 @@ else if (enable == 1) begin
         end
         
         s_tanh: begin
-            nReady <= 0;
-            nReset <= 0;
+            // nReady <= 0;
+            // nReset <= 0;
             if (w_ind < 5) begin
                 param_cache[w_ind] <= tanh_out;
-                tanh_addr <= param_cache[(w_ind + 1) % 5];
+                tanh_addr <= param_cache[w_ind];
                 w_ind <= w_ind + 1;
             end else begin
                 w_ind <= 0;
@@ -214,6 +230,8 @@ else if (enable == 1) begin
                 n_reg3 <= param_cache[2];
                 n_reg4 <= param_cache[3];
                 n_reg5 <= param_cache[4];
+
+
                 current_state <= s_loadw2;
                 load_bias <= 1;
                 bram_addr_reg <= 85;
@@ -229,6 +247,7 @@ else if (enable == 1) begin
             end else begin
                 if (w_ind < 5) begin
                     param_cache[w_ind] <= bram_out;
+                    nReset <= 0;
                     w_ind <= w_ind + 1;
                     bram_addr_reg <= bram_addr_reg + 1;
                 end else begin
@@ -248,30 +267,28 @@ else if (enable == 1) begin
                 param_cache[2] <= n_out3;
                 param_cache[3] <= n_out4;
                 param_cache[4] <= n_out5;
-                finalSum = 1;
-                acc_res <= b_n1;
+                finalSum <= 1;
+                acc_term <= n_out1;
+                w_ind <= w_ind + 1;
 //                current_state <= s_output;
-//            end else if (w_ind < 5) begin
-//                acc_res <= acc_res + param_cache[w_ind];
-//                w_ind <= w_ind + 1;
+            end else if (w_ind < 5) begin
+                acc_term <= param_cache[w_ind];
+                w_ind <= w_ind + 1;
+//                if (w_ind == 4) begin 
+//                    finalSum <= 0;
+//                    current_state <= s_output;
+//                    w_ind <= 0;
+//                end
             end else begin
+                finalSum <= 0;
                 current_state <= s_output;
                 w_ind <= 0;
             end
         end
         
         s_output: begin
-            acc_res = n_out1 + n_out2 + n_out3 + n_out4 + n_out5 + b_n1;
-            if (n_out1[N-1] == n_out2[N-1] && n_out1[N-1] == n_out3[N-1] && n_out1[N-1] == n_out4[N-1] && n_out1[N-1] == n_out5[N-1] && n_out1[N-1] != acc_res[2*N-1]) begin
-                if (n_out1[N-1] == 0)
-                    y_out_reg <= {1'b0, {N-1{1'b1}}};
-                else
-                    y_out_reg <= {1'b1, {N-1{1'b0}}};           
-            end else
-                y_out_reg <= {acc_res[2*N-1], acc_res[Q-1:0]};
-                   
-//            y_out_reg = {acc_res[2*N-1], acc_res[Q-1:0]};
-//            y_out_reg = n_out1 + n_out2 + n_out3 + n_out4 + n_out5 + b_n1;
+            y_out_reg = acc_out;
+            nReset <= 1;
             out_ready <= 1;
             current_state <= s_wait;
             ts <= ts + 1;

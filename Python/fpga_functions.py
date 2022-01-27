@@ -29,7 +29,9 @@ def generate_trace_init(trace, fname):
     """
     
     with open(fname, "w") as ofile:
-        fxptrace = Fxp(list(map(mapminmax_apply, trace)), like=fxp_rng)
+        normalized = list(map(mapminmax_apply, trace))
+        fxptrace = Fxp(normalized, like=fxp_rng)
+        
         ofile.write('\n'.join(fxptrace.bin()))
         
 def write_quantized_weights(weights,fname):
@@ -55,11 +57,11 @@ def write_quantized_weights(weights,fname):
         
 def plot_fpga_output(x_test):
     
-    outputs = open("VerilogOutputs/S1_D1.txt",'r').read().replace(' ','').replace('\t','').splitlines()
+    outputs = open("VerilogOutputs/S1_D3.txt",'r').read().replace(' ','').replace('\t','').splitlines()
     outputs = Fxp(outputs, like=fxp_rng)
     
     # y_test = list(map(mapminmax_reverse, Fxp(outputs, like=fxp_float)))
-    y_test = np.array([mapminmax_reverse(Fxp(o, like=fxp_float) ) for o in outputs], dtype=float)
+    y_test = np.array([mapminmax_reverse(Fxp(o, like=fxp_float) * 2  ) for o in outputs], dtype=float)[:len(x_test)]
     rmse = math.sqrt(np.sum((y_test - x_test) ** 2) / y_test.size)
     
     plt.plot(x_test, label='Ground Truth')
@@ -94,5 +96,5 @@ for i in np.arange(len(x_test))[1:]:
 
 # generate_trace_init(x_test[1],'HW/InputVectors/S1_D1.txt')
 
-plot_fpga_output(x_test[1])
+plot_fpga_output(x_test[3])
 print('')
