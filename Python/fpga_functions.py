@@ -57,11 +57,11 @@ def write_quantized_weights(weights,fname):
         
 def plot_fpga_output(x_test):
     
-    outputs = open("VerilogOutputs/S1_D3.txt",'r').read().replace(' ','').replace('\t','').splitlines()
+    outputs = open("VerilogOutputs/S1_D2.txt",'r').read().replace(' ','').replace('\t','').splitlines()
     outputs = Fxp(outputs, like=fxp_rng)
     
     # y_test = list(map(mapminmax_reverse, Fxp(outputs, like=fxp_float)))
-    y_test = np.array([mapminmax_reverse(Fxp(o, like=fxp_float) * 2  ) for o in outputs], dtype=float)[:len(x_test)]
+    y_test = np.array([mapminmax_reverse(Fxp(o, like=fxp_float) *2 ) for o in outputs], dtype=float)[:len(x_test)]
     rmse = math.sqrt(np.sum((y_test - x_test) ** 2) / y_test.size)
     
     plt.plot(x_test, label='Ground Truth')
@@ -79,22 +79,36 @@ def load_weights(fname="SubjectNNWeights/S1.txt"):
     weights = list(np.array(list(map(float, w.split()))) for w in weights)
     weights[1] = weights[1].reshape(5, 16)
 
-    return weights        
+    return weights
         
         
-        
-weights = load_weights()
+
+def generate_all_fpga_data():
+    subs = [1,2,4,5,6,7,8]
+    
+    for sub in subs:
+        weights = load_weights(f"SubjectNNWeights/S{sub}.txt")
+        write_quantized_weights(weights, f"HW/Weights/S{sub}.mem")
+        x_test = open(f"SubjectData/S{sub}.txt", "r").read().splitlines()
+        x_test = list(np.array(list(map(float, x.split()))) for x in x_test)
+
+        for i in np.arange(len(x_test))[1:]:
+            generate_trace_init(x_test[i],f'HW/InputVectors/S{sub}_D{i}.txt')
+    
+
+       
+generate_all_fpga_data()        
+# weights = load_weights()
 
 # load testing data
 x_test = open("SubjectData/S1.txt", "r").read().splitlines()
 x_test = list(np.array(list(map(float, x.split()))) for x in x_test)
 
-write_quantized_weights(weights, "HW/Weights/S1.txt")
-generate_tanh_lut()
-for i in np.arange(len(x_test))[1:]:
-    generate_trace_init(x_test[i],f'HW/InputVectors/S1_D{i}.txt')
+# write_quantized_weights(weights, "HW/Weights/S1.txt")
+# generate_tanh_lut()
+
 
 # generate_trace_init(x_test[1],'HW/InputVectors/S1_D1.txt')
 
-plot_fpga_output(x_test[3])
+plot_fpga_output(x_test[2])
 print('')
