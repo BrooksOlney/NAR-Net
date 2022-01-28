@@ -1,5 +1,5 @@
 
-module NARNet_SmallCache #(parameter N=8, parameter Q = 7)(clk,enable,rst,x_in,x_ready,y_out,out_ready);
+module NARNet_SmallCache #(parameter N=10, parameter Q = 9)(clk,enable,rst,x_in,x_ready,y_out,out_ready);
 
 // inputs/outputs 
 input wire clk, enable, rst, x_ready;
@@ -270,6 +270,7 @@ else if (enable == 1) begin
                 finalSum <= 1;
                 acc_term <= n_out1;
                 w_ind <= w_ind + 1;
+                
 //                current_state <= s_output;
             end else if (w_ind < 5) begin
                 acc_term <= param_cache[w_ind];
@@ -287,7 +288,8 @@ else if (enable == 1) begin
         end
         
         s_output: begin
-            y_out_reg = acc_out;
+            y_out_reg <= acc_out;
+//            y_out_reg <= n_out1 + n_out2 + n_out3 + n_out4 + n_out5;
             nReset <= 1;
             out_ready <= 1;
             current_state <= s_wait;

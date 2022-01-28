@@ -13,16 +13,17 @@ module neuron_v2 #(parameter N=10,Q=9)(
     
     wire g, r, s; // guard, round and sticky bits
     reg signed [2*N+4:0] acc = 0; 
-    reg signed [2*N-1:0] mult_res = 0;
+    reg signed [2*N:0] mult_res = 0;
     reg overflow = 0;
     reg biasAdded = 0;
 //    assign out = {acc[2*N-2], acc[Q+N-1:Q]};
-    assign out = (acc[2*N+4:2*N+3] == 2'b10) ? {1'b1, {(N-1){1'b0}}}:
+    assign out = 
+    (acc[2*N+4:2*N+3] == 2'b10) ? {1'b1, {(N-1){1'b0}}}:
                  (acc[2*N+4:2*N+3] == 2'b01) ? {1'b0, {(N-1){1'b1}}} : 
                 //  (!g) ? {acc[2*N+4], acc[2*Q-1:Q]} :
                 //  (g & (r|s)) ? {acc[2*N+4], acc[2*Q-1:Q+1], 1'b0} : 
                 //  (g & r & s) ? {acc[2*N+4], acc[2*Q-1:Q] + 1'b1}  :
-                 {acc[2*N+4], acc[2*Q-1:Q]}; 
+                 {acc[2*N+4], acc[2*Q-1:Q] }; 
                  
     
     assign g = acc[Q-1];

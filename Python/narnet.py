@@ -84,7 +84,7 @@ def NAR_inference(weights, x):
     return y
 
 
-def load_weights(fname="SubjectNNWeights/S1.txt"):
+def load_weights(fname="SubjectNNWeights/S2.txt"):
     # load weights
     weights = open(fname, "r").read().splitlines()
     weights = list(np.array(list(map(float, w.split()))) for w in weights)
@@ -93,22 +93,28 @@ def load_weights(fname="SubjectNNWeights/S1.txt"):
     return weights
 
 
+
+    
+    
+
 fxp_float = Fxp(None, dtype='fxp-s32/23')
 
-fxp_rng = Fxp(None, dtype='fxp-s10/9', n_word_max=10, rounding='trunc', op_input_siz='same', op_sizing='same')
-        
+fxp_rng = Fxp(None, dtype='fxp-s16/12', n_word_max=10, rounding='trunc', op_input_siz='same', op_sizing='same')
+
+
+
 
 if __name__ == "__main__":
+    
     weights = load_weights()
- 
 
     # load testing data
-    x_test = open("SubjectData/S1.txt", "r").read().splitlines()
+    x_test = open("SubjectData/S2.txt", "r").read().splitlines()
     x_test = list(np.array(list(map(float, x.split()))) for x in x_test)
 
     # delays = [16 for _ in range(16)]
-    y_test = NAR_inference(weights, x_test[1])
-    y_true = x_test[1]
+    y_test = NAR_inference(weights, x_test[2])
+    y_true = x_test[2]
 
     diff = mean([abs(yti - ymi) for yti,ymi in zip(y_test, y_true)])
     rmse = math.sqrt(np.sum((y_test - y_true) ** 2) / y_test.size)
@@ -116,6 +122,7 @@ if __name__ == "__main__":
     plt.plot(y_test, label='test')
     plt.plot(y_true, label='true')
     # plt.plot(range(293), x_test[1], label='matlab')
+    plt.text(x=30, y=16, s=f'RMSE = {rmse}')
 
     plt.legend()
     plt.show()

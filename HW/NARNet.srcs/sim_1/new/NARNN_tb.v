@@ -1,14 +1,14 @@
 `timescale 1ns / 1ps
-`define TRACE_SOURCE "F:\\Research\\NAR-Net\\HW\\InputVectors\\S1_D3.txt"
-`define OUTPUT_LOC "F:\\Research\\NAR-Net\\VerilogOutputs\\S1_D3.txt"
+`define TRACE_SOURCE "F:\\Research\\NAR-Net\\HW\\InputVectors\\S2_D2.txt"
+`define OUTPUT_LOC "F:\\Research\\NAR-Net\\VerilogOutputs\\S2_D2.txt"
 
 module NARNN_tb(
 
     );
 
 
-parameter N=10;
-parameter Q = 9;
+parameter N=16;
+parameter Q=12;
 reg clk = 0, rst = 0, enable = 1, x_ready = 0;
 wire signed [N-1:0] y_out;
 reg signed [N-1:0] x_in;
@@ -42,7 +42,7 @@ initial begin
   
 end
     
-always @(negedge clk) begin
+always @(posedge clk) begin
 
     if (out_ready == 0 && waiting == 0) begin
         
@@ -52,6 +52,9 @@ always @(negedge clk) begin
             x_in <= trace_data[trace_ind];
             
         end else begin
+            for (i = 0; i < 294; i = i + 1)
+                $fwrite(f, "b%b\n", test_output[i]);
+
             $fclose(f);
             $stop;
         end
@@ -60,7 +63,6 @@ always @(negedge clk) begin
     end else if (out_ready == 1) begin
         test_output[trace_ind] <= y_out;
         $display("%b", y_out);
-        $fwrite(f, "b%b\n", y_out);
 //        $fwrite(f, "%d\n", y_out);
         waiting <= 0;
         trace_ind <= trace_ind + 1;

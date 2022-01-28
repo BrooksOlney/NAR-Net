@@ -8,7 +8,7 @@ module accumulator #(parameter N=10, parameter Q=9)(
     output reg signed [N-1:0] out
     );
     
-    reg signed [N+1:0] int_result, tmp;
+    reg signed [N+2:0] int_result, tmp;
     reg signed [N-1:0] out_reg;
     reg overflow;
     
@@ -41,13 +41,13 @@ module accumulator #(parameter N=10, parameter Q=9)(
 //            out <= {int_result[N], int_result[Q-1:0]};
 //        end
         
-        if (int_result[N:N-1] == 2'b10) begin
+        if (int_result[N+2:N+1] == 2'b10) begin
             out <= {1'b1, {(N-1){1'b0}}};
-        end else if (int_result[N:N-1] == 2'b01) begin
+        end else if (int_result[N+2:N+1] == 2'b01) begin
             out <= {1'b0, {(N-1){1'b1}}};
             
         end else begin
-            out <= {int_result[N], int_result[Q-1:0]};
+            out <= {int_result[N+2], int_result[Q-1:0]};
         end
     end
     
