@@ -1,14 +1,14 @@
 `timescale 1ns / 1ps
-`define TRACE_SOURCE "F:\\Research\\NAR-Net\\HW\\InputVectors\\S2_D2.txt"
-`define OUTPUT_LOC "F:\\Research\\NAR-Net\\VerilogOutputs\\S2_D2.txt"
+`define TRACE_SOURCE "F:\\Research\\NAR-Net\\HW\\InputVectors\\S6_D2.txt"
+`define OUTPUT_LOC "F:\\Research\\NAR-Net\\VerilogOutputs\\S6_D2.txt"
 
 module NARNN_tb(
 
     );
 
 
-parameter N=16;
-parameter Q=12;
+parameter N=10;
+parameter Q=8;
 reg clk = 0, rst = 0, enable = 1, x_ready = 0;
 wire signed [N-1:0] y_out;
 reg signed [N-1:0] x_in;
@@ -39,7 +39,6 @@ end
 integer f;
 initial begin
   f = $fopen(`OUTPUT_LOC,"w");
-  
 end
     
 always @(posedge clk) begin

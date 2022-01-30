@@ -15,8 +15,8 @@ class settings:
         self.gain = gain
         self.ymin = ymin 
 
-xsettings = settings(2.2, 0.1, -1)
-ysettings = settings(2.2, 0.1, -1)
+xsettings = settings(3.5, 0.2, -1)
+ysettings = settings(3.5, 0.2, -1)
 
 def mapminmax_apply(x):
     return (x - xsettings.xoffset) * xsettings.gain + xsettings.ymin
@@ -41,8 +41,8 @@ def NAR_inference(weights, x):
     xd1[:16] = 16   
     
     for ts in range(16):
-        # xd1[ts] = mapminmax_apply(xd1[ts])
-        xd1[ts] = 0.375
+        xd1[ts] = mapminmax_apply(xd1[ts])
+        # xd1[ts] = 0.375
         
     # time loop
     tapdelayInds = []
@@ -57,7 +57,7 @@ def NAR_inference(weights, x):
         # test = [(xdts - i - 1) % 17 for i in range(16)]
         # tapdelayInds.append(test)
         tapdelay1 = Fxp(np.array([xd1[(xdts - i - 1) % 17] for i in range(16)]), like=fxp_rng)
-        a1 = list(map(add, list(sum(map(mul, neuron, tapdelay1)) for neuron in w1), b1))
+        # a1 = list(map(add, list(sum(map(mul, neuron, tapdelay1)) for neuron in w1), b1))
         # a1 = Fxp(np.zeros(5), like=fxp_rng)
         # for i in range(5):
         #     # acc = Fxp(b1[i], like=fxp_rng)
@@ -67,13 +67,13 @@ def NAR_inference(weights, x):
             
         #     a1[i] = acc
             
-        a1 = tansig(a1)
+        # a1 = tansig(a1)
         # test = np.matmul(w1, tapdelay1)
-        # a1 = tansig(np.matmul(w1, tapdelay1) + b1)
+        a1 = tansig(np.matmul(w1, tapdelay1) + b1)
         
         # layer 2 
-        a2  = sum(map(mul, w2, a1)) + b2
-        # a2 = Fxp(np.matmul(w2, a1), like=fxp_rng) + b2
+        # a2  = sum(map(mul, w2, a1)) + b2
+        a2 = Fxp(np.matmul(w2, a1), like=fxp_rng) + b2
         # a2 = Fxp(b2, like=fxp_rng)
         # for i in range(5):
         #     a2 = Fxp(a2 + w2[i] * a1[i], like=fxp_rng)
@@ -92,24 +92,15 @@ def load_weights(fname="SubjectNNWeights/S2.txt"):
 
     return weights
 
-
-
-    
-    
-
 fxp_float = Fxp(None, dtype='fxp-s32/23')
-
-fxp_rng = Fxp(None, dtype='fxp-s16/12', n_word_max=10, rounding='trunc', op_input_siz='same', op_sizing='same')
-
-
-
+fxp_rng = Fxp(None, dtype='fxp-s10/8', rounding='trunc')
 
 if __name__ == "__main__":
     
-    weights = load_weights()
+    weights = load_weights(fname="SubjectNNWeights/S6.txt")
 
     # load testing data
-    x_test = open("SubjectData/S2.txt", "r").read().splitlines()
+    x_test = open("SubjectData/S6.txt", "r").read().splitlines()
     x_test = list(np.array(list(map(float, x.split()))) for x in x_test)
 
     # delays = [16 for _ in range(16)]
@@ -119,8 +110,8 @@ if __name__ == "__main__":
     diff = mean([abs(yti - ymi) for yti,ymi in zip(y_test, y_true)])
     rmse = math.sqrt(np.sum((y_test - y_true) ** 2) / y_test.size)
 
+    plt.plot(y_true, label='Ground truth')
     plt.plot(y_test, label='test')
-    plt.plot(y_true, label='true')
     # plt.plot(range(293), x_test[1], label='matlab')
     plt.text(x=30, y=16, s=f'RMSE = {rmse}')
 

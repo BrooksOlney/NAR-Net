@@ -20,7 +20,7 @@ module accumulator #(parameter N=10, parameter Q=9)(
             tmp <= 0;
             overflow <= 0;
         end else if (add == 1) begin
-            {overflow, int_result} <= int_result + a;
+            int_result <= int_result + a;
             
         end
     end
@@ -41,14 +41,17 @@ module accumulator #(parameter N=10, parameter Q=9)(
 //            out <= {int_result[N], int_result[Q-1:0]};
 //        end
         
-        if (int_result[N+2:N+1] == 2'b10) begin
-            out <= {1'b1, {(N-1){1'b0}}};
-        end else if (int_result[N+2:N+1] == 2'b01) begin
-            out <= {1'b0, {(N-1){1'b1}}};
-            
-        end else begin
-            out <= {int_result[N+2], int_result[Q-1:0]};
-        end
+//        if (int_result[N+2:N+1] == 2'b10) begin
+//            out <= {1'b1, {(N-1){1'b0}}};
+//        end else if (int_result[N+2:N+1] == 2'b01) begin
+//            out <= {1'b0, {(N-1){1'b1}}};
+//        if (int_result < -512) begin
+//            out <= {1'b1, {(N-1){1'b0}}};
+//        end else if (int_result > 511) begin
+//            out <= {1'b0, {(N-1){1'b1}}};
+//        end else begin
+            out <= {int_result[N+2], int_result[N-1:0]};
+//        end
     end
     
 endmodule

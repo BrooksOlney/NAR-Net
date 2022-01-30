@@ -7,8 +7,7 @@ module neuron_v2 #(parameter N=10,Q=9)(
     input signed [N-1:0] w,
     input signed [N-1:0] x,
     input signed [N-1:0] b,
-    output signed [N-1:0] out,
-    output reg outReady
+    output signed [N-1:0] out
     );
     
     wire g, r, s; // guard, round and sticky bits
@@ -18,12 +17,12 @@ module neuron_v2 #(parameter N=10,Q=9)(
     reg biasAdded = 0;
 //    assign out = {acc[2*N-2], acc[Q+N-1:Q]};
     assign out = 
-    (acc[2*N+4:2*N+3] == 2'b10) ? {1'b1, {(N-1){1'b0}}}:
-                 (acc[2*N+4:2*N+3] == 2'b01) ? {1'b0, {(N-1){1'b1}}} : 
+//    (acc[2*N+4:2*N+3] == 2'b10) ? {1'b1, {(N-1){1'b0}}}:
+//                 (acc[2*N+4:2*N+3] == 2'b01) ? {1'b0, {(N-1){1'b1}}} : 
                 //  (!g) ? {acc[2*N+4], acc[2*Q-1:Q]} :
                 //  (g & (r|s)) ? {acc[2*N+4], acc[2*Q-1:Q+1], 1'b0} : 
                 //  (g & r & s) ? {acc[2*N+4], acc[2*Q-1:Q] + 1'b1}  :
-                 {acc[2*N+4], acc[2*Q-1:Q] }; 
+                 {acc[2*N+4], acc[N-2+Q:Q] }; 
                  
     
     assign g = acc[Q-1];
@@ -34,18 +33,15 @@ module neuron_v2 #(parameter N=10,Q=9)(
     always @(posedge clk) begin
         if (rst == 1) begin
             acc = 0;
-            outReady = 0;
             biasAdded = 0;
         end else if (inptReady == 1) begin
             
             mult_res = w * x;
             {overflow, acc} = acc + mult_res;
-            outReady = 1;
-        end else if (biasAdded == 0 && b) begin
-                {overflow, acc} = acc + (b <<< N);
+        end else if (biasAdded == 0) begin
+                {overflow, acc} = acc + (b <<< Q);
                 biasAdded = 1;
-        end else
-            outReady = 0;
+        end 
     end
     
 endmodule
