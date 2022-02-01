@@ -1,5 +1,7 @@
 from fxpmath import Fxp
 from narnet import *
+plt.style.use(['science', 'ieee'])
+
 
 def generate_tanh_lut():
     n = 2**fxp_rng.n_word
@@ -55,23 +57,30 @@ def write_quantized_weights(weights,fname):
         # for i,w in enumerate(test):
         #     ofile.write(f'8\'b{bin(i)[2:].zfill} : rom_reg <= 8\'b{w};\n')        
         
-def plot_fpga_output(x_test):
+def plot_fpga_output(x_test, sub, data):
     
-    outputs = open("VerilogOutputs/S6_D2.txt",'r').read().replace(' ','').replace('\t','').splitlines()
+    outputs = open(f"VerilogOutputs/S{sub}_D{data}.txt",'r').read().replace(' ','').replace('\t','').splitlines()
     outputs = [o for o in outputs if 'x' not in o]
     outputs = Fxp(outputs, like=fxp_rng)
     
     # y_test = list(map(mapminmax_reverse, Fxp(outputs, like=fxp_float)))
     y_test = np.array([mapminmax_reverse(Fxp(o, like=fxp_float) ) for o in outputs], dtype=float)[:len(x_test)]
     rmse = math.sqrt(np.sum((y_test - x_test) ** 2) / y_test.size)
+    y_test_software = NARNET_inference(load_weights(fname=f"SubjectNNWeights/S{sub}.txt"), x_test)
+    plt.subplots()
     
     plt.plot(x_test, label='Ground Truth')
-    plt.plot(y_test, label='FPGA')
+    plt.plot(y_test_software, label='Software (float)')
+    plt.plot(y_test, label='FPGA (fixed-point)')
+    
     # y_python = NAR_inference(weights, x_test)
     # plt.plot(y_python, label='Python')
     plt.legend()
-    plt.text(x=30, y=16, s=f'RMSE = {rmse}')
-    plt.show()
+    # plt.text(x=30, y=16, s=f'RMSE = {rmse}')
+    plt.xlabel("Timestep \#")
+    plt.ylabel("Glucose ($mmol/L$)")
+    # plt.show()
+    plt.savefig(f"S{sub}_D{data}_plot.pdf")
 
 
 def load_weights(fname="SubjectNNWeights/S1.txt"):
@@ -101,14 +110,24 @@ def generate_all_fpga_data():
 generate_all_fpga_data() 
 # weights = load_weights()
 
-# load testing data
-x_test = open("SubjectData/S6.txt", "r").read().splitlines()
-x_test = list(np.array(list(map(float, x.split()))) for x in x_test)
+# subs = [1,2,4,5,6,7,8]
+subs = [7]
+
+for sub in subs:
+
+    # load testing data
+    x_test = open(f"SubjectData/S{sub}.txt", "r").read().splitlines()
+    x_test = list(np.array(list(map(float, x.split()))) for x in x_test)[1:]
+
+    for i,x in enumerate(x_test):
+        plot_fpga_output(x_test[i], sub, i+1)
+# sub = 1
+# data = 3
 
 # write_quantized_weights(weights, "HW/Weights/S1.txt")
 
 
 # generate_trace_init(x_test[1],'HW/InputVectors/S1_D1.txt')
 
-plot_fpga_output(x_test[2])
+# plot_fpga_output(x_test[data], sub, data)
 print('')

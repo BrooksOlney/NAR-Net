@@ -1,5 +1,5 @@
 
-module NARNet_SmallCache #(parameter N=16, parameter Q = 10)(clk,enable,rst,x_in,x_ready,y_out,out_ready);
+module NARNet_SmallCache #(parameter N=10, parameter Q = 8)(clk,enable,rst,x_in,x_ready,y_out,out_ready);
 
 // inputs/outputs 
 input wire clk, enable, rst, x_ready;
@@ -22,14 +22,14 @@ reg signed [N-1:0] x_in_reg;
 integer i, j;
 
 // NARNet pipeline states
-parameter s_wait   = 3'b000;
-parameter s_delay  = 3'b001;
-parameter s_loadw1 = 3'b010;
-parameter s_layer1 = 3'b011;
-parameter s_tanh   = 3'b100;
-parameter s_loadw2 = 3'b101;
-parameter s_layer2 = 3'b110;
-parameter s_output = 3'b111;
+localparam s_wait   = 3'b000, s_delay  = 3'b001, s_loadw1 = 3'b010, s_layer1 = 3'b011, s_tanh = 3'b100, s_loadw2 = 3'b101, s_layer2 = 3'b110, s_output = 3'b111;
+//parameter s_delay  = 3'b001;
+//parameter s_loadw1 = 3'b010;
+//parameter s_layer1 = 3'b011;
+//parameter s_tanh   = 3'b100;
+//parameter s_loadw2 = 3'b101;
+//parameter s_layer2 = 3'b110;
+//parameter s_output = 3'b111;
 
 reg [2:0] current_state = s_wait;
 reg signed [10:0] ts = 0;
@@ -55,6 +55,7 @@ initial begin
        if (N == 10 && Q == 8) xdl[i] <= 10'b0001100001;
         if (N == 10 && Q == 9) xdl[i] <= 10'b0011000010;
         if (N == 8 && Q == 7) xdl[i] <= 8'b00110000;
+        if (N == 16 && Q == 10) xdl[i] <= 16'b1101000101100101;
     end
     xdl[16] <= 0;
 end
@@ -98,6 +99,7 @@ reg nReady = 0;
 wire nDone, n1Done, n2Done, n3Done, n4Done, n5Done;
 reg accRst = 0;
 
+reg [4:0] addrCounter [0:16]; 
 
 neuron_v2 #(N,Q) n1 (.clk(clk), .inptReady(nReady), .rst(nReset), .w(w_n1), .x(qmi1), .b(b_n1), .out(n_out1));
 neuron_v2 #(N,Q) n2 (.clk(clk), .inptReady(nReady), .rst(nReset), .w(w_n2), .x(qmi2), .b(b_n2), .out(n_out2));
@@ -127,7 +129,8 @@ if (rst == 1) begin
         if (N == 10 && Q == 8) xdl[i] <= 10'b0001100001;
         if (N == 10 && Q == 9) xdl[i] <= 10'b0011000010;
         if (N == 8 && Q == 7) xdl[i] <= 8'b00110000;
-        
+                if (N == 16 && Q == 10) xdl[i] <= 16'b1101000101100101;
+
     end
     xdl[16] <= 0;
     nReset <= 1;
