@@ -1,6 +1,6 @@
 webtalk_init -webtalk_dir F:/Research/NAR-Net/HW/NARNet.sim/sim_1/behav/xsim/xsim.dir/NARNN_tb_behav/webtalk/
 webtalk_register_client -client project
-webtalk_add_data -client project -key date_generated -value "Tue Feb  1 09:02:05 2022" -context "software_version_and_target_device"
+webtalk_add_data -client project -key date_generated -value "Tue Feb  1 15:11:57 2022" -context "software_version_and_target_device"
 webtalk_add_data -client project -key product_version -value "XSIM v2020.2 (64-bit)" -context "software_version_and_target_device"
 webtalk_add_data -client project -key build_version -value "3064766" -context "software_version_and_target_device"
 webtalk_add_data -client project -key os_platform -value "WIN64" -context "software_version_and_target_device"
@@ -14,7 +14,7 @@ webtalk_add_data -client project -key target_package -value "not_applicable" -co
 webtalk_add_data -client project -key target_speed -value "not_applicable" -context "software_version_and_target_device"
 webtalk_add_data -client project -key random_id -value "63e2ed13-b5c6-47bd-8683-9e976cd9a8af" -context "software_version_and_target_device"
 webtalk_add_data -client project -key project_id -value "6d685ae8384c47cda064e2a47bc52d41" -context "software_version_and_target_device"
-webtalk_add_data -client project -key project_iteration -value "729" -context "software_version_and_target_device"
+webtalk_add_data -client project -key project_iteration -value "795" -context "software_version_and_target_device"
 webtalk_add_data -client project -key os_name -value "Windows Server 2016 or Windows 10" -context "user_environment"
 webtalk_add_data -client project -key os_release -value "major release  (build 9200)" -context "user_environment"
 webtalk_add_data -client project -key cpu_name -value "AMD Ryzen 9 5950X 16-Core Processor            " -context "user_environment"
@@ -37,6 +37,6 @@ webtalk_add_data -client xsim -key Total_Processes -value "103" -context "xsim\\
 webtalk_add_data -client xsim -key Total_Instances -value "11" -context "xsim\\usage"
 webtalk_add_data -client xsim -key Xilinx_HDL_Libraries_Used -value "secureip unimacro_ver unisims_ver " -context "xsim\\usage"
 webtalk_add_data -client xsim -key Compiler_Time -value "1.40_sec" -context "xsim\\usage"
-webtalk_add_data -client xsim -key Compiler_Memory -value "138112_KB" -context "xsim\\usage"
-webtalk_transmit -clientid 1793692132 -regid "" -xml F:/Research/NAR-Net/HW/NARNet.sim/sim_1/behav/xsim/xsim.dir/NARNN_tb_behav/webtalk/usage_statistics_ext_xsim.xml -html F:/Research/NAR-Net/HW/NARNet.sim/sim_1/behav/xsim/xsim.dir/NARNN_tb_behav/webtalk/usage_statistics_ext_xsim.html -wdm F:/Research/NAR-Net/HW/NARNet.sim/sim_1/behav/xsim/xsim.dir/NARNN_tb_behav/webtalk/usage_statistics_ext_xsim.wdm -intro "<H3>XSIM Usage Report</H3><BR>"
+webtalk_add_data -client xsim -key Compiler_Memory -value "137736_KB" -context "xsim\\usage"
+webtalk_transmit -clientid 2999910563 -regid "" -xml F:/Research/NAR-Net/HW/NARNet.sim/sim_1/behav/xsim/xsim.dir/NARNN_tb_behav/webtalk/usage_statistics_ext_xsim.xml -html F:/Research/NAR-Net/HW/NARNet.sim/sim_1/behav/xsim/xsim.dir/NARNN_tb_behav/webtalk/usage_statistics_ext_xsim.html -wdm F:/Research/NAR-Net/HW/NARNet.sim/sim_1/behav/xsim/xsim.dir/NARNN_tb_behav/webtalk/usage_statistics_ext_xsim.wdm -intro "<H3>XSIM Usage Report</H3><BR>"
 webtalk_terminate

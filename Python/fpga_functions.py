@@ -65,9 +65,15 @@ def plot_fpga_output(x_test, sub, data):
     
     # y_test = list(map(mapminmax_reverse, Fxp(outputs, like=fxp_float)))
     y_test = np.array([mapminmax_reverse(Fxp(o, like=fxp_float) ) for o in outputs], dtype=float)[:len(x_test)]
-    rmse = math.sqrt(np.sum((y_test - x_test) ** 2) / y_test.size)
+    rmse_hw = math.sqrt(np.sum((y_test[16:] - x_test[16:]) ** 2) / y_test.size)
+    print(f"S{sub}_D{data} RMSE of hardware vs original: {rmse_hw}")
     y_test_software = NARNET_inference(load_weights(fname=f"SubjectNNWeights/S{sub}.txt"), x_test)
+    rmse_sw = math.sqrt(np.sum((y_test_software[16:] - x_test[16:]) ** 2) / y_test.size)
+    
+    print(f"S{sub}_D{data} RMSE of software vs original: {rmse_sw}")
+    print("\n")
     plt.subplots()
+
     
     plt.plot(x_test, label='Ground Truth')
     plt.plot(y_test_software, label='Software (float)')
@@ -81,6 +87,8 @@ def plot_fpga_output(x_test, sub, data):
     plt.ylabel("Glucose ($mmol/L$)")
     # plt.show()
     plt.savefig(f"S{sub}_D{data}_plot.pdf")
+    
+    return rmse_hw, rmse_sw
 
 
 def load_weights(fname="SubjectNNWeights/S1.txt"):
@@ -92,7 +100,7 @@ def load_weights(fname="SubjectNNWeights/S1.txt"):
     return weights
 
 def generate_all_fpga_data():
-    subs = [1,2,4,5,6,7,8]
+    subs = [2]
     generate_tanh_lut()
     
     for sub in subs:
@@ -111,7 +119,8 @@ generate_all_fpga_data()
 # weights = load_weights()
 
 # subs = [1,2,4,5,6,7,8]
-subs = [7]
+
+subs = [2]
 
 for sub in subs:
 
@@ -119,8 +128,16 @@ for sub in subs:
     x_test = open(f"SubjectData/S{sub}.txt", "r").read().splitlines()
     x_test = list(np.array(list(map(float, x.split()))) for x in x_test)[1:]
 
+    _hw, _sw = 0,0
     for i,x in enumerate(x_test):
-        plot_fpga_output(x_test[i], sub, i+1)
+        x1, x2 = plot_fpga_output(x_test[i], sub, i+1)
+        _hw += x1
+        _sw += x2
+    
+    _hw /= len(x_test)
+    _sw /= len(x_test)
+    
+    print(f"S{sub} average RMSE SW, HW: {_sw}, {_hw}")
 # sub = 1
 # data = 3
 
