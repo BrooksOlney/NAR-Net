@@ -72,7 +72,7 @@ proc create_report { reportName command } {
 OPTRACE "synth_1" START { ROLLUP_AUTO }
 set_param chipscope.maxJobs 8
 OPTRACE "Creating in-memory project" START { }
-create_project -in_memory -part xc7s50csga324-2
+create_project -in_memory -part xc7s6cpga196-2
 
 set_param project.singleFileAddWarning.threshold 0
 set_param project.compositeFile.enableAutoGeneration 0
@@ -105,11 +105,14 @@ OPTRACE "Adding files" END { }
 foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
   set_property used_in_implementation false $dcp
 }
+read_xdc F:/Research/NAR-Net/HW/NARNet.srcs/constrs_1/new/constraints.xdc
+set_property used_in_implementation false [get_files F:/Research/NAR-Net/HW/NARNet.srcs/constrs_1/new/constraints.xdc]
+
 set_param ips.enableIPCacheLiteLoad 1
 close [open __synthesis_is_running__ w]
 
 OPTRACE "synth_design" START { }
-synth_design -top NARNet_SmallCache -part xc7s50csga324-2
+synth_design -top NARNet_SmallCache -part xc7s6cpga196-2
 OPTRACE "synth_design" END { }
 if { [get_msg_config -count -severity {CRITICAL WARNING}] > 0 } {
  send_msg_id runtcl-6 info "Synthesis results are not added to the cache due to CRITICAL_WARNING"

@@ -1,11 +1,11 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-| Date         : Mon Jan 31 09:33:12 2022
+| Date         : Thu Feb  3 21:27:54 2022
 | Host         : BrooksRig running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file NARNet_SmallCache_control_sets_placed.rpt
 | Design       : NARNet_SmallCache
-| Device       : xc7s50
+| Device       : xc7s6
 ----------------------------------------------------------------------------------------------
 
 Control Set Information
@@ -23,11 +23,11 @@ Table of Contents
 +----------------------------------------------------------+-------+
 |                          Status                          | Count |
 +----------------------------------------------------------+-------+
-| Total control sets                                       |    46 |
-|    Minimum number of control sets                        |    46 |
+| Total control sets                                       |    42 |
+|    Minimum number of control sets                        |    42 |
 |    Addition due to synthesis replication                 |     0 |
 |    Addition due to physical synthesis replication        |     0 |
-| Unused register locations in slices containing registers |   251 |
+| Unused register locations in slices containing registers |   220 |
 +----------------------------------------------------------+-------+
 * Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
 ** Run report_qor_suggestions for automated merging and remapping suggestions
@@ -39,13 +39,13 @@ Table of Contents
 +--------------------+-------+
 |       Fanout       | Count |
 +--------------------+-------+
-| Total control sets |    46 |
-| >= 0 to < 4        |     2 |
+| Total control sets |    42 |
+| >= 0 to < 4        |     1 |
 | >= 4 to < 6        |     2 |
 | >= 6 to < 8        |     2 |
-| >= 8 to < 10       |     4 |
+| >= 8 to < 10       |     2 |
 | >= 10 to < 12      |    27 |
-| >= 12 to < 14      |     1 |
+| >= 12 to < 14      |     0 |
 | >= 14 to < 16      |     0 |
 | >= 16              |     8 |
 +--------------------+-------+
@@ -58,67 +58,63 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
-| No           | No                    | No                     |               9 |            6 |
+| No           | No                    | No                     |               8 |            6 |
 | No           | No                    | Yes                    |               0 |            0 |
-| No           | Yes                   | No                     |              14 |            9 |
-| Yes          | No                    | No                     |             166 |           73 |
+| No           | Yes                   | No                     |               5 |            3 |
+| Yes          | No                    | No                     |             165 |           68 |
 | Yes          | No                    | Yes                    |               0 |            0 |
-| Yes          | Yes                   | No                     |             368 |          138 |
+| Yes          | Yes                   | No                     |             346 |          113 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
 
 4. Detailed Control Set Information
 -----------------------------------
 
-+----------------+---------------------------+---------------------------+------------------+----------------+--------------+
-|  Clock Signal  |       Enable Signal       |      Set/Reset Signal     | Slice Load Count | Bel Load Count | Bels / Slice |
-+----------------+---------------------------+---------------------------+------------------+----------------+--------------+
-|  clk_IBUF_BUFG | y_out_reg[9]_i_1_n_0      |                           |                1 |              1 |         1.00 |
-|  clk_IBUF_BUFG | out_ready1_out            |                           |                1 |              1 |         1.00 |
-|  clk_IBUF_BUFG | w_ind[3]_i_1_n_0          |                           |                2 |              4 |         2.00 |
-|  clk_IBUF_BUFG |                           | nReset                    |                3 |              5 |         1.67 |
-|  clk_IBUF_BUFG | l1_ind[5]_i_1_n_0         |                           |                3 |              6 |         2.00 |
-|  clk_IBUF_BUFG | xdts                      |                           |                2 |              6 |         3.00 |
-|  clk_IBUF_BUFG | bram_addr_reg[7]_i_1_n_0  |                           |                6 |              8 |         1.33 |
-|  clk_IBUF_BUFG |                           |                           |                6 |              9 |         1.50 |
-|  clk_IBUF_BUFG | y_out_reg[9]_i_1_n_0      | y_out_reg[8]_i_1_n_0      |                2 |              9 |         4.50 |
-| ~clk_IBUF_BUFG |                           | bram_addr_reg_reg_n_0_[7] |                6 |              9 |         1.50 |
-|  clk_IBUF_BUFG | xdl[9][9]_i_1_n_0         | rst_IBUF                  |                9 |             10 |         1.11 |
-|  clk_IBUF_BUFG | xdl                       | rst_IBUF                  |                4 |             10 |         2.50 |
-|  clk_IBUF_BUFG | xdl[15][9]_i_1_n_0        | rst_IBUF                  |                4 |             10 |         2.50 |
-|  clk_IBUF_BUFG | xdl[11][9]_i_1_n_0        | rst_IBUF                  |                4 |             10 |         2.50 |
-|  clk_IBUF_BUFG | xdl[2][9]_i_1_n_0         | rst_IBUF                  |                5 |             10 |         2.00 |
-|  clk_IBUF_BUFG | xdl[12][9]_i_1_n_0        | rst_IBUF                  |                3 |             10 |         3.33 |
-|  clk_IBUF_BUFG | xdl[3][9]_i_1_n_0         | rst_IBUF                  |                3 |             10 |         3.33 |
-|  clk_IBUF_BUFG | xdl[4][9]_i_1_n_0         | rst_IBUF                  |                5 |             10 |         2.00 |
-|  clk_IBUF_BUFG | xdl[5][9]_i_1_n_0         | rst_IBUF                  |                3 |             10 |         3.33 |
-|  clk_IBUF_BUFG | xdl[14][9]_i_1_n_0        | rst_IBUF                  |                3 |             10 |         3.33 |
-|  clk_IBUF_BUFG | xdl[16][9]_i_1_n_0        | rst_IBUF                  |                5 |             10 |         2.00 |
-|  clk_IBUF_BUFG | xdl[10][9]_i_1_n_0        | rst_IBUF                  |                3 |             10 |         3.33 |
-|  clk_IBUF_BUFG | xdl[13][9]_i_1_n_0        | rst_IBUF                  |                4 |             10 |         2.50 |
-|  clk_IBUF_BUFG | xdl[1][9]_i_1_n_0         | rst_IBUF                  |                4 |             10 |         2.50 |
-|  clk_IBUF_BUFG | xdl[7][9]_i_1_n_0         | rst_IBUF                  |                6 |             10 |         1.67 |
-|  clk_IBUF_BUFG | xdl[8][9]_i_1_n_0         | rst_IBUF                  |                5 |             10 |         2.00 |
-|  clk_IBUF_BUFG | b_n1                      |                           |                3 |             10 |         3.33 |
-|  clk_IBUF_BUFG | acc_term                  |                           |                5 |             10 |         2.00 |
-|  clk_IBUF_BUFG | param_cache[3][9]_i_1_n_0 |                           |                5 |             10 |         2.00 |
-|  clk_IBUF_BUFG | param_cache[2][9]_i_1_n_0 |                           |                5 |             10 |         2.00 |
-|  clk_IBUF_BUFG | xdl[6][9]_i_1_n_0         | rst_IBUF                  |                5 |             10 |         2.00 |
-|  clk_IBUF_BUFG | param_cache[0][9]_i_1_n_0 |                           |                3 |             10 |         3.33 |
-|  clk_IBUF_BUFG | param_cache[4][9]_i_1_n_0 |                           |                7 |             10 |         1.43 |
-|  clk_IBUF_BUFG | param_cache[1][9]_i_1_n_0 |                           |                5 |             10 |         2.00 |
-|  clk_IBUF_BUFG | tap                       |                           |                3 |             10 |         3.33 |
-|  clk_IBUF_BUFG | x_in_reg                  |                           |                6 |             10 |         1.67 |
-|  clk_IBUF_BUFG | ts                        | rst_IBUF                  |                4 |             11 |         2.75 |
-|  clk_IBUF_BUFG | finalSum_reg_n_0          | accRst_reg_n_0            |                4 |             13 |         3.25 |
-|  clk_IBUF_BUFG | p_0_in__0                 |                           |                2 |             16 |         8.00 |
-|  clk_IBUF_BUFG | n3/acc[0]_i_1__1_n_0      | nReset                    |                7 |             25 |         3.57 |
-|  clk_IBUF_BUFG | n4/acc[0]_i_1__2_n_0      | nReset                    |                7 |             25 |         3.57 |
-|  clk_IBUF_BUFG | n5/acc[0]_i_1__3_n_0      | nReset                    |                7 |             25 |         3.57 |
-|  clk_IBUF_BUFG | n1/acc[0]_i_1_n_0         | nReset                    |                7 |             25 |         3.57 |
-|  clk_IBUF_BUFG | n2/acc[0]_i_1__0_n_0      | nReset                    |                7 |             25 |         3.57 |
-|  clk_IBUF_BUFG | b_n2                      | b_n2[9]_i_1_n_0           |               18 |             40 |         2.22 |
-|  clk_IBUF_BUFG | n_reg5[9]_i_1_n_0         |                           |               16 |             50 |         3.12 |
-+----------------+---------------------------+---------------------------+------------------+----------------+--------------+
++----------------+---------------------------+------------------+------------------+----------------+--------------+
+|  Clock Signal  |       Enable Signal       | Set/Reset Signal | Slice Load Count | Bel Load Count | Bels / Slice |
++----------------+---------------------------+------------------+------------------+----------------+--------------+
+|  clk_IBUF_BUFG | out_ready1_out            |                  |                1 |              1 |         1.00 |
+|  clk_IBUF_BUFG | w_ind[3]_i_1_n_0          |                  |                4 |              4 |         1.00 |
+|  clk_IBUF_BUFG |                           | nReset           |                3 |              5 |         1.67 |
+|  clk_IBUF_BUFG | l1_ind[5]_i_1_n_0         |                  |                2 |              6 |         3.00 |
+|  clk_IBUF_BUFG | xdts                      |                  |                3 |              6 |         2.00 |
+|  clk_IBUF_BUFG |                           |                  |                6 |              8 |         1.33 |
+|  clk_IBUF_BUFG | bram_addr_reg[7]_i_1_n_0  |                  |                6 |              8 |         1.33 |
+|  clk_IBUF_BUFG | param_cache[2][9]_i_1_n_0 |                  |                3 |             10 |         3.33 |
+|  clk_IBUF_BUFG | tap                       |                  |                3 |             10 |         3.33 |
+|  clk_IBUF_BUFG | xdl                       | rst_IBUF         |                3 |             10 |         3.33 |
+|  clk_IBUF_BUFG | x_in_reg                  |                  |                4 |             10 |         2.50 |
+|  clk_IBUF_BUFG | xdl[12][9]_i_1_n_0        | rst_IBUF         |                2 |             10 |         5.00 |
+|  clk_IBUF_BUFG | xdl[1][9]_i_1_n_0         | rst_IBUF         |                4 |             10 |         2.50 |
+|  clk_IBUF_BUFG | xdl[4][9]_i_1_n_0         | rst_IBUF         |                3 |             10 |         3.33 |
+|  clk_IBUF_BUFG | xdl[6][9]_i_1_n_0         | rst_IBUF         |                3 |             10 |         3.33 |
+|  clk_IBUF_BUFG | xdl[3][9]_i_1_n_0         | rst_IBUF         |                3 |             10 |         3.33 |
+|  clk_IBUF_BUFG | xdl[11][9]_i_1_n_0        | rst_IBUF         |                3 |             10 |         3.33 |
+|  clk_IBUF_BUFG | xdl[13][9]_i_1_n_0        | rst_IBUF         |                3 |             10 |         3.33 |
+|  clk_IBUF_BUFG | xdl[8][9]_i_1_n_0         | rst_IBUF         |                5 |             10 |         2.00 |
+|  clk_IBUF_BUFG | xdl[5][9]_i_1_n_0         | rst_IBUF         |                3 |             10 |         3.33 |
+|  clk_IBUF_BUFG | xdl[9][9]_i_1_n_0         | rst_IBUF         |                8 |             10 |         1.25 |
+|  clk_IBUF_BUFG | xdl[16][9]_i_1_n_0        | rst_IBUF         |                4 |             10 |         2.50 |
+|  clk_IBUF_BUFG | xdl[10][9]_i_1_n_0        | rst_IBUF         |                2 |             10 |         5.00 |
+|  clk_IBUF_BUFG | xdl[7][9]_i_1_n_0         | rst_IBUF         |                5 |             10 |         2.00 |
+|  clk_IBUF_BUFG | xdl[15][9]_i_1_n_0        | rst_IBUF         |                3 |             10 |         3.33 |
+|  clk_IBUF_BUFG | xdl[2][9]_i_1_n_0         | rst_IBUF         |                3 |             10 |         3.33 |
+|  clk_IBUF_BUFG | xdl[14][9]_i_1_n_0        | rst_IBUF         |                2 |             10 |         5.00 |
+|  clk_IBUF_BUFG | y_out_reg[9]_i_1_n_0      |                  |                3 |             10 |         3.33 |
+|  clk_IBUF_BUFG | b_n1                      |                  |                5 |             10 |         2.00 |
+|  clk_IBUF_BUFG | param_cache[0][9]_i_1_n_0 |                  |                3 |             10 |         3.33 |
+|  clk_IBUF_BUFG | param_cache[3][9]_i_1_n_0 |                  |                3 |             10 |         3.33 |
+|  clk_IBUF_BUFG | param_cache[4][9]_i_1_n_0 |                  |                6 |             10 |         1.67 |
+|  clk_IBUF_BUFG | param_cache[1][9]_i_1_n_0 |                  |                3 |             10 |         3.33 |
+|  clk_IBUF_BUFG | ts                        | rst_IBUF         |                6 |             11 |         1.83 |
+|  clk_IBUF_BUFG | p_0_in__0                 |                  |                2 |             16 |         8.00 |
+|  clk_IBUF_BUFG | n2/acc[0]_i_1__0_n_0      | nReset           |                7 |             25 |         3.57 |
+|  clk_IBUF_BUFG | n3/acc[0]_i_1__1_n_0      | nReset           |                7 |             25 |         3.57 |
+|  clk_IBUF_BUFG | n1/acc[0]_i_1_n_0         | nReset           |                7 |             25 |         3.57 |
+|  clk_IBUF_BUFG | n4/acc[0]_i_1__2_n_0      | nReset           |                7 |             25 |         3.57 |
+|  clk_IBUF_BUFG | n5/acc[0]_i_1__3_n_0      | nReset           |                7 |             25 |         3.57 |
+|  clk_IBUF_BUFG | b_n2                      | b_n2[9]_i_1_n_0  |               13 |             40 |         3.08 |
+|  clk_IBUF_BUFG | n_reg5[9]_i_1_n_0         |                  |               19 |             50 |         2.63 |
++----------------+---------------------------+------------------+------------------+----------------+--------------+
 
 

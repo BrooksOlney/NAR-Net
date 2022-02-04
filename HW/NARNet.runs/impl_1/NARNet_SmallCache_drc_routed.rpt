@@ -1,11 +1,11 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-| Date         : Mon Jan 31 09:33:25 2022
+| Date         : Thu Feb  3 21:28:03 2022
 | Host         : BrooksRig running 64-bit major release  (build 9200)
 | Command      : report_drc -file NARNet_SmallCache_drc_routed.rpt -pb NARNet_SmallCache_drc_routed.pb -rpx NARNet_SmallCache_drc_routed.rpx
 | Design       : NARNet_SmallCache
-| Device       : xc7s50csga324-2
+| Device       : xc7s6cpga196-2
 | Speed File   : -2
 | Design State : Fully Routed
 ---------------------------------------------------------------------------------------------------------------------------------------------

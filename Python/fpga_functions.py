@@ -25,6 +25,32 @@ def generate_tanh_lut():
 
         ofile.write('\tendcase\nend\n\nendmodule\n')
 
+def generate_tanh_lut_v2():
+    n = 2**fxp_rng.n_word
+    
+    lut = Fxp([0]*n, like=fxp_rng)
+    for i in range(n): lut[i] |= i
+    
+    lutOut = Fxp(np.tanh(lut), like=fxp_rng)
+    
+    with open("HW/tanh.mem", "w") as ofile:
+        ofile.write("\n".join(lutOut.bin()))
+        
+    with open("HW/tanh_lut.v", 'w') as ofile:
+        
+        ofile.write('`timescale 1ns / 1ps\n')
+        ofile.write('module tanh_lut #(parameter N=10, parameter Q=8) (\n')
+        ofile.write('\tinput [N-1:0] addr,\n\t input clk,\n\t output signed [N-1:0] tanh_out\n\t);\n')
+        ofile.write('reg signed [N-1:0] tanh_out_reg;\nassign tanh_out = tanh_out_reg;\n\n')
+        ofile.write('reg signed [N-1:0] tanh_mem [0:2**N];\n\n')
+        
+        ofile.write('initial begin\n')
+        ofile.write('\t$readmemb("tanh.mem", tanh_mem);\nend\n\n')
+        
+        ofile.write('always @(negedge clk) tanh_out_reg <= tanh_mem[addr];\n')
+
+        ofile.write('\nendmodule\n')
+
 def generate_trace_init(trace, fname):
     """
         Generate trace values in fixed-point notation for the FPGA to parse
@@ -75,9 +101,9 @@ def plot_fpga_output(x_test, sub, data):
     plt.subplots()
 
     
-    plt.plot(x_test, label='Ground Truth')
-    plt.plot(y_test_software, label='Software (float)')
-    plt.plot(y_test, label='FPGA (fixed-point)')
+    plt.plot(range(16,len(x_test)), x_test[16:], label='Ground Truth')
+    plt.plot(range(16,len(x_test)), y_test_software[16:], label='Software (float)')
+    plt.plot(range(16,len(x_test)), y_test[16:], label='FPGA (fixed-point)')
     
     # y_python = NAR_inference(weights, x_test)
     # plt.plot(y_python, label='Python')
@@ -86,7 +112,8 @@ def plot_fpga_output(x_test, sub, data):
     plt.xlabel("Timestep \#")
     plt.ylabel("Glucose ($mmol/L$)")
     # plt.show()
-    plt.savefig(f"S{sub}_D{data}_plot.pdf")
+    plt.title(f"Subject {sub} - Trial {data}")
+    plt.savefig(f"S{sub}_D{data}_plot.svg")
     
     return rmse_hw, rmse_sw
 
@@ -115,12 +142,15 @@ def generate_all_fpga_data():
         for i in np.arange(len(x_test))[1:]:
             generate_trace_init(x_test[i],f'HW/InputVectors/S{sub}_D{i}.txt')
 
-generate_all_fpga_data() 
+
+generate_tanh_lut()
+# generate_tanh_lut_v2()
+# generate_all_fpga_data() 
 # weights = load_weights()
 
 # subs = [1,2,4,5,6,7,8]
 
-subs = [2]
+subs = [1,7]
 
 for sub in subs:
 

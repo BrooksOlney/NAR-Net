@@ -1,5 +1,5 @@
 
-module NARNet_SmallCache #(parameter N=10, parameter Q = 8)(clk,enable,rst,x_in,x_ready,y_out,out_ready);
+module NARNet_SmallCache #(parameter N=16, parameter Q = 10)(clk,enable,rst,x_in,x_ready,y_out,out_ready);
 
 // inputs/outputs 
 input wire clk, enable, rst, x_ready;
@@ -107,7 +107,6 @@ neuron_v2 #(N,Q) n3 (.clk(clk), .inptReady(nReady), .rst(nReset), .w(w_n3), .x(q
 neuron_v2 #(N,Q) n4 (.clk(clk), .inptReady(nReady), .rst(nReset), .w(w_n4), .x(qmi4), .b(b_n4), .out(n_out4));
 neuron_v2 #(N,Q) n5 (.clk(clk), .inptReady(nReady), .rst(nReset), .w(w_n5), .x(qmi5), .b(b_n5), .out(n_out5));
 accumulator #(N,Q) acc (.clk(clk), .rst(accRst), .a(acc_term), .add(finalSum), .out(acc_out));
-
 
 assign y_out = y_out_reg;
 assign nDone = n1Done & n2Done & n3Done & n4Done & n5Done;
@@ -301,6 +300,7 @@ else if (enable == 1) begin
                 param_cache[2] <= n_out3;
                 param_cache[3] <= n_out4;
                 param_cache[4] <= n_out5;
+                current_state <=s_output;
                 finalSum <= 1;
                 acc_term <= n_out1;
                 w_ind <= 1;
@@ -317,8 +317,8 @@ else if (enable == 1) begin
         end
         
         s_output: begin
-            y_out_reg <= acc_out;
-//            y_out_reg <= n_out1 + n_out2 + n_out3 + n_out4 + n_out5;
+//            y_out_reg <= acc_out;
+            y_out_reg <= n_out1 + n_out2 + n_out3 + n_out4 + n_out5;
             nReset <= 1;
             out_ready <= 1;
             current_state <= s_wait;

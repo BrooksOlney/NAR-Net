@@ -124,7 +124,7 @@ set rc [catch {
   create_msg_db init_design.pb
   set_param chipscope.maxJobs 8
 OPTRACE "create in-memory project" START { }
-  create_project -in_memory -part xc7s50csga324-2
+  create_project -in_memory -part xc7s6cpga196-2
   set_property design_mode GateLvl [current_fileset]
   set_param project.singleFileAddWarning.threshold 0
 OPTRACE "create in-memory project" END { }
@@ -137,10 +137,11 @@ OPTRACE "set parameters" END { }
 OPTRACE "add files" START { }
   add_files -quiet F:/Research/NAR-Net/HW/NARNet.runs/synth_1/NARNet_SmallCache.dcp
 OPTRACE "read constraints: implementation" START { }
+  read_xdc F:/Research/NAR-Net/HW/NARNet.srcs/constrs_1/new/constraints.xdc
 OPTRACE "read constraints: implementation" END { }
 OPTRACE "add files" END { }
 OPTRACE "link_design" START { }
-  link_design -top NARNet_SmallCache -part xc7s50csga324-2
+  link_design -top NARNet_SmallCache -part xc7s6cpga196-2
 OPTRACE "link_design" END { }
 OPTRACE "gray box cells" START { }
 OPTRACE "gray box cells" END { }
