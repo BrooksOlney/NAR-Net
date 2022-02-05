@@ -71,6 +71,7 @@ proc create_report { reportName command } {
 }
 OPTRACE "synth_1" START { ROLLUP_AUTO }
 set_param chipscope.maxJobs 8
+set_msg_config -id {Common 17-41} -limit 10000000
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7s6cpga196-2
 
@@ -95,6 +96,7 @@ read_verilog -library xil_defaultlib {
   F:/Research/NAR-Net/HW/NARNet-SmallCache.v
   F:/Research/NAR-Net/HW/accumulator.v
   F:/Research/NAR-Net/HW/neuron-v2.v
+  F:/Research/NAR-Net/HW/tapdelayCounter.v
 }
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being

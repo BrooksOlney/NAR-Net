@@ -1,7 +1,7 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-| Date             : Thu Feb  3 21:28:04 2022
+| Date             : Fri Feb  4 22:17:55 2022
 | Host             : BrooksRig running 64-bit major release  (build 9200)
 | Command          : report_power -file NARNet_SmallCache_power_routed.rpt -pb NARNet_SmallCache_power_summary_routed.pb -rpx NARNet_SmallCache_power_routed.rpx
 | Design           : NARNet_SmallCache
@@ -30,7 +30,7 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.019        |
+| Total On-Chip Power (W)  | 0.018        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
 | Dynamic (W)              | 0.000        |
@@ -49,22 +49,23 @@ Table of Contents
 1.1 On-Chip Components
 ----------------------
 
-+--------------------------+-----------+----------+-----------+-----------------+
-| On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
-+--------------------------+-----------+----------+-----------+-----------------+
-| Clocks                   |    <0.001 |        3 |       --- |             --- |
-| Slice Logic              |    <0.001 |     3259 |       --- |             --- |
-|   LUT as Logic           |    <0.001 |     1857 |      3750 |           49.52 |
-|   CARRY4                 |    <0.001 |      320 |      2000 |           16.00 |
-|   Register               |    <0.001 |      524 |      7500 |            6.99 |
-|   LUT as Distributed RAM |    <0.001 |        8 |      2400 |            0.33 |
-|   Others                 |     0.000 |       16 |       --- |             --- |
-| Signals                  |    <0.001 |     2643 |       --- |             --- |
-| Block RAM                |    <0.001 |        1 |         5 |           20.00 |
-| I/O                      |    <0.001 |       25 |       100 |           25.00 |
-| Static Power             |     0.018 |          |           |                 |
-| Total                    |     0.019 |          |           |                 |
-+--------------------------+-----------+----------+-----------+-----------------+
++----------------+-----------+----------+-----------+-----------------+
+| On-Chip        | Power (W) | Used     | Available | Utilization (%) |
++----------------+-----------+----------+-----------+-----------------+
+| Clocks         |    <0.001 |        3 |       --- |             --- |
+| Slice Logic    |    <0.001 |     1351 |       --- |             --- |
+|   LUT as Logic |    <0.001 |      569 |      3750 |           15.17 |
+|   F7/F8 Muxes  |    <0.001 |      106 |      8000 |            1.33 |
+|   CARRY4       |    <0.001 |        8 |      2000 |            0.40 |
+|   Register     |    <0.001 |      509 |      7500 |            6.79 |
+|   Others       |     0.000 |       25 |       --- |             --- |
+| Signals        |    <0.001 |     1297 |       --- |             --- |
+| Block RAM      |    <0.001 |      0.5 |         5 |           10.00 |
+| DSPs           |    <0.001 |       10 |        10 |          100.00 |
+| I/O            |    <0.001 |       37 |       100 |           37.00 |
+| Static Power   |     0.018 |          |           |                 |
+| Total          |     0.018 |          |           |                 |
++----------------+-----------+----------+-----------+-----------------+
 
 
 1.2 Power Supply Summary

@@ -2,13 +2,13 @@
 # Webtalk v2020.2 (64-bit)
 # SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
 # IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
-# Start of session at: Thu Feb  3 16:38:06 2022
-# Process ID: 85684
+# Start of session at: Fri Feb  4 19:52:33 2022
+# Process ID: 101172
 # Current directory: F:/Research/NAR-Net/HW/NARNet.sim/sim_1/behav/xsim
 # Command line: wbtcv.exe -mode batch -source F:/Research/NAR-Net/HW/NARNet.sim/sim_1/behav/xsim/xsim.dir/NARNN_tb_behav/webtalk/xsim_webtalk.tcl -notrace
 # Log file: F:/Research/NAR-Net/HW/NARNet.sim/sim_1/behav/xsim/webtalk.log
 # Journal file: F:/Research/NAR-Net/HW/NARNet.sim/sim_1/behav/xsim\webtalk.jou
 #-----------------------------------------------------------
 source F:/Research/NAR-Net/HW/NARNet.sim/sim_1/behav/xsim/xsim.dir/NARNN_tb_behav/webtalk/xsim_webtalk.tcl -notrace
-INFO: [Common 17-186] 'F:/Research/NAR-Net/HW/NARNet.sim/sim_1/behav/xsim/xsim.dir/NARNN_tb_behav/webtalk/usage_statistics_ext_xsim.xml' has been successfully sent to Xilinx on Thu Feb  3 16:38:09 2022. For additional details about this file, please refer to the WebTalk help file at F:/Xilinx/Vivado/2020.2/doc/webtalk_introduction.html.
-INFO: [Common 17-206] Exiting Webtalk at Thu Feb  3 16:38:09 2022...
+INFO: [Common 17-186] 'F:/Research/NAR-Net/HW/NARNet.sim/sim_1/behav/xsim/xsim.dir/NARNN_tb_behav/webtalk/usage_statistics_ext_xsim.xml' has been successfully sent to Xilinx on Fri Feb  4 19:52:36 2022. For additional details about this file, please refer to the WebTalk help file at F:/Xilinx/Vivado/2020.2/doc/webtalk_introduction.html.
+INFO: [Common 17-206] Exiting Webtalk at Fri Feb  4 19:52:36 2022...

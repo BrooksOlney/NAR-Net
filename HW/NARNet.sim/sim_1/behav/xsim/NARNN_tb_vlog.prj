@@ -7,6 +7,7 @@ verilog xil_defaultlib  \
 "../../../../NARNet-SmallCache.v" \
 "../../../../accumulator.v" \
 "../../../../neuron-v2.v" \
+"../../../../tapdelayCounter.v" \
 "../../../../NARNet.srcs/sim_1/new/NARNN_tb.v" \
 "../../../../NARNet.srcs/sim_1/new/neuron_tb.v" \
 

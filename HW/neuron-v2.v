@@ -10,7 +10,7 @@ module neuron_v2 #(parameter N=10,Q=9)(
     output signed [N-1:0] out
     );
     
-    wire g, r, s; // guard, round and sticky bits
+//    wire g, r, s; // guard, round and sticky bits
     reg signed [2*N+4:0] acc = 0; 
     reg signed [2*N:0] mult_res = 0;
     reg overflow = 0;
@@ -25,9 +25,9 @@ module neuron_v2 #(parameter N=10,Q=9)(
                  {acc[2*N+4], acc[N-2+Q:Q] }; 
                  
     
-    assign g = acc[Q-1];
-    assign r = acc[Q-2];
-    assign s = |acc[Q-3:0];
+//    assign g = acc[Q-1];
+//    assign r = acc[Q-2];
+//    assign s = |acc[Q-3:0];
 
 
     always @(posedge clk) begin

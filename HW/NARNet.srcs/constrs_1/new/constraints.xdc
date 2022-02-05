@@ -368,3 +368,5 @@ set_output_delay -clock [get_clocks clk] -min -add_delay 0.000 [get_ports {y_out
 set_output_delay -clock [get_clocks clk] -max -add_delay 50.000 [get_ports {y_out[*]}]
 set_output_delay -clock [get_clocks clk] -min -add_delay 0.000 [get_ports out_ready]
 set_output_delay -clock [get_clocks clk] -max -add_delay 50.000 [get_ports out_ready]
+
+reset_switching_activity -all 
