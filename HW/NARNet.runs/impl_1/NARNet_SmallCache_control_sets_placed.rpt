@@ -1,7 +1,7 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-| Date         : Fri Feb  4 22:17:47 2022
+| Date         : Fri Feb 11 01:37:20 2022
 | Host         : BrooksRig running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file NARNet_SmallCache_control_sets_placed.rpt
 | Design       : NARNet_SmallCache
@@ -23,11 +23,11 @@ Table of Contents
 +----------------------------------------------------------+-------+
 |                          Status                          | Count |
 +----------------------------------------------------------+-------+
-| Total control sets                                       |    36 |
-|    Minimum number of control sets                        |    36 |
+| Total control sets                                       |    31 |
+|    Minimum number of control sets                        |    31 |
 |    Addition due to synthesis replication                 |     0 |
 |    Addition due to physical synthesis replication        |     0 |
-| Unused register locations in slices containing registers |    67 |
+| Unused register locations in slices containing registers |   163 |
 +----------------------------------------------------------+-------+
 * Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
 ** Run report_qor_suggestions for automated merging and remapping suggestions
@@ -39,15 +39,15 @@ Table of Contents
 +--------------------+-------+
 |       Fanout       | Count |
 +--------------------+-------+
-| Total control sets |    36 |
+| Total control sets |    31 |
 | >= 0 to < 4        |     0 |
 | >= 4 to < 6        |     3 |
-| >= 6 to < 8        |     5 |
-| >= 8 to < 10       |     3 |
-| >= 10 to < 12      |     5 |
+| >= 6 to < 8        |     0 |
+| >= 8 to < 10       |     2 |
+| >= 10 to < 12      |    24 |
 | >= 12 to < 14      |     0 |
 | >= 14 to < 16      |     0 |
-| >= 16              |    20 |
+| >= 16              |     2 |
 +--------------------+-------+
 * Control sets can be remapped at either synth_design or opt_design
 
@@ -58,57 +58,52 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
-| No           | No                    | No                     |               9 |            5 |
+| No           | No                    | No                     |               8 |            5 |
 | No           | No                    | Yes                    |               0 |            0 |
 | No           | Yes                   | No                     |               5 |            3 |
-| Yes          | No                    | No                     |             108 |           60 |
+| Yes          | No                    | No                     |             137 |           53 |
 | Yes          | No                    | Yes                    |               0 |            0 |
-| Yes          | Yes                   | No                     |             387 |          142 |
+| Yes          | Yes                   | No                     |             255 |           74 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
 
 4. Detailed Control Set Information
 -----------------------------------
 
-+----------------+-------------------------------------------------+--------------------+------------------+----------------+--------------+
-|  Clock Signal  |                  Enable Signal                  |  Set/Reset Signal  | Slice Load Count | Bel Load Count | Bels / Slice |
-+----------------+-------------------------------------------------+--------------------+------------------+----------------+--------------+
-|  clk_IBUF_BUFG | w_ind[3]_i_1_n_0                                |                    |                2 |              4 |         2.00 |
-|  clk_IBUF_BUFG |                                                 | nReset_reg_n_0     |                3 |              5 |         1.67 |
-|  clk_IBUF_BUFG | l1_ind[4]_i_1_n_0                               |                    |                2 |              5 |         2.50 |
-|  clk_IBUF_BUFG | n4/E[0]                                         | wrom/rom_reg_reg_3 |                2 |              6 |         3.00 |
-|  clk_IBUF_BUFG | n1/E[0]                                         | wrom/rom_reg_reg_0 |                2 |              6 |         3.00 |
-|  clk_IBUF_BUFG | n5/E[0]                                         | wrom/rom_reg_reg_4 |                2 |              6 |         3.00 |
-|  clk_IBUF_BUFG | n2/E[0]                                         | wrom/rom_reg_reg_1 |                3 |              6 |         2.00 |
-|  clk_IBUF_BUFG | n3/E[0]                                         | wrom/rom_reg_reg_2 |                3 |              6 |         2.00 |
-|  clk_IBUF_BUFG | bram_addr_reg[7]_i_1_n_0                        |                    |                6 |              8 |         1.33 |
-|  clk_IBUF_BUFG |                                                 |                    |                5 |              9 |         1.80 |
-| ~clk_IBUF_BUFG | tanhlut/tanh_out_reg                            |                    |                7 |              9 |         1.29 |
-|  clk_IBUF_BUFG | n1/E[0]                                         |                    |                9 |             10 |         1.11 |
-|  clk_IBUF_BUFG | n2/E[0]                                         |                    |                7 |             10 |         1.43 |
-|  clk_IBUF_BUFG | n3/E[0]                                         |                    |                5 |             10 |         2.00 |
-|  clk_IBUF_BUFG | n4/E[0]                                         |                    |                6 |             10 |         1.67 |
-|  clk_IBUF_BUFG | n5/E[0]                                         |                    |                4 |             10 |         2.50 |
-|  clk_IBUF_BUFG | y_out_reg[15]_i_1_n_0                           |                    |                4 |             16 |         4.00 |
-|  clk_IBUF_BUFG | x_in_reg[15]_i_1_n_0                            |                    |                8 |             16 |         2.00 |
-|  clk_IBUF_BUFG | xdlTap/FSM_sequential_current_state_reg[0]_1[0] | rst_IBUF           |               10 |             16 |         1.60 |
-|  clk_IBUF_BUFG | xdlTap/FSM_sequential_current_state_reg[0]_2[0] | rst_IBUF           |               14 |             16 |         1.14 |
-|  clk_IBUF_BUFG | xdlTap/FSM_sequential_current_state_reg[0]_3[0] | rst_IBUF           |                3 |             16 |         5.33 |
-|  clk_IBUF_BUFG | xdlTap/FSM_sequential_current_state_reg[0][0]   | rst_IBUF           |                4 |             16 |         4.00 |
-|  clk_IBUF_BUFG | xdlTap/FSM_sequential_current_state_reg[0]_0[0] | rst_IBUF           |                3 |             16 |         5.33 |
-|  clk_IBUF_BUFG | xdlTap/FSM_sequential_current_state_reg[0]_4[0] | rst_IBUF           |                3 |             16 |         5.33 |
-|  clk_IBUF_BUFG | xdlTap/FSM_sequential_current_state_reg[2][0]   | rst_IBUF           |                4 |             16 |         4.00 |
-|  clk_IBUF_BUFG | xdlTap/count_reg_reg[0]_0[0]                    | rst_IBUF           |                9 |             16 |         1.78 |
-|  clk_IBUF_BUFG | xdlTap/count_reg_reg[2]_1[0]                    | rst_IBUF           |                5 |             16 |         3.20 |
-|  clk_IBUF_BUFG | xdlTap/count_reg_reg[2]_2[0]                    | rst_IBUF           |               11 |             16 |         1.45 |
-|  clk_IBUF_BUFG | xdlTap/count_reg_reg[4]_2[0]                    | rst_IBUF           |                4 |             16 |         4.00 |
-|  clk_IBUF_BUFG | xdlTap/count_reg_reg[4]_3[0]                    | rst_IBUF           |                8 |             16 |         2.00 |
-|  clk_IBUF_BUFG | xdlTap/count_reg_reg[0]_1[0]                    | rst_IBUF           |                6 |             16 |         2.67 |
-|  clk_IBUF_BUFG | xdlTap/count_reg_reg[2]_0[0]                    | rst_IBUF           |                6 |             16 |         2.67 |
-|  clk_IBUF_BUFG | xdlTap/count_reg_reg[4]_0[0]                    | rst_IBUF           |                9 |             16 |         1.78 |
-|  clk_IBUF_BUFG | xdlTap/count_reg_reg[4]_1[0]                    | rst_IBUF           |               10 |             16 |         1.60 |
-|  clk_IBUF_BUFG | xdlTap/E[0]                                     | rst_IBUF           |                4 |             16 |         4.00 |
-|  clk_IBUF_BUFG | out_ready_OBUF                                  | tdcRst__0          |               17 |             85 |         5.00 |
-+----------------+-------------------------------------------------+--------------------+------------------+----------------+--------------+
++----------------+-------------------------------------------------+------------------+------------------+----------------+--------------+
+|  Clock Signal  |                  Enable Signal                  | Set/Reset Signal | Slice Load Count | Bel Load Count | Bels / Slice |
++----------------+-------------------------------------------------+------------------+------------------+----------------+--------------+
+|  clk_IBUF_BUFG | w_ind[3]_i_1_n_0                                |                  |                2 |              4 |         2.00 |
+|  clk_IBUF_BUFG |                                                 | nReset_reg_n_0   |                3 |              5 |         1.67 |
+|  clk_IBUF_BUFG | l1_ind[4]_i_1_n_0                               |                  |                1 |              5 |         5.00 |
+|  clk_IBUF_BUFG |                                                 |                  |                5 |              8 |         1.60 |
+|  clk_IBUF_BUFG | bram_addr_reg[7]_i_1_n_0                        |                  |                6 |              8 |         1.33 |
+|  clk_IBUF_BUFG | n1/E[0]                                         |                  |                4 |             10 |         2.50 |
+|  clk_IBUF_BUFG | n2/E[0]                                         |                  |                5 |             10 |         2.00 |
+|  clk_IBUF_BUFG | n3/E[0]                                         |                  |                3 |             10 |         3.33 |
+|  clk_IBUF_BUFG | n4/E[0]                                         |                  |                3 |             10 |         3.33 |
+|  clk_IBUF_BUFG | n5/E[0]                                         |                  |                3 |             10 |         3.33 |
+|  clk_IBUF_BUFG | xdlTap/FSM_sequential_current_state_reg[0]_4[0] | rst_IBUF         |                3 |             10 |         3.33 |
+|  clk_IBUF_BUFG | xdlTap/FSM_sequential_current_state_reg[0][0]   | rst_IBUF         |                5 |             10 |         2.00 |
+|  clk_IBUF_BUFG | xdlTap/count_reg_reg[0]_1[0]                    | rst_IBUF         |                3 |             10 |         3.33 |
+|  clk_IBUF_BUFG | xdlTap/count_reg_reg[4]_2[0]                    | rst_IBUF         |                4 |             10 |         2.50 |
+|  clk_IBUF_BUFG | xdlTap/count_reg_reg[2]_0[0]                    | rst_IBUF         |                3 |             10 |         3.33 |
+|  clk_IBUF_BUFG | xdlTap/count_reg_reg[0]_0[0]                    | rst_IBUF         |                3 |             10 |         3.33 |
+|  clk_IBUF_BUFG | xdlTap/count_reg_reg[2]_1[0]                    | rst_IBUF         |                2 |             10 |         5.00 |
+|  clk_IBUF_BUFG | xdlTap/count_reg_reg[2]_2[0]                    | rst_IBUF         |                7 |             10 |         1.43 |
+|  clk_IBUF_BUFG | xdlTap/FSM_sequential_current_state_reg[2][0]   | rst_IBUF         |                4 |             10 |         2.50 |
+|  clk_IBUF_BUFG | xdlTap/count_reg_reg[4]_0[0]                    | rst_IBUF         |                3 |             10 |         3.33 |
+|  clk_IBUF_BUFG | xdlTap/E[0]                                     | rst_IBUF         |                2 |             10 |         5.00 |
+|  clk_IBUF_BUFG | xdlTap/FSM_sequential_current_state_reg[0]_2[0] | rst_IBUF         |                3 |             10 |         3.33 |
+|  clk_IBUF_BUFG | xdlTap/FSM_sequential_current_state_reg[0]_3[0] | rst_IBUF         |                3 |             10 |         3.33 |
+|  clk_IBUF_BUFG | xdlTap/FSM_sequential_current_state_reg[0]_0[0] | rst_IBUF         |                3 |             10 |         3.33 |
+|  clk_IBUF_BUFG | xdlTap/FSM_sequential_current_state_reg[0]_1[0] | rst_IBUF         |                3 |             10 |         3.33 |
+|  clk_IBUF_BUFG | xdlTap/count_reg_reg[4]_1[0]                    | rst_IBUF         |                4 |             10 |         2.50 |
+|  clk_IBUF_BUFG | xdlTap/count_reg_reg[3]_0[0]                    | rst_IBUF         |                3 |             10 |         3.33 |
+|  clk_IBUF_BUFG | x_in_reg[9]_i_1_n_0                             |                  |                5 |             10 |         2.00 |
+|  clk_IBUF_BUFG | y_out_reg[9]_i_1_n_0                            |                  |                3 |             10 |         3.33 |
+|  clk_IBUF_BUFG | n_reg1[9]_i_1_n_0                               |                  |               18 |             50 |         2.78 |
+|  clk_IBUF_BUFG | out_ready_OBUF                                  | tdcRst__0        |               16 |             85 |         5.31 |
++----------------+-------------------------------------------------+------------------+------------------+----------------+--------------+
 
 

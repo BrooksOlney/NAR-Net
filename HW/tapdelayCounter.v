@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module tapdelayCounter #(parameter INIT_VAL = 0)(
+module tapdelayCounter #(reg[4:0] INIT_VAL = 0)(
     input clk,
     input en,
     input rst,
@@ -16,7 +16,7 @@ module tapdelayCounter #(parameter INIT_VAL = 0)(
         if (rst) begin
             count_reg <= INIT_VAL;
         end else if (en) begin
-            if (count_reg == 5'b10000) 
+            if (count_reg[4] == 1'b1) 
                 count_reg <= 0;
             else
                 count_reg <= count_reg + 1;            

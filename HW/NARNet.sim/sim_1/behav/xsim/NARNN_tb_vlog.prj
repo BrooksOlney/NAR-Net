@@ -1,11 +1,8 @@
 # compile verilog/system verilog design source files
 verilog xil_defaultlib  \
-"../../../../NARNet.v" \
-"../../../../neuron.v" \
 "../../../../tanh_lut.v" \
 "../../../../weights_rom.v" \
 "../../../../NARNet-SmallCache.v" \
-"../../../../accumulator.v" \
 "../../../../neuron-v2.v" \
 "../../../../tapdelayCounter.v" \
 "../../../../NARNet.srcs/sim_1/new/NARNN_tb.v" \

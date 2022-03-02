@@ -1,5 +1,5 @@
 
-module NARNet_SmallCache #(parameter N=16, parameter Q = 10)(clk,enable,rst,x_in,x_ready,y_out,out_ready);
+module NARNet_SmallCache #(parameter N=10, parameter Q = 8)(clk,enable,rst,x_in,x_ready,y_out,out_ready);
 
 // inputs/outputs 
 input wire clk, enable, rst, x_ready;
@@ -29,13 +29,6 @@ localparam s_wait   = 3'b000,
            s_loadw2 = 3'b101,
            s_layer2 = 3'b110,
            s_output = 3'b111;
-//parameter s_delay  = 3'b001;
-//parameter s_loadw1 = 3'b010;
-//parameter s_layer1 = 3'b011;
-//parameter s_tanh   = 3'b100;
-//parameter s_loadw2 = 3'b101;
-//parameter s_layer2 = 3'b110;
-//parameter s_output = 3'b111;
 
 reg [2:0] current_state = s_wait;
 reg signed [10:0] ts = 0;
@@ -65,8 +58,8 @@ initial begin
 end
 
 reg tdcRst = 0, tdcEn = 0;
-wire [4:0] xdltap;
-tapdelayCounter  #(16) xdlTap (.clk(clk), .rst(tdcRst), .en(tdcEn), .count(xdltap));
+wire [4:0] xdlt;
+tapdelayCounter  #(5'b10000) xdlTap (.clk(clk), .rst(tdcRst), .en(tdcEn), .count(xdlt));
 tapdelayCounter  #(15) tdc0 (.clk(clk), .rst(tdcRst), .en(tdcEn), .count(tapdelay1[0]));
 tapdelayCounter  #(14) tdc1 (.clk(clk), .rst(tdcRst), .en(tdcEn), .count(tapdelay1[1]));
 tapdelayCounter  #(13) tdc2 (.clk(clk), .rst(tdcRst), .en(tdcEn), .count(tapdelay1[2]));
@@ -95,17 +88,6 @@ assign w_n2 = param_cache[1];
 assign w_n3 = param_cache[2];
 assign w_n4 = param_cache[3];
 assign w_n5 = param_cache[4];
-                                             
-//assign qmi1 = (current_state == s_layer1 || current_state == s_loadw1) ? tapdelay1[l1_ind] : 
-//              (current_state == s_layer2 || current_state == s_loadw2) ? n_reg1 : 'bx;
-//assign qmi2 = (current_state == s_layer1 || current_state == s_loadw1) ? tapdelay1[l1_ind] : 
-//              (current_state == s_layer2 || current_state == s_loadw2) ? n_reg2 : 'bx;
-//assign qmi3 = (current_state == s_layer1 || current_state == s_loadw1) ? tapdelay1[l1_ind] : 
-//              (current_state == s_layer2 || current_state == s_loadw2) ? n_reg3 : 'bx;
-//assign qmi4 = (current_state == s_layer1 || current_state == s_loadw1) ? tapdelay1[l1_ind] : 
-//              (current_state == s_layer2 || current_state == s_loadw2) ? n_reg4 : 'bx;
-//assign qmi5 = (current_state == s_layer1 || current_state == s_loadw1) ? tapdelay1[l1_ind] : 
-//              (current_state == s_layer2 || current_state == s_loadw2) ? n_reg5 : 'bx;
 
 assign qmi1 = n_reg1;
 assign qmi2 = n_reg2;
@@ -135,16 +117,6 @@ if (rst == 1) begin
     tdcRst <= 1;
     // re-initialize delay states
     for (i = 0; i < 16; i = i + 1) begin
-//        xdl[i] <= 8'b00011000; // 0.375 in S8.6 
-//          xdl[i] <= 8'b00110000; //0.375 in S8.7
-//         xdl[i] <= 10'b0011000000;
-//           xdl[i] <= {4'b0011, {(N-4){1'b0}}};
-//        xdl[i] <= {1'b0, {(N-Q-1){1'b0}}, 3'b011, 4'b0000};
-//        if (N == 10 && Q == 7) xdl[i] <= 10'b0001100000;
-//        if (N == 10 && Q == 8) xdl[i] <= 10'b0001100001;
-//        if (N == 10 && Q == 9) xdl[i] <= 10'b0011000010;
-//        if (N == 8 && Q == 7) xdl[i] <= 8'b00110000;
-//                if (N == 16 && Q == 10) xdl[i] <= 16'b1101000101100101;
         xdl[i] <= 10'b0110000000;
     end
     xdl[16] <= 0;
@@ -166,7 +138,7 @@ else if (enable == 1) begin
         
         // intialize tap delays
         s_delay: begin
-                xdl[xdltap] <= x_in_reg;
+                xdl[xdlt] <= x_in_reg;
              
             if (w_ind < 5) begin
                 bias_cache[w_ind] <= bram_out;
@@ -276,13 +248,13 @@ else if (enable == 1) begin
         
         s_layer2: begin
             // 1 clock cycle for vals to load and then we compute
-            if (nReady == 1) begin
+//            if (nReady == 1) begin
                 nReady <= 0;
                 
             // get results from neurons, add them
-            end else begin
+//            end else begin
                 current_state <= s_output;
-            end
+//            end
         end
         
         s_output: begin

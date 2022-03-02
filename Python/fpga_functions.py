@@ -2,7 +2,6 @@ from fxpmath import Fxp
 from narnet import *
 plt.style.use(['science', 'ieee'])
 
-
 def generate_tanh_lut():
     n = 2**fxp_rng.n_word
     
@@ -127,7 +126,7 @@ def load_weights(fname="SubjectNNWeights/S1.txt"):
     return weights
 
 def generate_all_fpga_data():
-    subs = [2]
+    subs = [1,2,4,5,6,7,8]
     generate_tanh_lut()
     
     for sub in subs:
@@ -143,14 +142,10 @@ def generate_all_fpga_data():
             generate_trace_init(x_test[i],f'HW/InputVectors/S{sub}_D{i}.txt')
 
 
-generate_tanh_lut()
-# generate_tanh_lut_v2()
-# generate_all_fpga_data() 
-# weights = load_weights()
-
+generate_all_fpga_data()
 # subs = [1,2,4,5,6,7,8]
 
-subs = [1,7]
+subs = [1]
 
 for sub in subs:
 

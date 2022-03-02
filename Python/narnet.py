@@ -47,12 +47,13 @@ def NARNet_Quantized_Inference(weights, x):
     xd1 = Fxp(xd1,like=fxp_rng)
     # time loop
     tapdelayInds = []
+    xdtss = []
     for ts in range(len(x)):
         
         # rotating delay state position
         xdts = (ts + 16) % 17
         xd1[xdts] = mapminmax_apply(x[ts])
-
+        xdtss.append(xdts)
         # layer 1
         
         test = [(xdts - i - 1) % 17 for i in range(16)]
@@ -130,7 +131,7 @@ def load_weights(fname="SubjectNNWeights/S2.txt"):
     return weights
 
 fxp_float = Fxp(None, dtype='fxp-s32/23')
-fxp_rng = Fxp(None, dtype='fxp-s10/8', rounding='trunc')
+fxp_rng = Fxp(None, dtype='fxp-s12/10', rounding='trunc')
 
 if __name__ == "__main__":
     

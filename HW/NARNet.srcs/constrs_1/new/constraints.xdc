@@ -355,18 +355,20 @@
 
 
 
-create_clock -period 1000.000 -name clk -waveform {0.000 500.000} [get_ports clk]
-set_input_delay -clock [get_clocks clk] -min -add_delay 0.000 [get_ports {x_in[*]}]
-set_input_delay -clock [get_clocks clk] -max -add_delay 100.000 [get_ports {x_in[*]}]
-set_input_delay -clock [get_clocks clk] -min -add_delay 0.000 [get_ports enable]
-set_input_delay -clock [get_clocks clk] -max -add_delay 100.000 [get_ports enable]
-set_input_delay -clock [get_clocks clk] -min -add_delay 0.000 [get_ports rst]
-set_input_delay -clock [get_clocks clk] -max -add_delay 100.000 [get_ports rst]
-set_input_delay -clock [get_clocks clk] -min -add_delay 0.000 [get_ports x_ready]
-set_input_delay -clock [get_clocks clk] -max -add_delay 100.000 [get_ports x_ready]
-set_output_delay -clock [get_clocks clk] -min -add_delay 0.000 [get_ports {y_out[*]}]
-set_output_delay -clock [get_clocks clk] -max -add_delay 50.000 [get_ports {y_out[*]}]
-set_output_delay -clock [get_clocks clk] -min -add_delay 0.000 [get_ports out_ready]
-set_output_delay -clock [get_clocks clk] -max -add_delay 50.000 [get_ports out_ready]
 
-reset_switching_activity -all 
+
+create_clock -period 10.000 -name clk -waveform {0.000 5.000} [get_ports clk]
+
+
+
+
+
+
+
+
+
+
+
+
+
+

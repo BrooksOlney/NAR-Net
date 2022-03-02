@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module neuron_v2 #(parameter N=10,Q=9)(
+(* use_dsp = "yes" *) module neuron_v2 #(parameter N=10,Q=8)(
     input clk,
     input inptReady,
     input rst,
