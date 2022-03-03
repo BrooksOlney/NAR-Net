@@ -1,7 +1,0 @@
-# vsim -c NARNN_tb 
-# Start time: 16:23:36 on Mar 02,2022
-# ** Error (suppressible): (vsim-19) Failed to access library 'work' at "work".
-# No such file or directory. (errno = ENOENT)
-# Error loading design
-# End time: 16:23:37 on Mar 02,2022, Elapsed time: 0:00:01
-# Errors: 1, Warnings: 0

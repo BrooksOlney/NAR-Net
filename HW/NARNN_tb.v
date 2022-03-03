@@ -26,7 +26,7 @@ initial begin
 
 end
 
-NARNet_SmallCache #(N,Q) uut (.clk(clk), .enable(enable), .rst(rst), .x_in(x_in), .x_ready(x_ready), .y_out(y_out), .out_ready(out_ready));
+NARNet #(N,Q) uut (.clk(clk), .enable(enable), .rst(rst), .x_in(x_in), .x_ready(x_ready), .y_out(y_out), .out_ready(out_ready));
 
 always begin
     
