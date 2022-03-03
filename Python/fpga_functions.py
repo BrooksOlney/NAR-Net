@@ -14,7 +14,7 @@ def generate_tanh_lut(Q=8, N=10):
     
     lutOut = Fxp(np.tanh(lut), like=fxp)
     
-    with open(f"HW/tanh_lut_Q{Q}_{N}.v", 'w') as ofile:
+    with open(f"HW/tanh_lut_N_{N}_Q_{Q}.v", 'w') as ofile:
         
         ofile.write('`timescale 1ns / 1ps\n')
         ofile.write(f'module tanh_lut #(parameter N={N}, parameter Q={Q}) (\n')
@@ -24,7 +24,7 @@ def generate_tanh_lut(Q=8, N=10):
         ofile.write('always @(negedge clk) begin\n\tcase (addr)\n')
         
         for l,out in zip(lut.bin(),lutOut.bin()):
-            ofile.write(f"\t\t{fxp_rng.n_word}'b{l} : tanh_out_reg <= {N}'b{out};\n")
+            ofile.write(f"\t\t{N}'b{l} : tanh_out_reg <= {N}'b{out};\n")
 
         ofile.write('\tendcase\nend\n\nendmodule\n')
 
