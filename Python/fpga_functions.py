@@ -2,29 +2,29 @@ from fxpmath import Fxp
 from narnet import *
 # plt.style.use(['science', 'ieee'])
 
-def generate_tanh_lut(Q=8, N=10):
-    # n = 2**fxp_rng.n_word
-    n = 2**N
+def generate_tanh_lut():
+    n = 2**fxp_rng.n_word
+    # n = 2**N
     
-    fxp = Fxp(None, dtype=f'fxp-s{N}/{Q}', rounding='trunc')
+    # fxp = Fxp(None, dtype=f'fxp-s{N}/{Q}', rounding='trunc')
     
-    lut = Fxp([0]*n, like=fxp)
+    lut = Fxp([0]*n, like=fxp_rng)
     for i in range(n): 
         lut[i] |= i
     
-    lutOut = Fxp(np.tanh(lut), like=fxp)
+    lutOut = Fxp(np.tanh(lut), like=fxp_rng)
     
-    with open(f"HW/tanh_lut_N_{N}_Q_{Q}.v", 'w') as ofile:
+    with open(f"HW/tanh_lut.v", 'w') as ofile:
         
         ofile.write('`timescale 1ns / 1ps\n')
-        ofile.write(f'module tanh_lut #(parameter N={N}, parameter Q={Q}) (\n')
+        ofile.write(f'module tanh_lut #(parameter N={fxp_rng.n_word}, parameter Q={fxp_rng.n_frac}) (\n')
         ofile.write('\tinput [N-1:0] addr,\n\t input clk,\n\t output signed [N-1:0] tanh_out\n\t);\n')
         ofile.write('reg signed [N-1:0] tanh_out_reg;\nassign tanh_out = tanh_out_reg;\n\n')
         
         ofile.write('always @(negedge clk) begin\n\tcase (addr)\n')
         
         for l,out in zip(lut.bin(),lutOut.bin()):
-            ofile.write(f"\t\t{N}'b{l} : tanh_out_reg <= {N}'b{out};\n")
+            ofile.write(f"\t\t{fxp_rng.n_word}'b{l} : tanh_out_reg <= {fxp_rng.n_word}'b{out};\n")
 
         ofile.write('\tendcase\nend\n\nendmodule\n')
 
@@ -145,15 +145,18 @@ def generate_all_fpga_data():
         for i in np.arange(len(x_test))[1:]:
             generate_trace_init(x_test[i],f'HW/InputVectors/S{sub}_D{i}.txt')
 
+# generate_tanh_lut(Q=12, N=14)
+# generate_tanh_lut(Q=7, N=8)
+# generate_tanh_lut(Q=8, N=10)
+# generate_tanh_lut(Q=10, N=12)
+# generate_tanh_lut(Q=12, N=14)
+# generate_tanh_lut(Q=12, N=16)
+N = 16
+Q = 12
+global fxp_rng
+fxp_rng = Fxp(None, dtype=f'fxp-s{N}/{Q}', rounding='trunc')
 
-generate_tanh_lut(Q=7, N=8)
-generate_tanh_lut(Q=8, N=10)
-generate_tanh_lut(Q=10, N=12)
-generate_tanh_lut(Q=12, N=14)
-generate_tanh_lut(Q=12, N=16)
-
-
-# generate_all_fpga_data()
+generate_all_fpga_data()
 # subs = [1,2,4,5,6,7,8]
 
 subs = [1]

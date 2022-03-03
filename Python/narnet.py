@@ -131,7 +131,7 @@ def load_weights(fname="SubjectNNWeights/S2.txt"):
     return weights
 
 fxp_float = Fxp(None, dtype='fxp-s32/23')
-fxp_rng = Fxp(None, dtype='fxp-s12/10', rounding='trunc')
+# fxp_rng = Fxp(None, dtype='fxp-s16/12', rounding='trunc')
 
 if __name__ == "__main__":
     

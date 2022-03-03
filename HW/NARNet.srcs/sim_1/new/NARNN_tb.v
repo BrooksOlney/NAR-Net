@@ -1,14 +1,14 @@
 `timescale 1ns / 1ps
 
-`define TRACE_SOURCE "F:\\Research\\NAR-Net\\HW\\InputVectors\\S8_D2.txt"
-`define OUTPUT_LOC "F:\\Research\\NAR-Net\\VerilogOutputs\\S8_D2_Q12.10.txt"
+`define TRACE_SOURCE "F:\\Research\\NAR-Net\\HW\\InputVectors\\S4_D1.txt"
+`define OUTPUT_LOC "F:\\Research\\NAR-Net\\VerilogOutputs\\S4_D1_Q16.12.txt"
 
 module NARNN_tb(
 
     );
 
-parameter N=12;
-parameter Q=10;
+parameter N=16;
+parameter Q=12;
 reg clk = 0, rst = 0, enable = 1, x_ready = 0;
 wire signed [N-1:0] y_out;
 reg signed [N-1:0] x_in;
@@ -26,7 +26,7 @@ initial begin
 
 end
 
-NARNet_SmallCache #(N,Q) uut (.clk(clk), .enable(enable), .rst(rst), .x_in(x_in), .x_ready(x_ready), .y_out(y_out), .out_ready(out_ready));
+NARNet #(N,Q) uut (.clk(clk), .enable(enable), .rst(rst), .x_in(x_in), .x_ready(x_ready), .y_out(y_out), .out_ready(out_ready));
 
 always begin
     
@@ -61,7 +61,7 @@ always @(posedge clk) begin
 
     end else if (out_ready == 1) begin
         test_output[trace_ind] <= y_out;
-        $display("%b", y_out);
+//        $display("%b", y_out);
 //        $fwrite(f, "%d\n", y_out);
         waiting <= 0;
         trace_ind <= trace_ind + 1;

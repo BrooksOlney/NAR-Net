@@ -2,14 +2,12 @@
 2020.2
 Nov 18 2020
 09:47:47
-F:/Research/NAR-Net/HW/NARNet-SmallCache.v,1644337723,verilog,,F:/Research/NAR-Net/HW/neuron-v2.v,,NARNet_SmallCache,,,,,,,,
 F:/Research/NAR-Net/HW/NARNet.sim/sim_1/behav/xsim/glbl.v,1605673889,verilog,,,,glbl,,,,,,,,
-F:/Research/NAR-Net/HW/NARNet.srcs/sim_1/new/NARNN_tb.v,1646259307,verilog,,F:/Research/NAR-Net/HW/NARNet.srcs/sim_1/new/neuron_tb.v,,NARNN_tb,,,,,,,,
+F:/Research/NAR-Net/HW/NARNet.srcs/sim_1/new/NARNN_tb.v,1646331470,verilog,,F:/Research/NAR-Net/HW/NARNet.srcs/sim_1/new/neuron_tb.v,,NARNN_tb,,,,,,,,
 F:/Research/NAR-Net/HW/NARNet.srcs/sim_1/new/neuron_tb.v,1642453639,verilog,,,,neuron_tb,,,,,,,,
-F:/Research/NAR-Net/HW/NARNet.v,1642656439,verilog,,F:/Research/NAR-Net/HW/neuron.v,,NARNet,,,,,,,,
+F:/Research/NAR-Net/HW/NARNet.v,1646328584,verilog,,F:/Research/NAR-Net/HW/NARNet.srcs/sim_1/new/NARNN_tb.v,,NARNet,,,,,,,,
 F:/Research/NAR-Net/HW/accumulator.v,1643742355,verilog,,F:/Research/NAR-Net/HW/neuron-v2.v,,accumulator,,,,,,,,
-F:/Research/NAR-Net/HW/neuron-v2.v,1644561368,verilog,,F:/Research/NAR-Net/HW/tapdelayCounter.v,,neuron_v2,,,,,,,,
-F:/Research/NAR-Net/HW/neuron.v,1643150832,verilog,,F:/Research/NAR-Net/HW/tanh_lut.v,,neuron,,,,,,,,
-F:/Research/NAR-Net/HW/tanh_lut.v,1646257363,verilog,,F:/Research/NAR-Net/HW/weights_rom.v,,tanh_lut,,,,,,,,
-F:/Research/NAR-Net/HW/tapdelayCounter.v,1644337293,verilog,,F:/Research/NAR-Net/HW/NARNet.srcs/sim_1/new/NARNN_tb.v,,tapdelayCounter,,,,,,,,
-F:/Research/NAR-Net/HW/weights_rom.v,1646259275,verilog,,F:/Research/NAR-Net/HW/NARNet-SmallCache.v,,weights_rom,,,,,,,,
+F:/Research/NAR-Net/HW/neuron.v,1646328315,verilog,,F:/Research/NAR-Net/HW/NARNet.v,,neuron,,,,,,,,
+F:/Research/NAR-Net/HW/tanh_lut.v,1646330130,verilog,,F:/Research/NAR-Net/HW/weights_rom.v,,tanh_lut,,,,,,,,
+F:/Research/NAR-Net/HW/tapdelayCounter.v,1644337293,verilog,,F:/Research/NAR-Net/HW/neuron.v,,tapdelayCounter,,,,,,,,
+F:/Research/NAR-Net/HW/weights_rom.v,1646331877,verilog,,F:/Research/NAR-Net/HW/tapdelayCounter.v,,weights_rom,,,,,,,,

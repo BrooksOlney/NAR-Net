@@ -1,5 +1,5 @@
 
-module NARNet_SmallCache #(parameter N=10, parameter Q = 8)(clk,enable,rst,x_in,x_ready,y_out,out_ready);
+module NARNet #(parameter N=10, parameter Q = 8)(clk,enable,rst,x_in,x_ready,y_out,out_ready);
 
 // inputs/outputs 
 input wire clk, enable, rst, x_ready;
