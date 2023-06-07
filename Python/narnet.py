@@ -25,7 +25,7 @@ def mapminmax_reverse(y):
     return (y - ysettings.ymin) / ysettings.gain + ysettings.xoffset
 
         
-def NARNet_Quantized_Inference(weights, x):
+def NARNet_Quantized_Inference(weights, x, fxp_rng=None):
     n = 5
     feedbackDelay = 16
 
@@ -72,7 +72,7 @@ def NARNet_Quantized_Inference(weights, x):
             
         # a1 = tansig(a1)
         # test = np.matmul(w1, tapdelay1)
-        a1 = tansig(np.matmul(w1, tapdelay1) + b1)
+        a1 = tansig(Fxp(np.matmul(w1, tapdelay1), like=fxp_rng) + b1)
         
         # layer 2 
         # a2  = sum(map(mul, w2, a1)) + b2
@@ -114,10 +114,10 @@ def NARNET_inference(weights, x):
         a1 = tansig(np.matmul(w1, tapdelay1) + b1)
         
         # layer 2 
-        a2 = Fxp(np.matmul(w2, a1), like=fxp_rng) + b2
+        a2 = np.matmul(w2, a1) + b2
         
         # output
-        y[ts] = mapminmax_reverse(Fxp(a2, like=fxp_float))
+        y[ts] = mapminmax_reverse(a2)
  
     return y   
     

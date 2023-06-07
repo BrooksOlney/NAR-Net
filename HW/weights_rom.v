@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
  (* rom_style = "block" *)
-module weights_rom #(parameter N=8, parameter Q=7) (
+module weights_rom #(parameter N=10, parameter Q=8) (
     clk, addr, rom_out
     );
     input wire clk;
@@ -12,7 +12,7 @@ module weights_rom #(parameter N=8, parameter Q=7) (
     assign rom_out = rom_reg;
      
     initial begin
-        $readmemb("F:\\Research\\NAR-Net\\HW\\Weights\\S4.mem", rom);
+        $readmemb("F:\\Research\\NAR-Net\\HW\\Weights\\S2.mem", rom);
     end
      
      

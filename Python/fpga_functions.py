@@ -1,6 +1,10 @@
 from fxpmath import Fxp
 from narnet import *
+import time
+import os
 # plt.style.use(['science', 'ieee'])
+fxp_rng = Fxp(None, dtype='fxp-s10/8', rounding='trunc')
+
 
 def generate_tanh_lut():
     n = 2**fxp_rng.n_word
@@ -134,56 +138,64 @@ def generate_all_fpga_data():
     generate_tanh_lut()
     
     for sub in subs:
-        weights = load_weights(fname=f"SubjectNNWeights/S{sub}.txt")
+        weights = load_weights(fname=f"../SubjectNNWeights/S{sub}.txt")
         mn = min([np.min(w) for w in weights])
         mx = max([np.max(w) for w in weights])
 
-        write_quantized_weights(weights, f"HW/Weights/S{sub}.mem")
-        x_test = open(f"SubjectData/S{sub}.txt", "r").read().splitlines()
+        write_quantized_weights(weights, f"../HW/Weights/S{sub}.mem")
+        x_test = open(f"../SubjectData/S{sub}.txt", "r").read().splitlines()
         x_test = list(np.array(list(map(float, x.split()))) for x in x_test)
 
         for i in np.arange(len(x_test))[1:]:
-            generate_trace_init(x_test[i],f'HW/InputVectors/S{sub}_D{i}.txt')
+            generate_trace_init(x_test[i],f'../HW/InputVectors/S{sub}_D{i}.txt')
 
 # generate_tanh_lut(Q=12, N=14)
 # generate_tanh_lut(Q=7, N=8)
-# generate_tanh_lut(Q=8, N=10)
+generate_tanh_lut()
 # generate_tanh_lut(Q=10, N=12)
 # generate_tanh_lut(Q=12, N=14)
 # generate_tanh_lut(Q=12, N=16)
-N = 16
-Q = 12
-global fxp_rng
-fxp_rng = Fxp(None, dtype=f'fxp-s{N}/{Q}', rounding='trunc')
+# N = 12
+# Q = 10
+# # global fxp_rng
+# NQs  = [(8,7), (10,8), (12,10), (14,12), (16,12)]
 
-generate_all_fpga_data()
+# for N,Q in NQs:
+#     fxp_rng = Fxp(None, dtype=f'fxp-s{N}/{Q}', rounding='trunc')
+    
+#     s = time.time()
+#     generate_all_fpga_data()
+#     e = time.time() - s
+    
+#     print(e)
+# # print('hi')
 # subs = [1,2,4,5,6,7,8]
 
-subs = [1]
+# subs = [1]
 
-for sub in subs:
+# for sub in subs:
 
-    # load testing data
-    x_test = open(f"SubjectData/S{sub}.txt", "r").read().splitlines()
-    x_test = list(np.array(list(map(float, x.split()))) for x in x_test)[1:]
+#     # load testing data
+#     x_test = open(f"SubjectData/S{sub}.txt", "r").read().splitlines()
+#     x_test = list(np.array(list(map(float, x.split()))) for x in x_test)[1:]
 
-    _hw, _sw = 0,0
-    for i,x in enumerate(x_test):
-        x1, x2 = plot_fpga_output(x_test[i], sub, i+1)
-        _hw += x1
-        _sw += x2
+#     _hw, _sw = 0,0
+#     for i,x in enumerate(x_test):
+#         x1, x2 = plot_fpga_output(x_test[i], sub, i+1)
+#         _hw += x1
+#         _sw += x2
     
-    _hw /= len(x_test)
-    _sw /= len(x_test)
+#     _hw /= len(x_test)
+#     _sw /= len(x_test)
     
-    print(f"S{sub} average RMSE SW, HW: {_sw}, {_hw}")
-# sub = 1
-# data = 3
+#     print(f"S{sub} average RMSE SW, HW: {_sw}, {_hw}")
+# # sub = 1
+# # data = 3
 
-# write_quantized_weights(weights, "HW/Weights/S1.txt")
+# # write_quantized_weights(weights, "HW/Weights/S1.txt")
 
 
-# generate_trace_init(x_test[1],'HW/InputVectors/S1_D1.txt')
+# # generate_trace_init(x_test[1],'HW/InputVectors/S1_D1.txt')
 
-# plot_fpga_output(x_test[data], sub, data)
-print('')
+# # plot_fpga_output(x_test[data], sub, data)
+# print('')
